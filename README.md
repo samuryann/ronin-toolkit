@@ -43,7 +43,7 @@ Long Claude threads get expensive, because every turn re-reads the whole context
 - **Guided:** run `/phased:start`. It explains itself in three lines, asks for the job and a project folder (and creates it), then plans. Run it inside an existing project folder to resume the next phase.
 - **Direct:** say `Split this into phases: <the job, symptoms, what changed>. Project folder: <path>`.
 
-Each phase ends with **▶ Start a NEW session on <Model> and paste:** plus a START HERE line. Phase threads are named after the first thread (`<Project> — Phase 2: Fix`) so they group together. Lost the line? It's always at the top of `PLAN.md`.
+Each phase ends with **▶ Start a NEW session**: the project folder to open it in, the model, and a START HERE line to paste. Pick the folder first, because it sets which memory loads. Phase threads carry the project name (`<Project> — Phase 2: Fix`) so they group together. Lost the line? It's always at the top of `PLAN.md`.
 
 **Footprint:** about 130 tokens per session while installed, and about 1.8k when a phase runs.
 

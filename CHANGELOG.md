@@ -9,6 +9,7 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 - Planning offers to create `SOURCES.md` with one wildcard line, `~/.claude/projects/*/memory`, covering all Claude memory folders including future ones.
 - Planning names the project (1–4 words) and renames the planning thread to it when its auto-title doesn't fit (e.g. a thread started with `/phased`), so every phase carries a meaningful name.
 - Close-out saves the lesson into a `save:` folder as a proper note (with an index pointer) when one is set; otherwise to `LESSONS.md`.
+- The ▶ hand-off is now three steps: open the session in the project folder, pick the model, paste the START HERE line. The guided start says so when it creates the folder.
 - README: the planning thread keeps its name (no longer renamed to Control).
 
 ### fortigate-meraki: new plugin

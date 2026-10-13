@@ -75,10 +75,10 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
    - **Can start sessions:** ask "Open Phase <m> on <Model>?"; on yes, start it with the start line as its first message, set its model, name it, open it.
    - **Otherwise** end with:
 
-     **▶ Start a NEW session on <Model> (<effort>) and paste:**
+     **▶ Start a NEW session: 1. folder `<absolute project folder>` · 2. model <Model> (<effort>) · 3. paste:**
      ```
      <Project> — Phase <m> of <total>: <phase name> — START HERE <absolute path to handover>
      ```
-     (A part phase repeats its own number.)
+     (A part phase repeats its own number.) Pick the folder first: it sets where the session runs and which memory loads; the START HERE path only tells it which file to read.
 7. **STOP.**
 
