@@ -19,14 +19,7 @@
    - Then **stop**, unless the user asks you to continue in this thread.
 
 ## Estimating
-The unit is the **peak context of the thread, in k tokens**, because that's what can be measured at the end. Add up:
-- the starting context (measure it if you can, otherwise ~20k),
-- the files to read (1 token ≈ 4 characters),
-- the output you'll write,
-- about 1–2k per tool round trip,
-- about 1–3k per filtered command output the user pastes.
-
-Give a range and one line of working.
+Unit: **peak thread context, in k tokens** (what D2 measures). Sum: starting context (measured, or ~20k) + files to read (1 token ≈ 4 chars) + output written + ~1–2k per tool round trip + ~1–3k per filtered user paste. Give a range and one line of working.
 
 ## PLAN.md template
 ```markdown
