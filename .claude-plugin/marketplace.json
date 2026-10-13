@@ -1,14 +1,14 @@
 {
-  "name": "claude-toolkit",
-  "description": "Skills and subagents for Claude Code by samuryann",
+  "name": "ronin",
+  "description": "Ronin Toolkit: masterless Claude Code plugins for IT professionals, by Samuryann",
   "owner": {
-    "name": "samuryann"
+    "name": "Samuryann"
   },
   "plugins": [
     {
       "name": "phased",
       "source": "./plugins/phased",
-      "description": "Token-efficient phased projects: plan into small phases, one phase per thread with handovers, cheapest viable model, and per-step Opus escalation only with your approval"
+      "description": "Token-efficient phased projects and troubleshooting: plan into small phases, one phase per thread with handovers, cheapest viable model, and per-step Opus escalation only with your approval"
     }
   ]
 }
