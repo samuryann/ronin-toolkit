@@ -4,6 +4,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-13
 
+### README
+- phased section rewritten: how to start it, where the control and phase threads live, how memory and `SOURCES.md` work, then a short feature list.
+
 ### phased: choices and device syntax
 - Every user choice (plan approval, model check, escalation, continue here, opening a session, close-out) is asked with selectable options, recommended first, not as a text list.
 - Before giving device CLI, phased greps any installed agent file for that platform and checks the command's syntax there (e.g. FortiOS `grep -f` prints whole config blocks).

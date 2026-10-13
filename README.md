@@ -29,24 +29,48 @@ Install fails? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` and retry. Remove with `/
 
 ## phased
 
-Long Claude threads get expensive, because every turn re-sends the whole context. `phased` keeps work in right-sized phases on the cheapest model that can do them:
+Runs IT projects and troubleshooting in small phases, each on the cheapest model that can do it. **Why:** fewer tokens, everything for a job in one folder, and a guided, evidence-first way through fixes and builds.
 
-- **Plan first.** It writes a terse `PLAN.md` with phases, "done when" checks, estimates and a model for each, and waits for your approval.
-- **Sessions only where they pay.** Every new session rebuilds your startup context, so phases split only at a model change, a wait (overnight, a change window), ~60k of work or a risky change; otherwise it offers to continue in the same session. Past ~60k with lots left, it hands over to a fresh session. Each handover is short, and the next session reads only that. The planning thread becomes `<Project> — Control` and gets a 5-line status from each phase.
-- **Evidence first.** It reads config and logs before asking for testers or downtime. It gives filtered, paste-safe commands for systems it can't reach, labels conclusions fact or inference, and keeps a "Ruled out" table so nobody re-tests a dead end.
-- **Haiku for the bulk reading.** Inside any phase, a Haiku worker reads big logs, inventories and exports and returns a short extract, so the main thread never carries them. No approval needed.
-- **Opus only when it counts.** Before a risky change, when it's not confident, or after two failed fixes, it stops and asks. An approved Opus subagent (or a better-matched specialist agent you have installed, e.g. a firewall expert) reviews or solves that one step, then the cheap model carries on.
-- **Safe changes.** Backup, rollback and exact scope before anything touches production.
-- **Learns across projects.** At the end it offers to save a short lesson to `~/phased/LESSONS.md`, to write a paste-ready ticket note, and to archive or delete the project's sessions.
-- **Finds past fixes without loading them.** It searches `LESSONS.md` plus any notes folders listed in `~/phased/SOURCES.md` (e.g. your Claude memory folder) and reads only the notes that match, so project folders stay clean and nothing loads until it's relevant. Add a `save:` line to write lessons into that folder instead.
+### Start it
+Pick Sonnet, then either:
+- **Guided:** `/phased:start`. It asks for the job and a project folder (default `~/phased/<job>/`, created for you), then plans.
+- **Manual:** `Split this into phases: <the job, symptoms, what changed>. Project folder: <path>`.
 
-**Start it** (select Sonnet first):
-- **Guided:** run `/phased:start`. It explains itself in three lines, asks for the job and a project folder (and creates it), then plans. Run it inside an existing project folder to resume the next phase.
-- **Direct:** say `Split this into phases: <the job, symptoms, what changed>. Project folder: <path>`.
+Start that first session from your usual folder (e.g. home). Approve the plan and it becomes `<Project> — Control`, a dashboard that stays there and gets a 5-line status from every phase. Each phase then ends with three steps:
 
-Each phase ends with **▶ Start a NEW session**: the project folder to open it in, the model, and a START HERE line to paste. Pick the folder first, because it sets which memory loads. Phase threads carry the project name (`<Project> — Phase 2: Fix`) so they group together. Lost the line? It's always at the top of `PLAN.md`.
+1. Open a new session **in the project folder**.
+2. Pick the model it names.
+3. Paste its START HERE line.
 
-**Footprint:** about 180 tokens per session while installed, about 2.3k when a phase runs, and a few hundred plus the material read for each Haiku worker call.
+### Project folders
+| Thread | Opened in | Why |
+|---|---|---|
+| `<Project> — Control` | your usual folder (e.g. home) | planning with your normal memory; collects phase status |
+| `<Project> — Phase n: <step>` | `~/phased/<job>/` | no unrelated memory loads, sessions group by project |
+
+One folder per job holds `PLAN.md`, the handovers and the ticket note. The folder you pick when opening a session decides which memory loads; the START HERE path only says which file to read, so a phase opened elsewhere still works, just heavier. Lost your place? `Next start` is at the top of `PLAN.md`.
+
+### Memory and past fixes
+Phased doesn't load your notes; it searches them. Create `~/phased/SOURCES.md` (it offers to on first run):
+
+```
+~/.claude/projects/*/memory
+save: ~/.claude/projects/<your home folder>/memory
+```
+
+- **Line 1** searches all your Claude memory, wherever it was saved, including folders created later.
+- **`save:`** (optional) is where close-out writes the lesson as a memory note. Without it, lessons go to `~/phased/LESSONS.md`.
+
+It reads only the 1–3 notes that match the client, device or error, and lists them in `PLAN.md`.
+
+### What it does
+- **Plans first:** phases with "done when" checks, estimates and a model each. Splits only where a new session pays: a model change, a wait, ~60k of work, or a risky change.
+- **Evidence first:** config and logs before testers or downtime; filtered, paste-safe commands; fact vs inference; a "Ruled out" table.
+- **Right model per step:** a Haiku worker reads big logs and exports; Opus (or a matching specialist agent you've installed) reviews one hard or risky step, only when you approve.
+- **Safe changes:** backup, rollback and exact scope before anything touches production.
+- **Close-out:** a paste-ready ticket note, the lesson saved, and the sessions archived or deleted.
+
+**Footprint:** ~180 tokens per session while installed, ~2.3k when a phase runs.
 
 ## fortigate-meraki
 
