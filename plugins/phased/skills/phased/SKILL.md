@@ -5,9 +5,10 @@ description: Token-efficient phased workflow for IT projects and troubleshooting
 
 # Phased
 
-Core file. Read the other two in this skill's base directory (if it wasn't shown, glob `**/phased/planning.md` under `~/.claude`) only when needed:
+Core file. Read the others in this skill's base directory (if it wasn't shown, glob `**/phased/planning.md` under `~/.claude`) only when needed:
 - `planning.md`: a new project.
 - `escalation.md`: an escalation trigger fires.
+- `closeout.md`: the last phase is done.
 
 **Tools may need loading.** Session tools (rename, usage, message, start session) may be deferred: search for them before deciding you don't have them.
 
@@ -69,7 +70,7 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
    Next: Phase <m> <name>, <model> (<effort>)
    Start: <start line>
    ```
-6. **Hand off the next phase.** If the project is complete, say so in one line and skip this step.
+6. **Hand off the next phase.** If the project is complete, follow `closeout.md` instead.
    - **Can start sessions:** ask "Open Phase <m> on <Model>?"; on yes, start it with the start line as its first message, set its model, name it, open it.
    - **Otherwise** end with:
 

@@ -1,6 +1,7 @@
 # A. Plan (no building)
 
 1. **Triage**, in 3 lines max: what the job is, the model and effort for planning it, and the model most phases will need. If no folder was given, propose `~/phased/<project-slug>/` in the same message (common for network or remote-system work with no codebase).
+   - **Seen before?** If `LESSONS.md` exists in the projects' parent folder (e.g. `~/phased/`), grep it for 2–3 keywords from the problem. Mention any match in one line; don't read the whole file.
    - **Fits in one thread?** Say so and offer to just do it. Phasing costs more than it saves on small jobs.
    - **Is the current model wrong for planning?** Say so and wait.
 2. **Is there already a PLAN.md in the folder?** Don't overwrite it. (If it has no `Next start` line, it isn't a phased plan: pick another folder or file name.) Ask: resume it, revise it, or start new (rename the old one to `PLAN-<date>-old.md`).

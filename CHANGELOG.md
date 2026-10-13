@@ -4,6 +4,10 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-13
 
+### phased: close-out
+- At project end (new `closeout.md`, read only then): offers to save a 3–5 line lesson to a shared `LESSONS.md`, archive the project's sessions (never delete), and keep or remove the folder. Sends a final status to the control thread.
+- Planning greps `LESSONS.md` for keywords from the problem, so past fixes surface without loading anything into every session.
+
 ### phased: fixes from the first end-to-end test
 - **Control thread**: the planning thread becomes `<Project> — Control`; each phase sends a 5-line `PHASED STATUS`. It offers to open the next phase automatically where a start-session tool exists.
 - **Evidence ladder** (skill and agent): free evidence (config, logs, state) before testers or downtime; merges or skips phases the evidence already answered.
