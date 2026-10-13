@@ -15,15 +15,15 @@
      - A fix isn't done until its verification has been seen.
      - Put the fix in its own phase, so the risky change gets a clean thread and an approval.
 5. **Split into phases** of about 60k of work or less each (see Estimating), each with a 1–2 word name (e.g. Evidence, Fix, Verify). Every new session rebuilds the ~baseline cache, so **split only where it pays**: a model change, a wait (overnight, a scheduled window), the ~60k limit, or a risky change that needs its own approval thread. Otherwise merge. Bulk reading goes to the Haiku worker inside a phase, so a phase rarely needs Haiku of its own.
-6. **Name the project**: 1–4 words for the job (e.g. `File server migration`). If this thread's title already says that, keep it; otherwise rename this thread to it and check it took. Every phase thread carries this name.
+6. **Name the project**: 1–4 words for the job (e.g. `File server migration`); reuse this thread's title if it already says that. Every phase thread carries this name.
    **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then **wait for approval**. Revise and show it again if asked. Build nothing.
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
-   - Record `Control: <this session's id>` (get session `self`) in PLAN.md. This thread is the control thread (see Control below); keep its title.
+   - Record `Control: <this session's id>` (get session `self`) in PLAN.md. This thread is the control thread (see Control below): rename it `<Project> — Control` and check it took; if not, tell the user the exact name.
    - Hand off phase 1 as in SKILL.md D6, then **stop**, unless the user asks you to continue here.
 
 ## Control
-The planning thread (its title is the project name): a dashboard, not a workspace. On a `PHASED STATUS` message, reply with one progress line, don't re-read files, and offer to open the next phase if you can start sessions (SKILL.md D6).
+The planning thread, `<Project> — Control`: a dashboard, not a workspace. On a `PHASED STATUS` message, reply with one progress line, don't re-read files, and offer to open the next phase if you can start sessions (SKILL.md D6).
 
 ## Estimating
 Unit: **k tokens of work above the session's baseline** (what D2 measures; the baseline is setup overhead and varies by machine). Sum: files to read (1 token ≈ 4 chars) + output written + ~1–2k per tool round trip + ~1–3k per filtered user paste. Give a range and one line of working. Typical: evidence phase with user pastes 5–20k · build phase 15–40k · verify 3–10k. Estimate low; escalations are logged separately.
@@ -31,7 +31,7 @@ Unit: **k tokens of work above the session's baseline** (what D2 measures; the b
 ## PLAN.md template
 ```markdown
 # <Project>: <one-line title>
-Project: <the project name from step 6 (this thread's title)>
+Project: <the project name from step 6, without "— Control">
 Control: <this session's id, or none>
 Next start: <START HERE line for the next phase>
 Goal: <one line> · Shape: build|troubleshoot · Folder: <abs path> · Created: <date> · Models: <available>

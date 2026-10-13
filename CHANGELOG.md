@@ -16,7 +16,7 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 - Planning names the project (1–4 words) and renames the planning thread to it when its auto-title doesn't fit (e.g. a thread started with `/phased`), so every phase carries a meaningful name.
 - Close-out saves the lesson into a `save:` folder as a proper note (with an index pointer) when one is set; otherwise to `LESSONS.md`.
 - The ▶ hand-off is now three steps: open the session in the project folder, pick the model, paste the START HERE line. The guided start says so when it creates the folder.
-- README: the planning thread keeps its name (no longer renamed to Control).
+- The planning thread is renamed `<Project> — Control` once the plan is approved, so every thread in a project shares one prefix (phases find it by session id, not title).
 
 ### fortigate-meraki: new plugin
 - A FortiGate & Meraki engineer subagent: silent-fail traps, diagnostics, policy/NAT/local-in, shaping and voice, WAN failover, hardening, DDNS and certificates, a dial-up IPsec baseline, and Meraki MX/MS/MR gotchas. Restricted to file, shell and web tools. Follows the `phased` brief when called as a specialist.
