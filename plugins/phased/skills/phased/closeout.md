@@ -7,6 +7,6 @@ Ask one multi-select question with exactly these 4 options, in this order (no "n
    - `~/phased/SOURCES.md` has a `save:` folder: write it there as one note in the same format as that folder's existing notes (if a note already covers it, update that instead), and add a one-line pointer to its index (e.g. `MEMORY.md`) if there is one.
    - Otherwise: append 3–5 lines to `LESSONS.md` in the folder that holds the project folder (e.g. `~/phased/LESSONS.md`), no client names.
 3. **Archive the sessions** (reversible) **or 4. delete them** (permanent; the app asks the user to confirm each). Covers this project's phase sessions and its control thread; do this session last. Pinned or on-screen sessions may be refused: list those for the user. Without the tools, list the names. PLAN.md and the handovers hold everything either way.
-5. **Project folder**: not an option; say where it is and that it's kept. Remove it only if the user then asks.
+5. **Project folder**: not an option; say where it is and that it's kept. One-offs like removing it come through **Other**; do those too.
 
 Send the final `PHASED STATUS — <Project> — complete` to the control thread **before** archiving or deleting anything, then stop.
