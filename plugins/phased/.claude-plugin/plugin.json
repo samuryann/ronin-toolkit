@@ -1,0 +1,11 @@
+{
+  "name": "phased",
+  "description": "Token-efficient phased projects: plan into small phases, one phase per thread with handovers, cheapest viable model, and per-step Opus escalation only with your approval",
+  "author": {
+    "name": "samuryann"
+  },
+  "homepage": "https://github.com/samuryann/claude-toolkit",
+  "repository": "https://github.com/samuryann/claude-toolkit",
+  "license": "MIT",
+  "keywords": ["planning", "phases", "handoff", "model-routing", "token-efficiency"]
+}

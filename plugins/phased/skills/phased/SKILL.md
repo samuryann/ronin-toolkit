@@ -99,7 +99,7 @@ Needs: ...
    - **SOLVE**: Opus does the stuck step itself and hands back. Default for "failed twice".
    Add a rough cost (a focused escalation is usually 10–40k tokens, depending on files read).
 2. **Ask**: *Approve Opus review* / *Approve Opus to solve this step* / *Carry on with the current model* / *Stop here*.
-3. **If approved**, call the Agent tool with `subagent_type: "opus-escalation"`, in the foreground (the next step depends on it). The brief must stand alone and stay tight:
+3. **If approved**, call the Agent tool in the foreground (the next step depends on it) with the escalation subagent: `subagent_type: "phased:opus-escalation"` when installed as a plugin, or `"opus-escalation"` when installed manually. Use whichever appears in your list of available agents. If neither does, tell the user the subagent is missing and stop. The brief must stand alone and stay tight:
    ```
    MODE: REVIEW | SOLVE
    TRIGGER: risky change | low confidence | failed twice

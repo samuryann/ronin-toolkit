@@ -1,0 +1,14 @@
+{
+  "name": "claude-toolkit",
+  "description": "Skills and subagents for Claude Code by samuryann",
+  "owner": {
+    "name": "samuryann"
+  },
+  "plugins": [
+    {
+      "name": "phased",
+      "source": "./plugins/phased",
+      "description": "Token-efficient phased projects: plan into small phases, one phase per thread with handovers, cheapest viable model, and per-step Opus escalation only with your approval"
+    }
+  ]
+}
