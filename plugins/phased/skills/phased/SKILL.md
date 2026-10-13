@@ -62,7 +62,7 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
 11. **No other subagents or parallel work** (beyond B7 and approved escalations) without approval; say why it's worth the tokens first.
 
 ## D. End of phase (or part phase)
-1. **Show the "done when" check passing** with real output, and **wait for the user to confirm.** A failing check means not done: fix it if there's room, otherwise hand over as `part done`. For a part phase, say what's left.
+1. **Show the "done when" check passing** with real output, and **wait for the user to confirm.** A failing check means not done: keep working. Approvals, pastes or choices the user can give now are not blockers: ask (AskUserQuestion) and continue. Hand over as `part done` only for B10 (size), a wait, or something the user can't supply this session. For a part phase, say what's left.
    **Continue here?** If the next phase uses the same model, needs no wait (overnight, a scheduled window) and this thread's work plus its estimate stays under ~60k, ask in the same message. On yes: record the actual and status in PLAN.md, send the status (D5), rename this thread to the next phase, and carry on at B6. No handover file.
 2. **Record the actual** in PLAN.md as work above the baseline: `~<k> work, plan +<x>%` ("approx" if other sessions ran), plus escalation tokens. Write `not measured` if there's no usage tool or the context was compacted. Never guess.
 3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**, because the next thread pays for every line: built/found · decisions + why, one line each · files touched (absolute) · how to test, including user-run commands · ruled out · key log or output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted changes if it's a git repo (offer to commit, never unasked) · **next start: first action + the only files it needs**.
@@ -76,7 +76,7 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
    ```
 6. **Hand off the next phase.** If the project is complete, follow `closeout.md` instead.
    - **Can start sessions:** ask "Open Phase <m> on <Model>?"; on yes, start it with the start line as its first message, set its model, name it, open it.
-   - **Otherwise** end with:
+   - **Otherwise** end with one **Why a new session:** line (phase done · size: ~<k> work, B10 · waiting for <what/when> · blocked on <what> · model change to <Model>), then:
 
      **▶ Start a NEW session: 1. folder `<absolute project folder>` · 2. model <Model> (<effort>) · 3. paste:**
      ```

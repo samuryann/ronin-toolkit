@@ -4,6 +4,10 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-13
 
+### phased: no unexplained hand-offs
+- Questions the user can answer now (approvals, pastes, choices) no longer end a phase: phased asks and carries on. `part done` is only for size, a wait, or something unavailable this session.
+- Every hand-off states why in one line (phase done, size with the figure, waiting, blocked, or model change).
+
 ### phased: part-phase names
 - A resumed `part done` phase is named `<Project> — Phase <n>: <name> (part 2)`, so it doesn't duplicate the earlier thread's name.
 
