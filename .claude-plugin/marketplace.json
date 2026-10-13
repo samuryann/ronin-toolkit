@@ -1,6 +1,6 @@
 {
-  "name": "ronin",
-  "description": "Ronin Toolkit: masterless Claude Code plugins for IT professionals, by Samuryann",
+  "name": "ronin-toolkit",
+  "description": "ronin-toolkit: masterless Claude Code plugins for IT professionals. Built by Samuryann, assisted by Claude",
   "owner": {
     "name": "Samuryann"
   },

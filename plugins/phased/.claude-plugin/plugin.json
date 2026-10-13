@@ -5,8 +5,8 @@
     "name": "Samuryann",
     "url": "https://github.com/samuryann"
   },
-  "homepage": "https://github.com/samuryann/ronin",
-  "repository": "https://github.com/samuryann/ronin",
+  "homepage": "https://github.com/samuryann/ronin-toolkit",
+  "repository": "https://github.com/samuryann/ronin-toolkit",
   "license": "SEE LICENSE IN LICENSE",
   "keywords": ["planning", "phases", "handoff", "model-routing", "token-efficiency", "troubleshooting", "sysadmin", "msp"]
 }
