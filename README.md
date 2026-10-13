@@ -32,11 +32,12 @@ Install fails? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` and retry. Remove with `/
 Long Claude threads get expensive, because every turn re-reads the whole context. `phased` keeps work in small phases on the cheapest model that can do them:
 
 - **Plan first.** It writes a terse `PLAN.md` with phases, "done when" checks, estimates and a model for each, and waits for your approval.
-- **One phase per session.** Each phase ends with a short handover; the next session reads only that. The planning thread becomes `<Project> — Control` and gets a 5-line status from each phase.
+- **One phase per session.** Each phase ends with a short handover; the next session reads only that. The planning thread keeps its name, acts as the control thread and gets a 5-line status from each phase.
 - **Evidence first.** It reads config and logs before asking for testers or downtime. It gives filtered, paste-safe commands for systems it can't reach, labels conclusions fact or inference, and keeps a "Ruled out" table so nobody re-tests a dead end.
 - **Opus only when it counts.** Before a risky change, when it's not confident, or after two failed fixes, it stops and asks. An approved Opus subagent (or a better-matched specialist agent you have installed, e.g. a firewall expert) reviews or solves that one step, then the cheap model carries on.
 - **Safe changes.** Backup, rollback and exact scope before anything touches production.
-- **Learns across projects.** At the end it offers to save a short lesson to `~/phased/LESSONS.md` (searched when a new project starts, never loaded, so it costs nothing), to write a paste-ready ticket note, and to archive or delete the project's sessions.
+- **Learns across projects.** At the end it offers to save a short lesson to `~/phased/LESSONS.md`, to write a paste-ready ticket note, and to archive or delete the project's sessions.
+- **Finds past fixes without loading them.** It searches `LESSONS.md` plus any notes folders listed in `~/phased/SOURCES.md` (e.g. your Claude memory folder) and reads only the notes that match, so project folders stay clean and nothing loads until it's relevant. Add a `save:` line to write lessons into that folder instead.
 
 **Start it** (select Sonnet first):
 - **Guided:** run `/phased:start`. It explains itself in three lines, asks for the job and a project folder (and creates it), then plans. Run it inside an existing project folder to resume the next phase.

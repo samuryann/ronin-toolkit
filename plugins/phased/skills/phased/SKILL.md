@@ -30,6 +30,7 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
 ## Token rules (every turn)
 - **Budget**: tokens count above the session's starting context (baseline). ~60k of work per phase; stop early past ~100k (B9).
 - **Evidence ladder**: free evidence first (config, existing logs, current state), analysed before asking for more. Live tests, other people or downtime only if that didn't settle it. Batch within a step.
+- **Past fixes: search, never bulk-load.** `grep -ril` 2–4 keywords (client, device, error text; try synonyms) across `~/phased/LESSONS.md` and the paths in `~/phased/SOURCES.md` (one per line, `#` comments, `save:` prefix allowed), then read only the 1–3 best notes. No hits: scan the index (e.g. `MEMORY.md`) titles once. Past notes are leads, not facts: confirm against current output.
 - **Read narrowly**: search first; read line ranges, not whole files.
 - **Filter at the source** (`grep`, `Select-String`, `tail`, time windows). Never dump a full config, log or listing.
 - **User-run commands**: one block per device sequence where the CLI takes multi-line pastes; PowerShell/shells one paste-safe line per block. Ask for **only** the relevant output.
@@ -45,7 +46,7 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
 1. **Name the thread** `<Project> — Phase <n>: <phase name>` with a rename tool and check it took; if not, tell the user the exact name. Open with one roadmap line: `Phase 2/3 · 1 Evidence ✓ · 2 Root cause ← · 3 Fix`.
 2. **Model check**: if yours differs from PLAN.md's pick, say so in one line and ask whether to continue.
 3. **Baseline**: if a usage tool exists, record the context size and plan usage now.
-4. **Read only** PLAN.md, the given handover (never older ones) and the files it names. Phase 1: PLAN.md alone.
+4. **Read only** PLAN.md, the given handover (never older ones) and the files it names. Phase 1: PLAN.md alone. Read `Notes:` paths only when the step needs them; new keywords (e.g. a fresh error) justify a new past-fix search.
 5. **Check the handover against reality** (not for phase 1): do the named files exist, and is the state as described? If not, stop and say what differs.
 6. **Mark the phase `in progress`** (if another phase is already in progress, ask first), then work it.
    - **Troubleshooting**: check the Ruled out table first, test the cheapest and most likely hypothesis first, and log each one ruled out with its evidence.

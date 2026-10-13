@@ -3,7 +3,7 @@
 **Guided start** (no details given): if the current folder holds a phased PLAN.md, offer its `Next start`. Otherwise explain in ≤3 lines (small phases, one session each, cheapest model, asks before risky changes or Opus), then ask: the job in one line, and the project folder (suggest `~/phased/<slug>/`, offer to create it). Then continue below.
 
 1. **Triage**, in 3 lines max: what the job is, the model and effort for planning it, and the model most phases will need. If no folder was given, propose `~/phased/<project-slug>/` in the same message (common for network or remote-system work with no codebase).
-   - **Seen before?** If `LESSONS.md` exists in the projects' parent folder (e.g. `~/phased/`), grep it for 2–3 keywords from the problem. Mention any match in one line; don't read the whole file.
+   - **Seen before?** Search past fixes (SKILL.md token rules). One line per match; list useful paths under `Notes:` in PLAN.md so phases don't search again. If `~/phased/SOURCES.md` is missing and `ls -d ~/.claude/projects/*/memory` finds notes, offer once to create it listing them (lets phased find fixes from your other sessions).
    - **Fits in one thread?** Say so and offer to just do it. Phasing costs more than it saves on small jobs.
    - **Is the current model wrong for planning?** Say so and wait.
 2. **Is there already a PLAN.md in the folder?** Don't overwrite it. (If it has no `Next start` line, it isn't a phased plan: pick another folder or file name.) Ask: resume it, revise it, or start new (rename the old one to `PLAN-<date>-old.md`).
@@ -34,6 +34,7 @@ Project: <this thread's own title (get session `self`); if unavailable, a 1–3 
 Control: <this session's id, or none>
 Next start: <START HERE line for the next phase>
 Goal: <one line> · Shape: build|troubleshoot · Folder: <abs path> · Created: <date> · Models: <available>
+Notes: <abs paths of matching past notes, or none>
 
 ## Decisions
 - <answers to clarifying questions and constraints, one line each>

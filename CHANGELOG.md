@@ -4,6 +4,12 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-13
 
+### phased: past-fix lookup
+- Searches `~/phased/LESSONS.md` and the folders in an optional `~/phased/SOURCES.md` (e.g. Claude's memory folder) for client, device and error keywords, reads only the 1–3 best matches, and records them under `Notes:` in `PLAN.md`. Past notes are leads, confirmed against current output.
+- Planning offers to create `SOURCES.md` when it finds Claude memory folders.
+- Close-out saves the lesson into a `save:` folder as a proper note (with an index pointer) when one is set; otherwise to `LESSONS.md`.
+- README: the planning thread keeps its name (no longer renamed to Control).
+
 ### fortigate-meraki: new plugin
 - A FortiGate & Meraki engineer subagent: silent-fail traps, diagnostics, policy/NAT/local-in, shaping and voice, WAN failover, hardening, DDNS and certificates, a dial-up IPsec baseline, and Meraki MX/MS/MR gotchas. Restricted to file, shell and web tools. Follows the `phased` brief when called as a specialist.
 
