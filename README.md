@@ -33,7 +33,7 @@ Long Claude threads get expensive, because every turn re-reads the whole context
 - **Evidence first.** It reads config and logs before asking for testers or downtime. It gives filtered, paste-safe commands for systems it can't reach, labels conclusions fact or inference, and keeps a "Ruled out" table so nobody re-tests a dead end.
 - **Opus only when it counts.** Before a risky change, when it's not confident, or after two failed fixes, it stops and asks. An approved Opus subagent reviews or solves that one step, then the cheap model carries on.
 - **Safe changes.** Backup, rollback and exact scope before anything touches production.
-- **Learns across projects.** At the end it offers to save a short lesson to `~/phased/LESSONS.md` (searched when a new project starts, never loaded, so it costs nothing), and to archive or delete the project's sessions.
+- **Learns across projects.** At the end it offers to save a short lesson to `~/phased/LESSONS.md` (searched when a new project starts, never loaded, so it costs nothing), to write a paste-ready ticket note, and to archive or delete the project's sessions.
 
 **Start it** (select Sonnet first):
 - **Guided:** run `/phased:start`. It explains itself in three lines, asks for the job and a project folder (and creates it), then plans. Run it inside an existing project folder to resume the next phase.
