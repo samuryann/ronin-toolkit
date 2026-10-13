@@ -26,7 +26,7 @@
 The planning thread, `<Project> — Control`: a dashboard, not a workspace. On a `PHASED STATUS` message, reply with one progress line, don't re-read files, and offer to open the next phase if you can start sessions (SKILL.md D6).
 
 ## Estimating
-Unit: **k tokens of work above the session's baseline** (what D2 measures; the baseline is setup overhead and varies by machine). Sum: files to read (1 token ≈ 4 chars) + output written + ~1–2k per tool round trip + ~1–3k per filtered user paste. Give a range and one line of working. Typical: evidence phase with user pastes 5–20k · build phase 15–40k · verify 3–10k. Estimate low; escalations are logged separately.
+Unit: **k tokens of work above the session's baseline** (what D2 measures). Sum: files to read (1 token ≈ 4 chars) + output written + ~1–2k per tool round trip + ~1–3k per filtered user paste. Give a range and one line of working. Real phases so far: recon/evidence with pastes 7–30k · build 25–60k · verify 5–15k; they ran above estimate more often than below. Escalations are logged separately.
 
 ## PLAN.md template
 ```markdown
@@ -54,6 +54,6 @@ Status: not started · in progress · part done · done · blocked
 |---|---|---|
 
 ## Escalations
-| Date | Phase | Trigger | Mode | Opus tokens | Verdict |
+| Date | Phase | Trigger | Mode | Tokens | Verdict |
 |---|---|---|---|---|---|
 ```
