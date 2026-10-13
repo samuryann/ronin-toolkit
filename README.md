@@ -24,12 +24,14 @@ Long Claude Code threads get expensive: every turn re-reads the whole context, a
 - **Starts light, escalates one step, only when you say so.** The session runs on Haiku or Sonnet. When it hits a trigger it stops and asks. If you approve, the included `opus-escalation` subagent handles that single step and reports back, and the session carries on with the lighter model.
 - **Spends tokens like they're yours.** It searches before reading, reads line ranges instead of whole files, filters command output at the source, batches diagnostic commands into one round trip, and pulls the few lines that matter out of big log pastes. The skill itself loads in pieces: the planning and escalation rules are only read when needed.
 - **Built for troubleshooting.** Investigations get evidence-based phases (gather, hypothesise, test, fix, verify) and a "Ruled out" table that every later thread checks, so nobody re-tests a dead end. Conclusions are labelled fact or inference.
-- **Works on systems Claude can't reach.** For firewalls, servers and client networks it gives you exact, paste-safe commands and treats your output as the evidence. It asks you to mask secrets before pasting, and never writes them to a file.
+- **Evidence first, people last.** It works from free evidence (config, existing logs, current state) before asking for live tests, a second tester or downtime, and skips phases the evidence has already answered.
+- **One place to watch.** The planning thread becomes `<Project> — Control`. Each phase reports a five-line status back to it, so the progress is in one thread while the work happens in fresh, cheap sessions. Where your Claude Code can start sessions, it offers to open the next phase for you.
+- **Works on systems Claude can't reach.** For firewalls, servers and client networks it gives you exact, paste-safe commands (one block per device sequence) and treats your output as the evidence. It uses only syntax verified for that platform, every verification it gives you can actually fail, and it asks you to mask secrets before pasting.
 - **Careful with production.** Risky changes (device config, deletions, migrations, credentials, anything sent or published) trigger an approval and an optional Opus review. Before an approved change it captures the current state, prepares the rollback and restates exactly what will change.
 - **Tracks estimate vs actual.** PLAN.md records the measured peak context beside each estimate, plus every escalation. If usage can't be measured, it writes `not measured` rather than guessing.
 - **Hard to lose your place.** PLAN.md always carries the next START HERE line, handovers never overwrite each other, and a handover is checked against the real files before it's trusted. Jobs small enough for one thread are told to skip the ceremony.
 
-**Footprint** (measured with `claude plugin details`): about 110 tokens added to each session while installed. Running a phase loads about 1.4k. The planning rules (about 0.8k) and escalation rules (about 0.7k) are read only when needed, and the Opus subagent's instructions are about 0.6k.
+**Footprint** (measured with `claude plugin details`): about 115 tokens added to each session while installed. Running a phase loads about 1.8k. The planning rules (about 0.9k) and escalation rules (about 0.7k) are read only when needed. The Opus subagent's instructions are about 0.7k, and it gets only file and shell tools, so it doesn't carry the cost of every tool you have installed. Actuals are measured as work above each session's starting context, because that baseline varies a lot between setups.
 
 ### How escalation works
 
@@ -59,7 +61,7 @@ You:    Split this into phases: users at the branch office drop off the VPN ever
         afternoon. Project folder: ~/projects/branch-vpn-drops
 Claude: Recommends Sonnet, asks what changed recently and who is affected,
         writes PLAN.md (troubleshoot shape, 4 phases), waits for approval,
-        then gives you the phase 1 start line.
+        renames itself "Branch VPN — Control" and gives you the phase 1 start line.
 
 [new thread, model set to Sonnet]
 You:    Branch VPN Drops — Phase 1 of 4: Gather evidence — START HERE ~/projects/branch-vpn-drops/PLAN.md
@@ -153,13 +155,13 @@ Split this into phases: <what you want built or fixed>. Project folder: <full pa
 
 or run the skill directly: `/phased:phased <description>` (plugin install) or `/phased <description>` (manual install).
 
-**Run each phase in a fresh thread.** At the end of every phase Claude tells you which model to select and gives a line in its own box. Start a new thread, select that model (`/model` in the CLI, or the model menu in the app), and paste the line exactly:
+**Run each phase in a fresh thread.** Every phase ends with **▶ Start a NEW session on <Model> and paste:** and a line in its own box. Start a new thread, select that model (`/model` in the CLI, or the model menu in the app), and paste the line exactly. Each phase opens with a one-line roadmap, so you always know where you are:
 
 ```
 <Project> — Phase 2 of 4: <phase name> — START HERE /full/path/HANDOFF-YYYY-MM-DD-PHASE-1.md
 ```
 
-Lost the line? Tell Claude the project folder; the next start line is always at the top of `PLAN.md`.
+Lost the line? Tell Claude the project folder; the next start line is always at the top of `PLAN.md`. Progress also shows in the `<Project> — Control` thread, where your Claude Code supports messaging between sessions (the desktop app does). Opening the next phase automatically depends on a start-session tool that not every version exposes; without it you paste the line as above.
 
 **Force an escalation** any time: "get an Opus review of this" or "escalate this step to Opus".
 

@@ -4,33 +4,37 @@
    - **Fits in one thread?** Say so and offer to just do it. Phasing costs more than it saves on small jobs.
    - **Is the current model wrong for planning?** Say so and wait.
 2. **Is there already a PLAN.md in the folder?** Don't overwrite it. (If it has no `Next start` line, it isn't a phased plan: pick another folder or file name.) Ask: resume it, revise it, or start new (rename the old one to `PLAN-<date>-old.md`).
-3. **If anything is unclear, ask** before planning, at most 4 questions. For troubleshooting, ask for the symptoms, when it started, what changed, the scope (who and what is affected), and what's already been tried.
+3. **If anything is unclear, ask** before planning, at most 4 questions. Don't ask what a config or output paste would answer: ask for the paste instead. For troubleshooting, ask about the symptoms, when it started, what changed, the scope (who and what is affected), and what's already been tried.
 4. **Pick the shape:**
    - **Build**: phases deliver working pieces.
    - **Troubleshoot**: gather evidence > hypotheses > test (cheapest and most likely first) > fix > verify it holds.
      - An investigation's "done when" is evidence: e.g. "root cause shown by <output>", or "A–C ruled out with evidence".
      - A fix isn't done until its verification has been seen.
      - Put the fix in its own phase, so the risky change gets a clean thread and an approval.
-5. **Split into phases** small enough for one thread: an expected peak context of at most ~40% of the model's window. Fewer, well-sized phases beat many tiny ones, because every thread pays the startup cost again.
+5. **Split into phases** of about 60k of work or less each (see Estimating). Fewer, well-sized phases beat many tiny ones, because every thread pays the startup cost again.
 6. **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then **wait for approval**. Revise and show it again if asked. Build nothing.
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
-   - Give the phase 1 model and the start line, alone in a code block.
-   - Then **stop**, unless the user asks you to continue in this thread.
+   - Rename this thread `<Project> — Control`: it becomes the control thread (see Control below).
+   - Hand off phase 1 as in SKILL.md D6, then **stop**, unless the user asks you to continue here.
+
+## Control
+The planning thread, renamed `<Project> — Control`: a dashboard, not a workspace. On a `PHASED STATUS` message, reply with one progress line, don't re-read files, and offer to open the next phase if you can start sessions (SKILL.md D6).
 
 ## Estimating
-Unit: **peak thread context, in k tokens** (what D2 measures). Sum: starting context (measured, or ~20k) + files to read (1 token ≈ 4 chars) + output written + ~1–2k per tool round trip + ~1–3k per filtered user paste. Give a range and one line of working.
+Unit: **k tokens of work above the session's baseline** (what D2 measures; the baseline is setup overhead and varies by machine). Sum: files to read (1 token ≈ 4 chars) + output written + ~1–2k per tool round trip + ~1–3k per filtered user paste. Give a range and one line of working.
 
 ## PLAN.md template
 ```markdown
-# <Project>
+# <Project>: <one-line title>
+Project: <short name, 1–3 words, used in thread names and start lines>
 Next start: <START HERE line for the next phase>
 Goal: <one line> · Shape: build|troubleshoot · Folder: <abs path> · Created: <date> · Models: <available>
 
 ## Decisions
 - <answers to clarifying questions and constraints, one line each>
 
-| # | Phase | Done when | Est. peak | Actual | Model (effort) | Status |
+| # | Phase | Done when | Est. work | Actual | Model (effort) | Status |
 |---|---|---|---|---|---|---|
 | 1 | <name> | <check> | 30–45k | | Sonnet (medium) | not started |
 

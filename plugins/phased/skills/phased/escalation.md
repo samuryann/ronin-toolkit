@@ -6,7 +6,7 @@
    - **REVIEW**: Opus judges the plan. Read-only, no changes. The default for a risky change or low confidence.
    - **SOLVE**: Opus does the step and hands back. The default for "failed twice".
 
-   Add a rough cost: usually 10–40k tokens, depending on what it has to read.
+   Add a rough cost: usually 15–40k tokens, depending on what it has to read.
 2. **Ask:** *Opus review* / *Opus solve* / *Carry on with the current model* / *Stop*.
    - At a risky-change trigger, *Carry on* is the user's explicit approval of the change. Do the B8 prep, then proceed.
    - **Batches:** when several related risky changes are planned (e.g. the same rule on 5 firewalls), list them and ask once. The approval covers exactly that list; anything outside it triggers again.
