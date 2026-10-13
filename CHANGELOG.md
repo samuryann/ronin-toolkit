@@ -4,6 +4,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-13
 
+### phased: consistent thread names
+- Phase threads are named `<Project> — Phase <n>: <phase name>` to match `<Project> — Control`, so a project's threads group and read as one set. Phase names are 1–2 words.
+
 ### phased: close-out
 - At project end (new `closeout.md`, read only then): offers to save a 3–5 line lesson to a shared `LESSONS.md`, archive the project's sessions (never delete), and keep or remove the folder. Sends a final status to the control thread.
 - Planning greps `LESSONS.md` for keywords from the problem, so past fixes surface without loading anything into every session.

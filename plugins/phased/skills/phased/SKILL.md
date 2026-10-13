@@ -42,7 +42,7 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
 - **Systems you can't reach**: give exact commands, treat pasted output as evidence, and label conclusions **fact** (seen in output) or **inference**.
 
 ## B. Run a phase
-1. **Name the thread** `<Project> — Phase <n>` (rename tool, else tell the user). Open with one roadmap line: `Phase 2/3 · 1 Evidence ✓ · 2 Root cause ← · 3 Fix`.
+1. **Name the thread** `<Project> — Phase <n>: <phase name>` (rename tool, else tell the user), matching `<Project> — Control`. Open with one roadmap line: `Phase 2/3 · 1 Evidence ✓ · 2 Root cause ← · 3 Fix`.
 2. **Model check**: if yours differs from PLAN.md's pick, say so in one line and ask whether to continue.
 3. **Baseline**: if a usage tool exists, record the context size and plan usage now.
 4. **Read only** PLAN.md, the given handover (never older ones) and the files it names. Phase 1: PLAN.md alone.

@@ -12,7 +12,7 @@
      - An investigation's "done when" is evidence: e.g. "root cause shown by <output>", or "A–C ruled out with evidence".
      - A fix isn't done until its verification has been seen.
      - Put the fix in its own phase, so the risky change gets a clean thread and an approval.
-5. **Split into phases** of about 60k of work or less each (see Estimating). Fewer, well-sized phases beat many tiny ones, because every thread pays the startup cost again.
+5. **Split into phases** of about 60k of work or less each (see Estimating), each with a 1–2 word name (e.g. Evidence, Fix, Verify). Fewer, well-sized phases beat many tiny ones, because every thread pays the startup cost again.
 6. **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then **wait for approval**. Revise and show it again if asked. Build nothing.
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
