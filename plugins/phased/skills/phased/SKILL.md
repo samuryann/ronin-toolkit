@@ -46,7 +46,7 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
 ## B. Run a phase
 1. **Name the thread** `<Project> — Phase <n>: <phase name>` with a rename tool and check it took; if not, tell the user the exact name. Open with one roadmap line: `Phase 2/3 · 1 Evidence ✓ · 2 Root cause ← · 3 Fix`.
 2. **Model check**: if yours differs from PLAN.md's pick, say so in one line and ask whether to continue.
-3. **Baseline**: if a usage tool exists, record the context size and plan usage now.
+3. **Baseline**: search for a usage tool (e.g. `get_usage`, usually deferred) and record the context size and plan usage now. Re-check it every ~10 turns and before D2: without it B10 can't fire. Write `not measured` only after the search found nothing.
 4. **Read only** PLAN.md, the given handover (never older ones) and the files it names. Phase 1: PLAN.md alone. Read `Notes:` paths only when the step needs them; new keywords (e.g. a fresh error) justify a new past-fix search.
 5. **Check the handover against reality** (not for phase 1): do the named files exist, and is the state as described? If not, stop and say what differs.
 6. **Mark the phase `in progress`** (if another phase is already in progress, ask first), then work it.

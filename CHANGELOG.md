@@ -4,6 +4,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-13
 
+### phased: usage measured every phase
+- The baseline step searches for the (usually deferred) usage tool instead of assuming it's missing, and re-checks every ~10 turns so the session-size rule actually fires. A real phase ran to ~108k of work with `not measured`.
+
 ### README
 - phased section rewritten: how to start it, where the control and phase threads live, how memory and `SOURCES.md` work, then a short feature list.
 
