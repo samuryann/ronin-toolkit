@@ -25,10 +25,10 @@ Core file. Read the others in this skill's base directory (if it wasn't shown, g
 | Sonnet | most building, configs, docs, debugging with a clear error | medium |
 | Opus | design trade-offs, ambiguous/dead-end debugging, security-sensitive work, risky-change review | high |
 
-Use the cheapest tier that does the work well; when torn, go lighter. A session can't reliably switch its own model: a new phase gets a new session on the right model, and within a phase you escalate one step (`escalation.md`).
+Use the cheapest tier that does the work well; when torn, go lighter. A session can't reliably switch its own model, and every new session rebuilds the baseline cache, so switch models inside a phase instead: bulk reading goes down to the Haiku worker (B7), one hard step goes up to Opus (`escalation.md`).
 
 ## Token rules (every turn)
-- **Budget**: tokens count above the session's starting context (baseline). ~60k of work per phase; stop early past ~100k (B9).
+- **Budget**: tokens count above the session's starting context (baseline). ~60k of work per phase; check at ~60k, hand over by ~100k (B10).
 - **Evidence ladder**: free evidence first (config, existing logs, current state), analysed before asking for more. Live tests, other people or downtime only if that didn't settle it. Batch within a step.
 - **Past fixes: search, never bulk-load.** `grep -ril` 2–4 keywords (client, device, error text; try synonyms) across `~/phased/LESSONS.md` and the paths in `~/phased/SOURCES.md` (one per line, globs ok, `#` comments, `save:` prefix allowed), then read only the 1–3 best notes. No hits: scan the index (e.g. `MEMORY.md`) titles once. Past notes are leads, not facts: confirm against current output.
 - **Read narrowly**: search first; read line ranges, not whole files.
@@ -51,16 +51,18 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
 6. **Mark the phase `in progress`** (if another phase is already in progress, ask first), then work it.
    - **Troubleshooting**: check the Ruled out table first, test the cheapest and most likely hypothesis first, and log each one ruled out with its evidence.
    - **Evidence answers a later phase early?** Propose merging or skipping the phase rather than working through it.
-7. **Escalation triggers, in priority order** (read `escalation.md` when one fires):
+7. **Bulk reading goes to Haiku, no approval needed.** When a step needs more than ~10k of raw material (logs, inventories, exports, large configs) but only an extract or answer, call the Agent tool with `subagent_type` `phased:haiku-worker` (or `haiku-worker`; if neither exists, `model: "haiku"`). Brief: the absolute file paths, one precise question, what to quote. Treat its answer as evidence to spot-check, not a verdict. Not for judgement calls or risky-change review.
+8. **Escalation triggers, in priority order** (read `escalation.md` when one fires):
    1. **A risky change is next**: anything hard to undo, e.g. production or device config, deleting or overwriting data, migrations, credentials, security or identity changes, sending or publishing, client-facing documents.
    2. **Low confidence**: guessing a command, flag or syntax; several causes fit the evidence; changing something you haven't read; or acting on memory rather than output seen in this thread.
    3. **Stuck**: the same fix, or attempts at a working solution, failed twice.
-8. **Before any approved risky change**: capture the current state (config backup or current values), have the rollback ready, and restate exactly what will change.
-9. **Stop early and hand over as `part done`** if work passes ~100k above the baseline (or 60% of the window, whichever comes first), the context was compacted, an earlier decision has been lost, or the phase has outgrown its plan.
-10. **No other subagents or parallel work** without approval; say why it's worth the tokens first.
+9. **Before any approved risky change**: capture the current state (config backup or current values), have the rollback ready, and restate exactly what will change.
+10. **Session size.** At ~60k of work above the baseline, check what's left: more than ~15 messages, hand over as `part done` now (a fresh session repays its cache rebuild in about that many); nearly done, finish here. Always hand over past ~100k (or 60% of the window), or if the context was compacted or an earlier decision has been lost.
+11. **No other subagents or parallel work** (beyond B7 and approved escalations) without approval; say why it's worth the tokens first.
 
 ## D. End of phase (or part phase)
 1. **Show the "done when" check passing** with real output, and **wait for the user to confirm.** A failing check means not done: fix it if there's room, otherwise hand over as `part done`. For a part phase, say what's left.
+   **Continue here?** If the next phase uses the same model, needs no wait (overnight, a scheduled window) and this thread's work plus its estimate stays under ~60k, ask in the same message. On yes: record the actual and status in PLAN.md, send the status (D5), rename this thread to the next phase, and carry on at B6. No handover file.
 2. **Record the actual** in PLAN.md as work above the baseline: `~<k> work, plan +<x>%` ("approx" if other sessions ran), plus escalation tokens. Write `not measured` if there's no usage tool or the context was compacted. Never guess.
 3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**, because the next thread pays for every line: built/found · decisions + why, one line each · files touched (absolute) · how to test, including user-run commands · ruled out · key log or output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted changes if it's a git repo (offer to commit, never unasked) · **next start: first action + the only files it needs**.
 4. **Update PLAN.md**: the status (`done`, `part done` or `blocked`) and `Next start`. If a `CLAUDE.md` or memory note exists for this project, point it at the handover.

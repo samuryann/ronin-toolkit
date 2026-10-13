@@ -29,11 +29,12 @@ Install fails? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` and retry. Remove with `/
 
 ## phased
 
-Long Claude threads get expensive, because every turn re-reads the whole context. `phased` keeps work in small phases on the cheapest model that can do them:
+Long Claude threads get expensive, because every turn re-sends the whole context. `phased` keeps work in right-sized phases on the cheapest model that can do them:
 
 - **Plan first.** It writes a terse `PLAN.md` with phases, "done when" checks, estimates and a model for each, and waits for your approval.
-- **One phase per session.** Each phase ends with a short handover; the next session reads only that. The planning thread keeps its name, acts as the control thread and gets a 5-line status from each phase.
+- **Sessions only where they pay.** Every new session rebuilds your startup context, so phases split only at a model change, a wait (overnight, a change window), ~60k of work or a risky change; otherwise it offers to continue in the same session. Past ~60k with lots left, it hands over to a fresh session. Each handover is short, and the next session reads only that. The planning thread keeps its name, acts as the control thread and gets a 5-line status from each phase.
 - **Evidence first.** It reads config and logs before asking for testers or downtime. It gives filtered, paste-safe commands for systems it can't reach, labels conclusions fact or inference, and keeps a "Ruled out" table so nobody re-tests a dead end.
+- **Haiku for the bulk reading.** Inside any phase, a Haiku worker reads big logs, inventories and exports and returns a short extract, so the main thread never carries them. No approval needed.
 - **Opus only when it counts.** Before a risky change, when it's not confident, or after two failed fixes, it stops and asks. An approved Opus subagent (or a better-matched specialist agent you have installed, e.g. a firewall expert) reviews or solves that one step, then the cheap model carries on.
 - **Safe changes.** Backup, rollback and exact scope before anything touches production.
 - **Learns across projects.** At the end it offers to save a short lesson to `~/phased/LESSONS.md`, to write a paste-ready ticket note, and to archive or delete the project's sessions.
@@ -45,7 +46,7 @@ Long Claude threads get expensive, because every turn re-reads the whole context
 
 Each phase ends with **▶ Start a NEW session**: the project folder to open it in, the model, and a START HERE line to paste. Pick the folder first, because it sets which memory loads. Phase threads carry the project name (`<Project> — Phase 2: Fix`) so they group together. Lost the line? It's always at the top of `PLAN.md`.
 
-**Footprint:** about 130 tokens per session while installed, and about 1.8k when a phase runs.
+**Footprint:** about 180 tokens per session while installed, about 2.3k when a phase runs, and a few hundred plus the material read for each Haiku worker call.
 
 ## fortigate-meraki
 

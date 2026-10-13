@@ -14,7 +14,7 @@
      - An investigation's "done when" is evidence: e.g. "root cause shown by <output>", or "A–C ruled out with evidence".
      - A fix isn't done until its verification has been seen.
      - Put the fix in its own phase, so the risky change gets a clean thread and an approval.
-5. **Split into phases** of about 60k of work or less each (see Estimating), each with a 1–2 word name (e.g. Evidence, Fix, Verify). Fewer, well-sized phases beat many tiny ones, because every thread pays the startup cost again.
+5. **Split into phases** of about 60k of work or less each (see Estimating), each with a 1–2 word name (e.g. Evidence, Fix, Verify). Every new session rebuilds the ~baseline cache, so **split only where it pays**: a model change, a wait (overnight, a scheduled window), the ~60k limit, or a risky change that needs its own approval thread. Otherwise merge. Bulk reading goes to the Haiku worker inside a phase, so a phase rarely needs Haiku of its own.
 6. **Name the project**: 1–4 words for the job (e.g. `File server migration`). If this thread's title already says that, keep it; otherwise rename this thread to it and check it took. Every phase thread carries this name.
    **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then **wait for approval**. Revise and show it again if asked. Build nothing.
 7. **Once it's approved:**

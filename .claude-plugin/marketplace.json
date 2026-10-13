@@ -8,7 +8,7 @@
     {
       "name": "phased",
       "source": "./plugins/phased",
-      "description": "Token-efficient phased projects and troubleshooting: plan into small phases, one phase per thread with handovers, cheapest viable model, and per-step Opus escalation only with your approval"
+      "description": "Token-efficient phased projects and troubleshooting: plan into small phases, one phase per thread with handovers, cheapest viable model, a Haiku worker for bulk reading, and per-step Opus escalation only with your approval"
     },
     {
       "name": "fortigate-meraki",

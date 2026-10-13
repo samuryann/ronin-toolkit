@@ -4,6 +4,12 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-13
 
+### phased: usage savings
+- New `haiku-worker` subagent: bulk reading (logs, inventories, exports, large configs) goes to Haiku inside any phase and comes back as a ≤200-word extract with quoted lines. No approval needed. Models now switch inside a phase (Haiku down, Opus up) instead of forcing a new session.
+- Phases split only where it pays: a model change, a wait, ~60k of work or a risky change. Otherwise merge.
+- End of phase offers **Continue here?** when the next phase has the same model, no wait and fits ~60k.
+- Session size: at ~60k of work, hand over if more than ~15 messages remain (a fresh session repays its cache rebuild in about that many); always by ~100k.
+
 ### phased: past-fix lookup
 - Searches `~/phased/LESSONS.md` and the folders in an optional `~/phased/SOURCES.md` (e.g. Claude's memory folder) for client, device and error keywords, reads only the 1–3 best matches, and records them under `Notes:` in `PLAN.md`. Past notes are leads, confirmed against current output.
 - Planning offers to create `SOURCES.md` with one wildcard line, `~/.claude/projects/*/memory`, covering all Claude memory folders including future ones.
