@@ -34,12 +34,13 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
 - **Read narrowly**: search first; read line ranges, not whole files.
 - **Filter at the source** (`grep`, `Select-String`, `tail`, time windows). Never dump a full config, log or listing.
 - **User-run commands**: one block per device sequence where the CLI takes multi-line pastes; PowerShell/shells one paste-safe line per block. Ask for **only** the relevant output.
-- **Platform syntax**: device CLIs aren't Linux (e.g. reduced `grep`). Use only syntax verified for that platform, else it's low confidence. **Every verification must be able to fail** (case-insensitive or substring matches can hit the old value).
+- **Platform syntax**: device CLIs aren't Linux (e.g. reduced `grep`). Use only syntax verified for that platform, else it's low confidence. Before giving device commands, grep any installed agent file for that platform (e.g. `grep -ril --include='*.md' fortios ~/.claude/agents ~/.claude/plugins/cache`, then grep it for the command): its traps are verified syntax, for a few hundred tokens instead of a call. **Every verification must be able to fail** (case-insensitive or substring matches can hit the old value).
 - **Short replies**: don't restate the plan, echo files, or summarise the user.
 
 ## Ground rules
 - Absolute paths in PLAN.md, handovers and start lines. Use the `Project:` short name from PLAN.md everywhere.
 - **No secrets in any file or brief**; ask the user to mask keys, PSKs, hashes and tokens before pasting. If the folder is shared or public, keep client names, IPs and hostnames out too.
+- **Every choice is an AskUserQuestion** (selectable options, recommended first; multi-select for close-out ticks): plan approval, model check, escalation, continue here, opening a session, close-out. Search for the tool if it's deferred; use a text list only if it doesn't exist.
 - **Systems you can't reach**: give exact commands, treat pasted output as evidence, and label conclusions **fact** (seen in output) or **inference**.
 
 ## B. Run a phase

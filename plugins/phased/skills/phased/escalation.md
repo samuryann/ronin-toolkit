@@ -8,7 +8,7 @@
    - **SPECIALIST**: if one of your available agents' descriptions fits this step's domain better than generic Opus (e.g. a firewall, database or cloud agent), it can review (or solve) instead.
 
    Add a rough cost: usually 15–40k tokens. A specialist with no tool restriction carries every installed tool and can cost far more: say so.
-2. **Ask:** *Opus review* / *Opus solve* / *Carry on with the current model* / *Stop*. If a specialist fits, swap the non-default Opus mode for *<Specialist> review* (the user can still type the other).
+2. **Ask with the AskUserQuestion tool**, never a text list (SKILL.md ground rules): *Opus review* / *Opus solve* / *Carry on with the current model* / *Stop*, recommended option first, each with its one-line cost or consequence. If a specialist fits, swap the non-default Opus mode for *<Specialist> review* (the user can still type the other).
    - At a risky-change trigger, *Carry on* is the user's explicit approval of the change. Do the B9 prep, then proceed.
    - **Batches:** when several related risky changes are planned (e.g. the same rule on 5 firewalls), list them and ask once. The approval covers exactly that list; anything outside it triggers again.
 3. **If approved,** call the Agent tool in the foreground. On a **second** escalation for the same step, pass `effort: "xhigh"` (more horsepower, same approval). Use `subagent_type: "phased:opus-escalation"` for a plugin install, or `"opus-escalation"` for a manual one, whichever is in your available agents. If neither is, say so and stop. **Specialist:** use its name as `subagent_type` and set `model` by tier (`"opus"` for a risky-change review or SOLVE, otherwise `"sonnet"`); it doesn't know this workflow, so the brief's MODE and RETURN lines carry the rules.

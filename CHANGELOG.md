@@ -4,6 +4,10 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-13
 
+### phased: choices and device syntax
+- Every user choice (plan approval, model check, escalation, continue here, opening a session, close-out) is asked with selectable options, recommended first, not as a text list.
+- Before giving device CLI, phased greps any installed agent file for that platform and checks the command's syntax there (e.g. FortiOS `grep -f` prints whole config blocks).
+
 ### phased: usage savings
 - New `haiku-worker` subagent: bulk reading (logs, inventories, exports, large configs) goes to Haiku inside any phase and comes back as a ≤200-word extract with quoted lines. No approval needed. Models now switch inside a phase (Haiku down, Opus up) instead of forcing a new session.
 - Phases split only where it pays: a model change, a wait, ~60k of work or a risky change. Otherwise merge.
