@@ -6,7 +6,8 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ### phased: past-fix lookup
 - Searches `~/phased/LESSONS.md` and the folders in an optional `~/phased/SOURCES.md` (e.g. Claude's memory folder) for client, device and error keywords, reads only the 1–3 best matches, and records them under `Notes:` in `PLAN.md`. Past notes are leads, confirmed against current output.
-- Planning offers to create `SOURCES.md` when it finds Claude memory folders.
+- Planning offers to create `SOURCES.md` with one wildcard line, `~/.claude/projects/*/memory`, covering all Claude memory folders including future ones.
+- Planning names the project (1–4 words) and renames the planning thread to it when its auto-title doesn't fit (e.g. a thread started with `/phased`), so every phase carries a meaningful name.
 - Close-out saves the lesson into a `save:` folder as a proper note (with an index pointer) when one is set; otherwise to `LESSONS.md`.
 - README: the planning thread keeps its name (no longer renamed to Control).
 

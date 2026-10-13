@@ -3,7 +3,7 @@
 **Guided start** (no details given): if the current folder holds a phased PLAN.md, offer its `Next start`. Otherwise explain in ≤3 lines (small phases, one session each, cheapest model, asks before risky changes or Opus), then ask: the job in one line, and the project folder (suggest `~/phased/<slug>/`, offer to create it). Then continue below.
 
 1. **Triage**, in 3 lines max: what the job is, the model and effort for planning it, and the model most phases will need. If no folder was given, propose `~/phased/<project-slug>/` in the same message (common for network or remote-system work with no codebase).
-   - **Seen before?** Search past fixes (SKILL.md token rules). One line per match; list useful paths under `Notes:` in PLAN.md so phases don't search again. If `~/phased/SOURCES.md` is missing and `ls -d ~/.claude/projects/*/memory` finds notes, offer once to create it listing them (lets phased find fixes from your other sessions).
+   - **Seen before?** Search past fixes (SKILL.md token rules). One line per match; list useful paths under `Notes:` in PLAN.md so phases don't search again. If `~/phased/SOURCES.md` is missing and `ls -d ~/.claude/projects/*/memory` finds notes, offer once to create it with the line `~/.claude/projects/*/memory` (all Claude memory, including future folders).
    - **Fits in one thread?** Say so and offer to just do it. Phasing costs more than it saves on small jobs.
    - **Is the current model wrong for planning?** Say so and wait.
 2. **Is there already a PLAN.md in the folder?** Don't overwrite it. (If it has no `Next start` line, it isn't a phased plan: pick another folder or file name.) Ask: resume it, revise it, or start new (rename the old one to `PLAN-<date>-old.md`).
@@ -15,7 +15,8 @@
      - A fix isn't done until its verification has been seen.
      - Put the fix in its own phase, so the risky change gets a clean thread and an approval.
 5. **Split into phases** of about 60k of work or less each (see Estimating), each with a 1–2 word name (e.g. Evidence, Fix, Verify). Fewer, well-sized phases beat many tiny ones, because every thread pays the startup cost again.
-6. **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then **wait for approval**. Revise and show it again if asked. Build nothing.
+6. **Name the project**: 1–4 words for the job (e.g. `File server migration`). If this thread's title already says that, keep it; otherwise rename this thread to it and check it took. Every phase thread carries this name.
+   **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then **wait for approval**. Revise and show it again if asked. Build nothing.
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
    - Record `Control: <this session's id>` (get session `self`) in PLAN.md. This thread is the control thread (see Control below); keep its title.
@@ -30,7 +31,7 @@ Unit: **k tokens of work above the session's baseline** (what D2 measures; the b
 ## PLAN.md template
 ```markdown
 # <Project>: <one-line title>
-Project: <this thread's own title (get session `self`); if unavailable, a 1–3 word name>
+Project: <the project name from step 6 (this thread's title)>
 Control: <this session's id, or none>
 Next start: <START HERE line for the next phase>
 Goal: <one line> · Shape: build|troubleshoot · Folder: <abs path> · Created: <date> · Models: <available>

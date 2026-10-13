@@ -30,7 +30,7 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
 ## Token rules (every turn)
 - **Budget**: tokens count above the session's starting context (baseline). ~60k of work per phase; stop early past ~100k (B9).
 - **Evidence ladder**: free evidence first (config, existing logs, current state), analysed before asking for more. Live tests, other people or downtime only if that didn't settle it. Batch within a step.
-- **Past fixes: search, never bulk-load.** `grep -ril` 2–4 keywords (client, device, error text; try synonyms) across `~/phased/LESSONS.md` and the paths in `~/phased/SOURCES.md` (one per line, `#` comments, `save:` prefix allowed), then read only the 1–3 best notes. No hits: scan the index (e.g. `MEMORY.md`) titles once. Past notes are leads, not facts: confirm against current output.
+- **Past fixes: search, never bulk-load.** `grep -ril` 2–4 keywords (client, device, error text; try synonyms) across `~/phased/LESSONS.md` and the paths in `~/phased/SOURCES.md` (one per line, globs ok, `#` comments, `save:` prefix allowed), then read only the 1–3 best notes. No hits: scan the index (e.g. `MEMORY.md`) titles once. Past notes are leads, not facts: confirm against current output.
 - **Read narrowly**: search first; read line ranges, not whole files.
 - **Filter at the source** (`grep`, `Select-String`, `tail`, time windows). Never dump a full config, log or listing.
 - **User-run commands**: one block per device sequence where the CLI takes multi-line pastes; PowerShell/shells one paste-safe line per block. Ask for **only** the relevant output.
