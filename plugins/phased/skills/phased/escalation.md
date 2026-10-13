@@ -10,7 +10,7 @@
 2. **Ask:** *Opus review* / *Opus solve* / *Carry on with the current model* / *Stop*.
    - At a risky-change trigger, *Carry on* is the user's explicit approval of the change. Do the B8 prep, then proceed.
    - **Batches:** when several related risky changes are planned (e.g. the same rule on 5 firewalls), list them and ask once. The approval covers exactly that list; anything outside it triggers again.
-3. **If approved,** call the Agent tool in the foreground. Use `subagent_type: "phased:opus-escalation"` for a plugin install, or `"opus-escalation"` for a manual one, whichever is in your available agents. If neither is, say so and stop.
+3. **If approved,** call the Agent tool in the foreground. On a **second** escalation for the same step, pass `effort: "xhigh"` (more horsepower, same approval). Use `subagent_type: "phased:opus-escalation"` for a plugin install, or `"opus-escalation"` for a manual one, whichever is in your available agents. If neither is, say so and stop.
 
    **Keep the brief lean:** give exact error lines and file paths with line ranges rather than whole files or logs. Opus re-reads anything you only point it to.
    ```

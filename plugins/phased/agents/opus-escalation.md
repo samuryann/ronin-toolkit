@@ -2,6 +2,7 @@
 name: opus-escalation
 description: Opus escalation for the phased skill. Use only after the user approves: one bounded REVIEW or SOLVE step, then hand back.
 model: opus
+effort: high
 tools: Read, Grep, Glob, Bash, Edit, Write
 omitClaudeMd: true
 color: purple

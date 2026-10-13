@@ -10,10 +10,10 @@ Core file. Read the others in this skill's base directory (if it wasn't shown, g
 - `escalation.md`: an escalation trigger fires.
 - `closeout.md`: the last phase is done.
 
-**Tools may need loading.** Session tools (rename, usage, message, start session) may be deferred: search for them before deciding you don't have them.
+**Tools may need loading.** Session tools (get/rename session, usage, send message, `start_session`/`hand_off_to_session`, archive/delete) may be deferred: search for them before deciding you don't have them.
 
 ## Entry
-- **New project or problem**: follow `planning.md`.
+- **New project or problem**, or no details given (`/phased`, `/phased:start`): follow `planning.md`.
 - **`START HERE` + a path** (match loosely; dashes may be altered): run a phase (**B**). The path is a handover, or PLAN.md for phase 1.
 - **`PHASED STATUS` message**: you're the control thread; see Control in `planning.md`.
 - **Resume, no start line**: use the `Next start` line in the folder's PLAN.md. A PLAN.md without one isn't a phased plan: don't adopt it. No PLAN.md: ask for the folder.
@@ -42,7 +42,7 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
 - **Systems you can't reach**: give exact commands, treat pasted output as evidence, and label conclusions **fact** (seen in output) or **inference**.
 
 ## B. Run a phase
-1. **Name the thread** `<Project> — Phase <n>: <phase name>` (rename tool, else tell the user), matching `<Project> — Control`. Open with one roadmap line: `Phase 2/3 · 1 Evidence ✓ · 2 Root cause ← · 3 Fix`.
+1. **Name the thread** `<Project> — Phase <n>: <phase name>` with a rename tool and check it took; if not, tell the user the exact name. Open with one roadmap line: `Phase 2/3 · 1 Evidence ✓ · 2 Root cause ← · 3 Fix`.
 2. **Model check**: if yours differs from PLAN.md's pick, say so in one line and ask whether to continue.
 3. **Baseline**: if a usage tool exists, record the context size and plan usage now.
 4. **Read only** PLAN.md, the given handover (never older ones) and the files it names. Phase 1: PLAN.md alone.
@@ -63,7 +63,7 @@ Use the cheapest tier that does the work well; when torn, go lighter. A session 
 2. **Record the actual** in PLAN.md as work above the baseline: `~<k> work, plan +<x>%` ("approx" if other sessions ran), plus escalation tokens. Write `not measured` if there's no usage tool or the context was compacted. Never guess.
 3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**, because the next thread pays for every line: built/found · decisions + why, one line each · files touched (absolute) · how to test, including user-run commands · ruled out · key log or output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted changes if it's a git repo (offer to commit, never unasked) · **next start: first action + the only files it needs**.
 4. **Update PLAN.md**: the status (`done`, `part done` or `blocked`) and `Next start`. If a `CLAUDE.md` or memory note exists for this project, point it at the handover.
-5. **Report to the control thread** if you can message sessions (`parent`, or the one titled `<Project> — Control`), max 5 lines:
+5. **Report to the control thread** (the `Control:` session id in PLAN.md, or `parent`) if you can message sessions, max 5 lines. If it can't be delivered, say so in one line:
    ```
    PHASED STATUS — <Project> — Phase <n>: done | part done | blocked
    <key result, fact/inference>

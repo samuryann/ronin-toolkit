@@ -1,5 +1,7 @@
 # A. Plan (no building)
 
+**Guided start** (no details given): if the current folder holds a phased PLAN.md, offer its `Next start`. Otherwise explain in ≤3 lines (small phases, one session each, cheapest model, asks before risky changes or Opus), then ask: the job in one line, and the project folder (suggest `~/phased/<slug>/`, offer to create it). Then continue below.
+
 1. **Triage**, in 3 lines max: what the job is, the model and effort for planning it, and the model most phases will need. If no folder was given, propose `~/phased/<project-slug>/` in the same message (common for network or remote-system work with no codebase).
    - **Seen before?** If `LESSONS.md` exists in the projects' parent folder (e.g. `~/phased/`), grep it for 2–3 keywords from the problem. Mention any match in one line; don't read the whole file.
    - **Fits in one thread?** Say so and offer to just do it. Phasing costs more than it saves on small jobs.
@@ -16,19 +18,20 @@
 6. **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then **wait for approval**. Revise and show it again if asked. Build nothing.
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
-   - Rename this thread `<Project> — Control`: it becomes the control thread (see Control below).
+   - Record `Control: <this session's id>` (get session `self`) in PLAN.md. This thread is the control thread (see Control below); keep its title.
    - Hand off phase 1 as in SKILL.md D6, then **stop**, unless the user asks you to continue here.
 
 ## Control
-The planning thread, renamed `<Project> — Control`: a dashboard, not a workspace. On a `PHASED STATUS` message, reply with one progress line, don't re-read files, and offer to open the next phase if you can start sessions (SKILL.md D6).
+The planning thread (its title is the project name): a dashboard, not a workspace. On a `PHASED STATUS` message, reply with one progress line, don't re-read files, and offer to open the next phase if you can start sessions (SKILL.md D6).
 
 ## Estimating
-Unit: **k tokens of work above the session's baseline** (what D2 measures; the baseline is setup overhead and varies by machine). Sum: files to read (1 token ≈ 4 chars) + output written + ~1–2k per tool round trip + ~1–3k per filtered user paste. Give a range and one line of working.
+Unit: **k tokens of work above the session's baseline** (what D2 measures; the baseline is setup overhead and varies by machine). Sum: files to read (1 token ≈ 4 chars) + output written + ~1–2k per tool round trip + ~1–3k per filtered user paste. Give a range and one line of working. Typical: evidence phase with user pastes 5–20k · build phase 15–40k · verify 3–10k. Estimate low; escalations are logged separately.
 
 ## PLAN.md template
 ```markdown
 # <Project>: <one-line title>
-Project: <short name, 1–3 words, used in thread names and start lines>
+Project: <this thread's own title (get session `self`); if unavailable, a 1–3 word name>
+Control: <this session's id, or none>
 Next start: <START HERE line for the next phase>
 Goal: <one line> · Shape: build|troubleshoot · Folder: <abs path> · Created: <date> · Models: <available>
 

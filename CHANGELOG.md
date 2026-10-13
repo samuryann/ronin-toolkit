@@ -4,6 +4,15 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-13
 
+### phased: fixes from the second end-to-end test
+- **Guided start**: `/phased:start` (plugin) or `/phased` with no details explains itself, asks for the job and a project folder (and creates it), or resumes the next phase if the folder already holds a plan.
+- **Project name = the first thread's title**; phases are named `<Project> — Phase <n>: <name>` and must confirm the rename took.
+- **Control thread found by session id** recorded in PLAN.md (no rename needed); an undeliverable status is reported instead of silently skipped.
+- **Power ladder**: a second escalation on the same step runs Opus at `xhigh` effort; the agent defaults to `high`.
+- **Close-out** adds a permanent delete option (the app confirms each one); the final status is sent before archiving.
+- Realistic estimate figures (evidence 5–20k, build 15–40k, verify 3–10k work); searches for `start_session`/`hand_off_to_session` to open phases automatically where available.
+- Measured: an Opus review cost ~14k, down from ~74k, after restricting the agent's tools.
+
 ### phased: consistent thread names
 - Phase threads are named `<Project> — Phase <n>: <phase name>` to match `<Project> — Control`, so a project's threads group and read as one set. Phase names are 1–2 words.
 
