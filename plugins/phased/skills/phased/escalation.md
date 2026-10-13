@@ -5,12 +5,13 @@
 1. **Tell the user**, in 3 lines max: the trigger, what's at stake, and the mode you propose.
    - **REVIEW**: Opus judges the plan. Read-only, no changes. The default for a risky change or low confidence.
    - **SOLVE**: Opus does the step and hands back. The default for "failed twice".
+   - **SPECIALIST**: if one of your available agents' descriptions fits this step's domain better than generic Opus (e.g. a firewall, database or cloud agent), it can review (or solve) instead.
 
-   Add a rough cost: usually 15–40k tokens, depending on what it has to read.
-2. **Ask:** *Opus review* / *Opus solve* / *Carry on with the current model* / *Stop*.
+   Add a rough cost: usually 15–40k tokens. A specialist with no tool restriction carries every installed tool and can cost far more: say so.
+2. **Ask:** *Opus review* / *Opus solve* / *Carry on with the current model* / *Stop*. If a specialist fits, swap the non-default Opus mode for *<Specialist> review* (the user can still type the other).
    - At a risky-change trigger, *Carry on* is the user's explicit approval of the change. Do the B8 prep, then proceed.
    - **Batches:** when several related risky changes are planned (e.g. the same rule on 5 firewalls), list them and ask once. The approval covers exactly that list; anything outside it triggers again.
-3. **If approved,** call the Agent tool in the foreground. On a **second** escalation for the same step, pass `effort: "xhigh"` (more horsepower, same approval). Use `subagent_type: "phased:opus-escalation"` for a plugin install, or `"opus-escalation"` for a manual one, whichever is in your available agents. If neither is, say so and stop.
+3. **If approved,** call the Agent tool in the foreground. On a **second** escalation for the same step, pass `effort: "xhigh"` (more horsepower, same approval). Use `subagent_type: "phased:opus-escalation"` for a plugin install, or `"opus-escalation"` for a manual one, whichever is in your available agents. If neither is, say so and stop. **Specialist:** use its name as `subagent_type` and set `model` by tier (`"opus"` for a risky-change review or SOLVE, otherwise `"sonnet"`); it doesn't know this workflow, so the brief's MODE and RETURN lines carry the rules.
 
    **Keep the brief lean:** give exact error lines and file paths with line ranges rather than whole files or logs. Opus re-reads anything you only point it to.
    ```
@@ -23,12 +24,13 @@
    FILES: <absolute paths, with line ranges where useful>
    CAN RUN: <what it may execute, or "nothing: user runs commands">
    CONSTRAINTS: <decisions that must hold>
+   RETURN (≤200 words, no preamble): VERDICT GO|GO WITH CHANGES|STOP|SOLVED|NOT SOLVED|NEEDS INFO · CONFIDENCE · DONE · FILES TOUCHED · VERIFIED · RULED OUT · NEXT. REVIEW = read-only.
    ```
 4. **After the handback:**
    - **Files touched:** re-read only those files (your copy is stale).
    - **NEEDS INFO:** get it, from the user if necessary. A second call counts toward the limit.
    - **STOP on a risky change:** don't make it. Tell the user and wait.
    - **Low confidence, or "still needs the heavier model":** tell the user. Don't continue blindly.
-5. **Relay in short form**: the verdict, what changed, and the next step. Then log one row in PLAN.md's Escalations table. Opus tokens come from the Agent result's usage figure; if none is shown, write `not measured`.
+5. **Relay in short form**: the verdict, what changed, and the next step. Then log one row in PLAN.md's Escalations table (Mode REVIEW, SOLVE or `<Specialist>`). Tokens come from the Agent result's usage figure; if none is shown, write `not measured`.
 6. **Limit: 2 escalations per step.** If the step is still unresolved, write the handover, mark the phase `blocked` or `part done`, and recommend Opus for the next thread.
 7. **Otherwise continue on the lighter model** from the handback's next step.

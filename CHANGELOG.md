@@ -4,6 +4,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-13
 
+### phased: specialist escalation
+- At an escalation, if an installed agent fits the step's domain better than generic Opus, it's offered as `<Specialist> review`, with the same brief, approval, logging and 2-per-step limit. Its model is set by tier (Opus for risky changes, otherwise Sonnet), and the brief carries the handback format and REVIEW = read-only.
+
 ### phased: fixes from the second end-to-end test
 - **Guided start**: `/phased:start` (plugin) or `/phased` with no details explains itself, asks for the job and a project folder (and creates it), or resumes the next phase if the folder already holds a plan.
 - **Project name = the first thread's title**; phases are named `<Project> — Phase <n>: <name>` and must confirm the rename took.
