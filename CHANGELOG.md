@@ -4,6 +4,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-13
 
+### fortigate-meraki: new plugin
+- A FortiGate & Meraki engineer subagent: silent-fail traps, diagnostics, policy/NAT/local-in, shaping and voice, WAN failover, hardening, DDNS and certificates, a dial-up IPsec baseline, and Meraki MX/MS/MR gotchas. Restricted to file, shell and web tools. Follows the `phased` brief when called as a specialist.
+
 ### phased: specialist escalation
 - At an escalation, if an installed agent fits the step's domain better than generic Opus, it's offered as `<Specialist> review`, with the same brief, approval, logging and 2-per-step limit. Its model is set by tier (Opus for risky changes, otherwise Sonnet), and the brief carries the handback format and REVIEW = read-only.
 

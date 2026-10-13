@@ -8,6 +8,7 @@ In Japanese history, a *ronin* was a samurai with no master. These days they're 
 | Plugin | What it does |
 |---|---|
 | [`phased`](#phased) | Runs IT projects and troubleshooting in small, cheap phases, escalating to Opus only when you approve |
+| [`fortigate-meraki`](#fortigate-meraki) | A FortiGate & Meraki engineer subagent that knows the silent-fail traps, plans changes with rollback, and reads debug output |
 
 ## Install
 
@@ -20,6 +21,8 @@ In Claude Code:
 ```
 /plugin install phased@ronin-toolkit
 ```
+
+Want the firewall agent too? `/plugin install fortigate-meraki@ronin-toolkit`
 
 Then turn on updates: `/plugin` → **Marketplaces** → **ronin-toolkit** → **Enable auto-update**.
 Install fails? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` and retry. Remove with `/plugin uninstall phased@ronin-toolkit`.
@@ -42,6 +45,12 @@ Long Claude threads get expensive, because every turn re-reads the whole context
 Each phase ends with **▶ Start a NEW session on <Model> and paste:** plus a START HERE line. Phase threads are named after the first thread (`<Project> — Phase 2: Fix`) so they group together. Lost the line? It's always at the top of `PLAN.md`.
 
 **Footprint:** about 130 tokens per session while installed, and about 1.8k when a phase runs.
+
+## fortigate-meraki
+
+A subagent for FortiGate (FortiOS 7.2–7.6) and Meraki MX/MS/MR work. It never touches a device: it gives you firmware-correct commands with a backup, verification and rollback, reads your pasted `diagnose`/`show` output, and labels fact vs inference. It knows the traps that fail silently: `set` replacing whole lists, a policy with the wrong `dstintf` that never matches, local-in not protecting VIPs, session filters that flush everything, dial-up IPsec name and DH-order limits, MX uplink and flow-preference overrides. Use it directly (`@agent-fortigate-meraki:fortigate-meraki-engineer`), or let `phased` offer it as the specialist reviewer on firewall steps. It uses only file, shell and web tools, so it stays cheap to call.
+
+**Footprint:** about 90 tokens per session while installed, and about 4.4k each time it's called.
 
 ## License
 

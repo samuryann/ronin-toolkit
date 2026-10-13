@@ -1,0 +1,12 @@
+{
+  "name": "fortigate-meraki",
+  "description": "FortiGate & Meraki engineer subagent: change plans with rollback, debug-output reading, and the silent-fail traps (list-replacing set, wrong dstintf, local-in vs VIP, dial-up IPsec, MX uplinks)",
+  "author": {
+    "name": "Samuryann",
+    "url": "https://github.com/samuryann"
+  },
+  "homepage": "https://github.com/samuryann/ronin-toolkit",
+  "repository": "https://github.com/samuryann/ronin-toolkit",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": ["fortigate", "fortios", "meraki", "firewall", "ipsec", "network", "msp", "sysadmin"]
+}

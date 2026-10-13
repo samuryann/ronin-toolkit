@@ -9,6 +9,11 @@
       "name": "phased",
       "source": "./plugins/phased",
       "description": "Token-efficient phased projects and troubleshooting: plan into small phases, one phase per thread with handovers, cheapest viable model, and per-step Opus escalation only with your approval"
+    },
+    {
+      "name": "fortigate-meraki",
+      "source": "./plugins/fortigate-meraki",
+      "description": "FortiGate & Meraki engineer subagent: change plans with rollback, debug-output reading, and the silent-fail traps"
     }
   ]
 }
