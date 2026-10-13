@@ -1,9 +1,9 @@
 # A. Plan (no building)
 
-1. **Triage**, in 3 lines max: what the job is, the model and effort for planning it, and the model most phases will need.
+1. **Triage**, in 3 lines max: what the job is, the model and effort for planning it, and the model most phases will need. If no folder was given, propose `~/phased/<project-slug>/` in the same message (common for network or remote-system work with no codebase).
    - **Fits in one thread?** Say so and offer to just do it. Phasing costs more than it saves on small jobs.
    - **Is the current model wrong for planning?** Say so and wait.
-2. **Is there already a PLAN.md in the folder?** Don't overwrite it. Ask: resume it, revise it, or start new (rename the old one to `PLAN-<date>-old.md`).
+2. **Is there already a PLAN.md in the folder?** Don't overwrite it. (If it has no `Next start` line, it isn't a phased plan: pick another folder or file name.) Ask: resume it, revise it, or start new (rename the old one to `PLAN-<date>-old.md`).
 3. **If anything is unclear, ask** before planning, at most 4 questions. For troubleshooting, ask for the symptoms, when it started, what changed, the scope (who and what is affected), and what's already been tried.
 4. **Pick the shape:**
    - **Build**: phases deliver working pieces.

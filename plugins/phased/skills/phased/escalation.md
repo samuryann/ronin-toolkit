@@ -1,5 +1,7 @@
 # C. Escalate one step (only with approval)
 
+**Already running on Opus?** Don't spawn the subagent. Still stop and ask at a risky change, but do the review yourself with the same verdicts.
+
 1. **Tell the user**, in 3 lines max: the trigger, what's at stake, and the mode you propose.
    - **REVIEW**: Opus judges the plan. Read-only, no changes. The default for a risky change or low confidence.
    - **SOLVE**: Opus does the step and hands back. The default for "failed twice".
@@ -7,6 +9,7 @@
    Add a rough cost: usually 10–40k tokens, depending on what it has to read.
 2. **Ask:** *Opus review* / *Opus solve* / *Carry on with the current model* / *Stop*.
    - At a risky-change trigger, *Carry on* is the user's explicit approval of the change. Do the B8 prep, then proceed.
+   - **Batches:** when several related risky changes are planned (e.g. the same rule on 5 firewalls), list them and ask once. The approval covers exactly that list; anything outside it triggers again.
 3. **If approved,** call the Agent tool in the foreground. Use `subagent_type: "phased:opus-escalation"` for a plugin install, or `"opus-escalation"` for a manual one, whichever is in your available agents. If neither is, say so and stop.
 
    **Keep the brief lean:** give exact error lines and file paths with line ranges rather than whole files or logs. Opus re-reads anything you only point it to.

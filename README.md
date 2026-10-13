@@ -29,7 +29,7 @@ Long Claude Code threads get expensive: every turn re-reads the whole context, a
 - **Tracks estimate vs actual.** PLAN.md records the measured peak context beside each estimate, plus every escalation. If usage can't be measured, it writes `not measured` rather than guessing.
 - **Hard to lose your place.** PLAN.md always carries the next START HERE line, handovers never overwrite each other, and a handover is checked against the real files before it's trusted. Jobs small enough for one thread are told to skip the ceremony.
 
-**Footprint** (measured with `claude plugin details`): about 150 tokens added to each session while installed. Running a phase loads about 1.6k. The planning rules (about 0.8k) and escalation rules (about 0.6k) are read only when needed, and the Opus subagent's instructions are about 0.6k.
+**Footprint** (measured with `claude plugin details`): about 150 tokens added to each session while installed. Running a phase loads about 1.7k. The planning rules (about 0.8k) and escalation rules (about 0.7k) are read only when needed, and the Opus subagent's instructions are about 0.6k.
 
 ### How escalation works
 
