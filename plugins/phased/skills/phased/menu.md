@@ -1,5 +1,7 @@
 # Start menu (`/phased` or `/phased:start` with no details)
 
+A start menu option named (a `new`/`resume`/`status`/`close-out` command): go straight to it, no step-3 question. New project: `planning.md` at once. Others: step 1 first; a project or folder given: use it.
+
 1. One command, never reading whole plans:
 `grep -H '^Next start:' PLAN.md 2>/dev/null; find ~/phased -mindepth 2 -maxdepth 2 -name PLAN.md -exec ls -t {} + 2>/dev/null | while IFS= read -r f; do awk -F'|' '/^Project:/{p=substr($0,10)} /^Next start:/{n=substr($0,13)} /^\| *[0-9]+ *\|/{t++; s=$8; gsub(/^ +| +$/,"",s); if(s~/^(done|skipped)/)d++; else if(c==""){x=$3; gsub(/^ +| +$/,"",x); c=x (s~/^not started/?"":" ("s")")}} END{printf "%s | %d/%d done | %s | %s\n",p,d,t,(n~/^none/?"complete":"next: "c),FILENAME}' "$f"; done`
 2. Current folder has a PLAN.md: still ask step 3, with **Resume a project** first and recommended, its description naming this folder's project and next phase; picked: resume that project directly (SKILL.md Entry **Resume**; `none`: offer to add work).

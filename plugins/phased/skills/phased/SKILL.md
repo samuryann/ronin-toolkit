@@ -10,7 +10,7 @@ Other files in this skill's base directory (not shown? glob `**/phased/planning.
 **Load tools first, in one search**: rename/get session, usage (`get_usage`), AskUserQuestion, `start_session`/`hand_off_to_session` (search by bare name: the server prefix varies), archive/delete are often deferred. Fetch them all on your first turn before deciding any is missing.
 
 ## Entry
-- **No details** (`/phased` or `/phased:start` alone): `menu.md`.
+- **No details** (`/phased` or `/phased:start` alone), or a start menu option named (new, resume, status, close-out commands): `menu.md`.
 - **New project or problem** (details given): `planning.md`.
 - **`START HERE` + a path** (match loosely): run a phase (**B**). The path is a handover, or PLAN.md for phase 1.
 - **Control thread asked for status** (or an old `PHASED STATUS` message): from PLAN.md, in 2 lines: progress and the `Next start` line; offer to open it (D5).
