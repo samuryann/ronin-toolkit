@@ -4,6 +4,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-14
 
+### phased: menu options in autocomplete
+- `/phased:new`, `/phased:resume`, `/phased:status` and `/phased:close-out` jump straight to that start menu option. All phased commands, `/phased:start` included, are marked `disable-model-invocation`, so they show in the `/` menu but add nothing to each session's context (`/phased:start` used to).
+
 ### phased: start menu
 - `/phased` or `/phased:start` on its own now asks: **New project**, **Resume a project**, **Status of all projects** or **Close out a project**. Projects are listed with progress (`2/6 done · next: Verify`) from one quick read of each plan's header and phase table. Typing the job (or giving details, a START HERE line, or a folder with a plan) skips the menu as before.
 
