@@ -9,4 +9,4 @@ Ask one multi-select question with exactly these 4 options, in this order (no "n
 3. **Archive the sessions** (reversible) **or 4. delete them** (permanent; the app asks the user to confirm each). Covers this project's phase sessions and its control thread; do this session last. Pinned or on-screen sessions may be refused: list those for the user. Without the tools, list the names. PLAN.md and the handovers hold everything either way.
 5. **Project folder**: not an option; say where it is and that it's kept. One-offs like removing it come through **Other**; do those too.
 
-Send the final `PHASED STATUS — <Project> — complete` to the control thread **before** archiving or deleting anything, then stop.
+Mark PLAN.md `complete` before archiving or deleting anything, then stop.

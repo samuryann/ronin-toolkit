@@ -20,10 +20,10 @@
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
    - Record `Control: <this session's id>` (get session `self`) in PLAN.md; this is the control thread (see Control below).
-   - Hand off phase 1 as in SKILL.md D6, then **stop**, unless the user asks you to continue here.
+   - Hand off phase 1 as in SKILL.md D5, then **stop**, unless the user asks you to continue here.
 
 ## Control
-The planning thread, `<Project> — Control`: a dashboard, not a workspace. On a `PHASED STATUS` message, reply with one progress line, don't re-read files, and offer to open the next phase if you can start sessions (SKILL.md D6).
+The planning thread, `<Project> — Control`: a dashboard, not a workspace. Phases don't message it (each message would wake and reload it); PLAN.md is the record. Asked for status: read PLAN.md's table and `Next start`, reply in 2 lines (progress, next start line), and offer to open the next phase if you can start sessions (SKILL.md D5).
 
 ## Estimating
 Unit: **k tokens of work above the session's baseline** (what D2 measures). Sum: files to read (1 token ≈ 4 chars) + output written + ~1–2k per tool round trip + ~1–3k per filtered user paste. Give a range and one line of working. Real phases so far: recon/evidence with pastes 7–30k · build 25–60k · verify 5–15k; they ran above estimate more often than below. Escalations are logged separately.

@@ -1,18 +1,18 @@
 ---
 name: phased
-description: Token-efficient phased workflow for IT projects and troubleshooting. Small phases, one per thread with handovers, cheapest viable model, Opus escalation only with approval. Use for /phased, "split this into phases", a pasted "START HERE <path>" line, a "PHASED STATUS" message, or resuming a phased PLAN.md.
+description: Token-efficient phased workflow for IT projects and troubleshooting. Small phases, one per thread with handovers, cheapest viable model, Opus escalation only with approval. Use for /phased, "split this into phases", a pasted "START HERE <path>" line, or resuming or checking a phased PLAN.md.
 ---
 
 # Phased
 
 Core file. Read the others in this skill's base directory (if it wasn't shown, glob `**/phased/planning.md` under `~/.claude`) only when needed: `planning.md` for a new project, `escalation.md` when a trigger fires, `closeout.md` when the last phase is done.
 
-**Load tools first, in one search.** Rename/get session, usage (`get_usage`), AskUserQuestion, send message, `start_session`/`hand_off_to_session` and archive/delete are often deferred: fetch them all in one tool search on your first turn, before deciding any is missing.
+**Load tools first, in one search.** Rename/get session, usage (`get_usage`), AskUserQuestion, `start_session`/`hand_off_to_session` and archive/delete are often deferred: fetch them all in one tool search on your first turn, before deciding any is missing.
 
 ## Entry
 - **New project or problem**, or no details (`/phased`, `/phased:start`): `planning.md`.
 - **`START HERE` + a path** (match loosely): run a phase (**B**). The path is a handover, or PLAN.md for phase 1.
-- **`PHASED STATUS` message**: you're the control thread (Control in `planning.md`).
+- **Control thread asked for status** (or an old `PHASED STATUS` message): reply from PLAN.md (Control in `planning.md`).
 - **Resume, no start line**: use the `Next start` line in the folder's PLAN.md. No `Next start` line means it isn't a phased plan: don't adopt it. No PLAN.md: ask for the folder.
 
 ## Models
@@ -60,18 +60,11 @@ Cheapest tier that does the work well; when torn, go lighter. New sessions rebui
 
 ## D. End of phase (or part phase)
 1. **Show the "done when" check passing** with real output; **wait for the user to confirm.** Failing = not done: keep working. Approvals, pastes or choices the user can give now aren't blockers: ask and continue. `part done` only for B10, a wait, or something unavailable this session; say what's left.
-   **Continue here?** Next phase on the same model, no wait (overnight, a scheduled window), this thread's work plus its estimate under ~60k: ask now. On yes: record actual and status in PLAN.md, send D5, rename this thread to the next phase, carry on at B6. No handover file.
+   **Continue here?** Next phase on the same model, no wait (overnight, a scheduled window), this thread's work plus its estimate under ~60k: ask now. On yes: record actual and status in PLAN.md, rename this thread to the next phase, carry on at B6. No handover file.
 2. **Record the actual** in PLAN.md: `~<k> work, plan +<x>%` ("approx" if other sessions ran), plus escalation tokens; `not measured` if no usage tool or the context was compacted. Never guess.
 3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**: built/found · decisions + why, one line each · files touched (absolute) · how to test, incl. user-run commands · ruled out · key output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted git changes (offer to commit, never unasked) · **next start: first action + the only files it needs**.
 4. **Update PLAN.md**: status (`done`, `part done` or `blocked`) and `Next start`. If a `CLAUDE.md` or memory note exists for this project, point it at the handover.
-5. **Report to the control thread** (`Control:` session id in PLAN.md, or `parent`), max 5 lines; if it can't be delivered, say so in one line:
-   ```
-   PHASED STATUS — <Project> — Phase <n>: done | part done | blocked
-   <key result, fact/inference>
-   Next: Phase <m> <name>, <model> (<effort>)
-   Start: <start line>
-   ```
-6. **Hand off.** Project complete: `closeout.md` instead.
+5. **Hand off.** Project complete: `closeout.md` instead.
    - **Can start sessions:** ask "Open Phase <m> on <Model>?"; on yes, start it with the start line, set its model, name it, open it.
    - **Otherwise** end with **Why a new session:** <phase done · size ~<k> work · waiting for <what/when> · blocked on <what> · model change to <Model>>, then:
 
@@ -80,4 +73,4 @@ Cheapest tier that does the work well; when torn, go lighter. New sessions rebui
      <Project> — Phase <m> of <total>: <phase name> — START HERE <absolute path to handover>
      ```
      (A part phase repeats its number.) Folder first: it decides which memory loads.
-7. **STOP.**
+6. **STOP.**
