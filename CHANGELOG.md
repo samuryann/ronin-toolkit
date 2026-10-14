@@ -4,6 +4,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-14
 
+### phased: start menu
+- `/phased` or `/phased:start` on its own now asks: **New project**, **Resume a project**, **Status of all projects** or **Close out a project**. Projects are listed with progress (`2/6 done · next: Verify`) from one quick read of each plan's header and phase table. Typing the job (or giving details, a START HERE line, or a folder with a plan) skips the menu as before.
+
 ### phased: close-out cleans up the saved environment
 - Choosing Archive or Delete at close-out now ends with a reminder to remove the project folder's saved environment from the desktop app's new-session box. A leftover one can make new sessions warn "the Local environment isn't available anymore". The four close-out options are unchanged.
 

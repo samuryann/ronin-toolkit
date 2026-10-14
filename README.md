@@ -33,7 +33,7 @@ Runs IT projects and troubleshooting in small phases, each on the cheapest model
 
 ### Start it
 Pick Sonnet, then either:
-- **Guided:** `/phased:start`. It asks for the job, a project name and a folder (default `~/phased/<job>/`, created for you), then plans.
+- **Menu:** `/phased:start` (or `/phased`) on its own. Pick **New project** (it asks for the job, a project name and a folder, default `~/phased/<job>/`, created for you), **Resume a project** (your projects listed with progress, e.g. `2/6 done · next: Verify`; finished ones can take more work), **Status of all projects**, or **Close out a project**. Or type the job in the Other box to go straight to planning.
 - **Manual:** `Split this into phases: <the job, symptoms, what changed>. Project folder: <path>`.
 
 Start that first session from your usual folder (e.g. home). It's named `<Project> — Control` and stays there; ask it "status?" any time and it answers from `PLAN.md` (phases don't message it, which would reload it each time). Each phase then ends with three steps:

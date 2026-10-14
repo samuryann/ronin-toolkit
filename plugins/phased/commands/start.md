@@ -1,4 +1,4 @@
 ---
-description: Start or resume a phased project (guided)
+description: Start, resume, check or close out a phased project
 ---
-Use the phased skill. Guided start with these details, if any: $ARGUMENTS
+Use the phased skill. Details, if any: $ARGUMENTS (none: show the start menu)

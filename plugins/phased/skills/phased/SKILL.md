@@ -5,12 +5,13 @@ description: Token-efficient phased workflow for IT projects and troubleshooting
 
 # Phased
 
-Other files in this skill's base directory (not shown? glob `**/phased/planning.md` under `~/.claude`), read only when needed: `planning.md` new project · `bigoutput.md` before any command that may print >~100 lines · `escalation.md` a trigger fires · `closeout.md` last phase done.
+Other files in this skill's base directory (not shown? glob `**/phased/planning.md` under `~/.claude`), read only when needed: `menu.md` no details given · `planning.md` new project · `bigoutput.md` before any command that may print >~100 lines · `escalation.md` a trigger fires · `closeout.md` last phase done.
 
 **Load tools first, in one search**: rename/get session, usage (`get_usage`), AskUserQuestion, `start_session`/`hand_off_to_session` (search by bare name: the server prefix varies), archive/delete are often deferred. Fetch them all on your first turn before deciding any is missing.
 
 ## Entry
-- **New project or problem**, or no details (`/phased`, `/phased:start`): `planning.md`.
+- **No details** (`/phased` or `/phased:start` alone): `menu.md`.
+- **New project or problem** (details given): `planning.md`.
 - **`START HERE` + a path** (match loosely): run a phase (**B**). The path is a handover, or PLAN.md for phase 1.
 - **Control thread asked for status** (or an old `PHASED STATUS` message): from PLAN.md, in 2 lines: progress and the `Next start` line; offer to open it (D5).
 - **Resume, no start line**: the `Next start` line in the folder's PLAN.md. `none`: say the project is complete. No such line: not a phased plan, don't adopt it. No PLAN.md: ask for the folder.
