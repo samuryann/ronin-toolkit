@@ -14,12 +14,12 @@
      - An investigation's "done when" is evidence: e.g. "root cause shown by <output>", or "A–C ruled out with evidence".
      - A fix isn't done until its verification has been seen.
      - Put the fix in its own phase, so the risky change gets a clean thread and an approval.
-5. **Split into phases** of about 60k of work or less each (see Estimating), each with a 1–2 word name (e.g. Evidence, Fix, Verify). Every new session rebuilds the ~baseline cache, so **split only where it pays**: a model change, a wait (overnight, a scheduled window), the ~60k limit, or a risky change that needs its own approval thread. Otherwise merge. Bulk reading goes to the Haiku worker inside a phase, so a phase rarely needs Haiku of its own.
-6. **Name the project**: 1–4 words for the job (e.g. `File server migration`); reuse this thread's title if it already says that. Every phase thread carries this name.
-   **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then **wait for approval**. Revise and show it again if asked. Build nothing.
+5. **Split into phases** of about 60k of work or less each (see Estimating), each with a 1–2 word name (e.g. Evidence, Fix, Verify). Every new session rebuilds the ~baseline cache, so **split only where it pays**: a model change, a wait (overnight, a scheduled window), the ~60k limit, or a risky change that needs its own approval thread. Otherwise merge. Mechanical phases (verify against a clear check, cleanup, docs from notes) go to Haiku; bulk reading inside any phase goes to the Haiku worker.
+6. **Name the project**: 1–4 words for the job (e.g. `File server migration`); reuse this thread's title if it already says that. Rename this thread `<Project> — Control` now and check it took (if not, give the user the exact name). Every phase thread carries the project name.
+   **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then ask *Approve* / *Revise* (AskUserQuestion). Build nothing until approved.
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
-   - Record `Control: <this session's id>` (get session `self`) in PLAN.md. This thread is the control thread (see Control below): rename it `<Project> — Control` and check it took; if not, tell the user the exact name.
+   - Record `Control: <this session's id>` (get session `self`) in PLAN.md; this is the control thread (see Control below).
    - Hand off phase 1 as in SKILL.md D6, then **stop**, unless the user asks you to continue here.
 
 ## Control

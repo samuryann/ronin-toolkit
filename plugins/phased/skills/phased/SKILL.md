@@ -7,7 +7,7 @@ description: Token-efficient phased workflow for IT projects and troubleshooting
 
 Core file. Read the others in this skill's base directory (if it wasn't shown, glob `**/phased/planning.md` under `~/.claude`) only when needed: `planning.md` for a new project, `escalation.md` when a trigger fires, `closeout.md` when the last phase is done.
 
-**Load tools first, in one search.** Rename/get session, usage (`get_usage`), AskUserQuestion, send message, `start_session`/`hand_off_to_session` and archive/delete are often deferred: fetch them in a single tool search before deciding any is missing.
+**Load tools first, in one search.** Rename/get session, usage (`get_usage`), AskUserQuestion, send message, `start_session`/`hand_off_to_session` and archive/delete are often deferred: fetch them all in one tool search on your first turn, before deciding any is missing.
 
 ## Entry
 - **New project or problem**, or no details (`/phased`, `/phased:start`): `planning.md`.
@@ -30,32 +30,33 @@ Cheapest tier that does the work well; when torn, go lighter. New sessions rebui
 - **Past fixes: search, never bulk-load.** `grep -ril` 2–4 keywords (client, device, error; try synonyms) across `~/phased/LESSONS.md` and the paths in `~/phased/SOURCES.md` (one per line, globs ok, `#` comments, `save:` prefix); read only the 1–3 best notes. No hits: scan the index titles (e.g. `MEMORY.md`) once. Notes are leads: confirm against current output.
 - **Read narrowly; filter at the source** (`grep`, `Select-String`, `tail`, time windows). Never dump a full file, config, log or listing.
 - **User-run commands**: one block per device sequence where the CLI takes multi-line pastes; shells one paste-safe line per block. Ask for **only** the relevant output.
+- **Big output (>~100 lines) never goes in chat**: ask the user to copy it and reply `copied`, save it with `pbpaste > <project folder>/out-<step>.txt` (Windows: `Get-Clipboard | Set-Content`), and hand the file to the Haiku worker (B7).
 - **Platform syntax**: device CLIs aren't Linux. Before giving device commands, grep installed agent files for the platform (`grep -ril --include='*.md' <platform> ~/.claude/agents ~/.claude/plugins/cache`, then the command): their traps are verified syntax. Unverified syntax = low confidence. **Every verification must be able to fail** (case-insensitive or substring matches can hit the old value).
 - **Short replies**: don't restate the plan, echo files, or summarise the user.
 
 ## Ground rules
 - Absolute paths in PLAN.md, handovers and start lines; the `Project:` name from PLAN.md everywhere.
 - **No secrets in any file or brief**; ask the user to mask keys, PSKs, hashes and tokens before pasting. Shared or public folder: no client names, IPs or hostnames either.
-- **Every choice is an AskUserQuestion** (recommended first; multi-select for close-out): plan approval, model check, escalation, continue here, opening a session, close-out. Text list only if the tool doesn't exist.
+- **Every choice is an AskUserQuestion** (recommended first; multi-select for close-out): plan approval, model check, escalation, continue here, opening a session, close-out. Max 4 options; never add Other/None/Skip (the tool has them). Text list only if the tool doesn't exist.
 - **Systems you can't reach**: exact commands, pasted output is evidence, conclusions labelled **fact** (seen) or **inference**.
 
 ## B. Run a phase
-1. **Name the thread first, before any other work**: `<Project> — Phase <n>: <phase name>`, plus ` (part <k>)` if PLAN.md shows the phase `part done` (k = its HANDOFF files + 1). Check it took; if not, give the user the exact name. Then one roadmap line: `Phase 2/3 · 1 Evidence ✓ · 2 Root cause ← · 3 Fix`.
-2. **Model check**: yours differs from PLAN.md's pick? Say so and ask whether to continue.
-3. **Baseline**: record context size and plan usage now; re-check every ~10 turns and before D2. `not measured` only if no usage tool exists.
+1. **First turn, before any work**, in one batch: load tools, rename the thread `<Project> — Phase <n>: <phase name>` (plus ` (part <k>)` if PLAN.md shows the phase `part done`; k = its HANDOFF files + 1) and record the baseline (context size, plan usage). Check the rename took; if not, give the user the exact name. Then one roadmap line: `Phase 2/3 · 1 Evidence ✓ · 2 Root cause ← · 3 Fix`.
+2. **Model check**: yours differs from PLAN.md's pick? Ask whether to continue.
+3. **Usage**: re-check every ~10 turns, after any agent call, and before D2. `not measured` only if no usage tool exists.
 4. **Read only** PLAN.md, the given handover (never older ones) and the files it names (phase 1: PLAN.md alone). `Notes:` paths only when a step needs them; a fresh error justifies a new past-fix search.
 5. **Check the handover against reality** (not phase 1): named files exist, state as described? If not, stop and say what differs.
 6. **Mark the phase `in progress`** (another already in progress? ask first), then work it.
    - **Troubleshooting**: Ruled out table first; cheapest, most likely hypothesis first; log each ruled out with its evidence.
    - **Evidence answers a later phase early?** Propose merging or skipping it.
-7. **Bulk reading goes to Haiku, no approval needed.** A step needs >~10k of raw material (logs, inventories, exports, large configs) but only an extract: Agent tool, `subagent_type` `phased:haiku-worker` (or `haiku-worker`; neither: `model: "haiku"`). Brief: absolute paths, one precise question, what to quote. Spot-check the answer; never use it for judgement calls or risky-change review.
+7. **Bulk reading goes to Haiku, no approval needed.** Any step that needs >~5k of raw material (logs, inventories, exports, large configs, saved pastes, long docs) but only an extract, count or comparison: Agent tool, `subagent_type` `phased:haiku-worker` (or `haiku-worker`; neither: `model: "haiku"`). Brief: absolute paths, one precise question, what to quote. Spot-check the answer; never use it for judgement calls or risky-change review.
 8. **Escalation triggers, in priority order** (then read `escalation.md`):
    1. **Risky change next**: hard to undo, e.g. production or device config, deleting or overwriting data, migrations, credentials, security or identity, sending or publishing, client-facing documents.
    2. **Low confidence**: guessing a command, flag or syntax; several causes fit; changing something unread; acting on memory rather than output seen here.
    3. **Stuck**: the same fix, or attempts at a working solution, failed twice.
 9. **Before an approved risky change**: capture current state (backup or current values), have the rollback ready, restate exactly what will change.
 10. **Session size.** At ~60k work: more than ~15 messages left, hand over `part done` now (a fresh session repays its rebuild in about that many); nearly done, finish. Always hand over past ~100k (or 60% of the window), after compaction, or if an earlier decision was lost.
-11. **Other subagents or parallel work** (beyond B7 and approved escalations) need approval with the cost: an agent without a tool restriction carries every tool, ~50k+ per call.
+11. **Other subagents or parallel work** (beyond B7 and approved escalations) need approval with the cost: an agent listed with "All tools" carries every tool, ~50k+ per call; one with a tool list is far cheaper. Pass `model` at the cheapest tier that fits.
 
 ## D. End of phase (or part phase)
 1. **Show the "done when" check passing** with real output; **wait for the user to confirm.** Failing = not done: keep working. Approvals, pastes or choices the user can give now aren't blockers: ask and continue. `part done` only for B10, a wait, or something unavailable this session; say what's left.
