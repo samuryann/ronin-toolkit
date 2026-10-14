@@ -4,6 +4,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-14
 
+### phased: full project list for resume and close-out
+- With more than 4 projects, `/phased:resume` and `/phased:close-out` now print the full list above the question (only `/phased` did before), so projects that don't fit in the 4 choices can be typed in Other.
+
 ### phased: efficiency pass (3 reviews each, Opus + Prompt Engineer)
 - Shorter always-on descriptions for the skill and both agents (paid in every session), tighter core wording (~180 chars less per phase), one PLAN.md edit at phase end instead of two, one exact-name tool search on the first turn (more reliable session auto-open), and the archive/delete tools load only at close-out.
 - README: table of the `/phased` commands and what each does.
