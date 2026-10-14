@@ -70,7 +70,7 @@ It reads only the 1–3 notes that match the client, device or error, and lists 
 - **Safe changes:** backup, rollback and exact scope before anything touches production.
 - **Close-out:** a paste-ready ticket note, the lesson saved, and the sessions archived or deleted.
 
-**Footprint:** ~180 tokens per session while installed, ~2.3k when a phase runs.
+**Footprint:** ~175 tokens per session while installed, ~2.2k when a phase runs.
 
 ## fortigate-meraki
 
