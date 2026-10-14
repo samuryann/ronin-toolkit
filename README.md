@@ -66,7 +66,7 @@ It reads only the 1–3 notes that match the client, device or error, and lists 
 ### What it does
 - **Plans first:** phases with "done when" checks, estimates and a model each. Splits only where a new session pays: a model change, a wait, ~60k of work, or a risky change.
 - **Evidence first:** config and logs before testers or downtime; filtered, paste-safe commands; fact vs inference; a "Ruled out" table.
-- **Right model per step:** a Haiku worker reads big logs and exports (big outputs go clipboard → file → Haiku, never into the chat); Opus (or a matching specialist agent you've installed) reviews one hard or risky step, only when you approve.
+- **Right model per step:** a Haiku worker reads big logs and exports (big outputs come back as a file, copied or downloaded, never pasted into the chat); Opus (or a matching specialist agent you've installed) reviews one hard or risky step, only when you approve.
 - **Safe changes:** backup, rollback and exact scope before anything touches production.
 - **Close-out:** a paste-ready ticket note, the lesson saved, and the sessions archived or deleted.
 
