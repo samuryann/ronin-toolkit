@@ -60,7 +60,7 @@ save: ~/.claude/projects/<your home folder>/memory
 ```
 
 - **Line 1** searches all your Claude memory, wherever it was saved, including folders created later.
-- **Line 2** searches every project's `FINDINGS.md`: each Haiku answer is appended there, so past extracts are found without re-reading.
+- **Line 2** searches every project's `FINDINGS.md`: every Haiku answer is appended there, so past extracts are found without re-reading.
 - **`save:`** (optional) is where close-out writes the lesson as a memory note. Without it, lessons go to `~/phased/LESSONS.md`.
 
 It reads only the 1–3 notes that match the client, device or error, and lists them in `PLAN.md`.
