@@ -1,13 +1,13 @@
 # A. Plan (no building)
 
-**Guided start** (no details given): if the current folder holds a phased PLAN.md, offer its `Next start`. Otherwise explain in ≤3 lines (small phases, one session each, cheapest model, asks before risky changes or Opus), then ask: the job in one line, and the project folder (suggest `~/phased/<slug>/`, offer to create it). Once it exists, say in one line: phase sessions get opened **in this folder** (folder picker), which groups them and skips loading unrelated memory. Then continue below.
+**Guided start** (no details given): current folder holds a phased PLAN.md? Offer its `Next start`. Otherwise explain in ≤3 lines (small phases, one session each, cheapest model, asks before risky changes or Opus), then ask for the job in one line and the project folder (suggest `~/phased/<slug>/`, offer to create it). Once it exists, one line: phase sessions open **in this folder** (folder picker), which groups them and skips unrelated memory. Then continue below.
 
-1. **Triage**, in 3 lines max: what the job is, the model and effort for planning it, and the model most phases will need. If no folder was given, propose `~/phased/<project-slug>/` in the same message (common for network or remote-system work with no codebase).
-   - **Seen before?** Search past fixes (SKILL.md token rules). One line per match; list useful paths under `Notes:` in PLAN.md so phases don't search again. If `~/phased/SOURCES.md` is missing and `ls -d ~/.claude/projects/*/memory` finds notes, offer once to create it with the line `~/.claude/projects/*/memory` (all Claude memory, including future folders).
-   - **Fits in one thread?** Say so and offer to just do it. Phasing costs more than it saves on small jobs.
+1. **Triage**, 3 lines max: the job, the model and effort for planning it, the model most phases need. No folder given: propose `~/phased/<project-slug>/` in the same message.
+   - **Seen before?** Search past fixes (SKILL.md token rules); one line per match; useful paths go under `Notes:` in PLAN.md so phases don't search again. `~/phased/SOURCES.md` missing and `ls -d ~/.claude/projects/*/memory` finds notes? Offer once to create it with the line `~/.claude/projects/*/memory` (all Claude memory, future folders too).
+   - **Fits in one thread?** Offer to just do it: phasing costs more than it saves on small jobs.
    - **Is the current model wrong for planning?** Say so and wait.
-2. **Is there already a PLAN.md in the folder?** Don't overwrite it. (If it has no `Next start` line, it isn't a phased plan: pick another folder or file name.) Ask: resume it, revise it, or start new (rename the old one to `PLAN-<date>-old.md`).
-3. **If anything is unclear, ask** before planning, at most 4 questions. Don't ask what a config or output paste would answer: ask for the paste instead. For troubleshooting, ask about the symptoms, when it started, what changed, the scope (who and what is affected), and what's already been tried.
+2. **PLAN.md already in the folder?** Never overwrite it. (No `Next start` line: not a phased plan; pick another folder or file name.) Ask: resume, revise, or start new (old one renamed `PLAN-<date>-old.md`).
+3. **Unclear? Ask** before planning, at most 4 questions. Don't ask what a config or output paste would answer: ask for the paste. Troubleshooting: symptoms, when it started, what changed, scope (who and what), what's been tried.
 4. **Pick the shape:**
    - **Build**: phases deliver working pieces.
    - **Troubleshoot**: gather evidence > hypotheses > test (cheapest and most likely first) > fix > verify it holds.
