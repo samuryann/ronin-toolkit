@@ -1,6 +1,6 @@
 # A. Plan (no building)
 
-**Guided start** (no details given): current folder holds a phased PLAN.md? Offer its `Next start`. Otherwise explain in ≤3 lines (small phases, one session each, cheapest model, asks before risky changes or Opus), then ask for the job in one line and the project folder (suggest `~/phased/<slug>/`, offer to create it). Once it exists, one line: phase sessions open **in this folder** (folder picker), which groups them and skips unrelated memory. Then continue below.
+**Guided start** (no details given): current folder holds a phased PLAN.md? Offer its `Next start` (`none`: say the project is complete). Otherwise explain in ≤3 lines (small phases, one session each, cheapest model, asks before risky changes or Opus), then ask for the job in one line and the project folder (suggest `~/phased/<slug>/`, offer to create it). Once it exists, one line: phase sessions open **in this folder** (folder picker), which groups them and skips unrelated memory. Then continue below.
 
 1. **Triage**, 3 lines max: the job, the model and effort for planning it, the model most phases need. No folder given: propose `~/phased/<project-slug>/` in the same message.
    - **Seen before?** Search past fixes (SKILL.md token rules); one line per match; useful paths go under `Notes:` in PLAN.md so phases don't search again. `~/phased/SOURCES.md` missing and `ls -d ~/.claude/projects/*/memory` finds notes? Offer once to create it with the line `~/.claude/projects/*/memory` (all Claude memory, future folders too).
@@ -20,7 +20,7 @@
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
    - Record `Control: <this session's id>` (get session `self`) in PLAN.md; this is the control thread (see Control below).
-   - Hand off phase 1 as in SKILL.md D5, then **stop**, unless the user asks you to continue here.
+   - Hand off phase 1 as in SKILL.md D5, then **stop**. If the user asks to continue here instead: keep the Control name, record a baseline, run phase 1 from SKILL.md B2.
 
 ## Control
 The planning thread, `<Project> — Control`: a dashboard, not a workspace. Phases don't message it (each message would wake and reload it); PLAN.md is the record. Asked for status: read PLAN.md's table and `Next start`, reply in 2 lines (progress, next start line), and offer to open the next phase if you can start sessions (SKILL.md D5).

@@ -9,4 +9,4 @@ One multi-select question, exactly these 4 options in order (no "nothing more": 
 3. **Archive the sessions** (reversible) **or 4. delete them** (permanent; the app confirms each): this project's phase sessions and control thread, this session last. Pinned or on-screen ones may be refused: list them. No tools: list the names. PLAN.md and the handovers hold everything either way.
 5. **Project folder**: not an option; say where it is and that it's kept. One-offs like removing it come through **Other**; do those too.
 
-Mark PLAN.md `complete` before archiving or deleting anything, then stop.
+Set PLAN.md `Next start: none (project complete)` before archiving or deleting anything, then stop.
