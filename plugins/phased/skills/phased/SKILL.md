@@ -37,7 +37,7 @@ Cheapest tier that does the work well; when torn, go lighter. New sessions rebui
 ## Ground rules
 - Absolute paths in PLAN.md, handovers and start lines; the `Project:` name from PLAN.md everywhere.
 - **No secrets in any file or brief**; ask the user to mask keys, PSKs, hashes and tokens before pasting. Shared or public folder: no client names, IPs or hostnames either.
-- **Every choice is an AskUserQuestion** (recommended first; multi-select for close-out): plan approval, model check, escalation, continue here, opening a session, close-out. Max 4 options; never add Other/None/Skip/Nothing more/Done (built in). Text list only if the tool doesn't exist.
+- **Every choice is an AskUserQuestion** (recommended first; multi-select for close-out): plan approval, model check, escalation, opening a session, close-out. Max 4 options; never add Other/None/Skip/Nothing more/Done (built in). Text list only if the tool doesn't exist.
 - **Systems you can't reach**: exact commands, pasted output is evidence, conclusions labelled **fact** (seen) or **inference**. Shape commands for PLAN.md's `Access:` (e.g. RMM jobs run as SYSTEM, non-interactive: no prompts, no mapped drives or user-profile paths).
 
 ## B. Run a phase
@@ -60,9 +60,8 @@ Cheapest tier that does the work well; when torn, go lighter. New sessions rebui
 
 ## D. End of phase (or part phase)
 1. **Show the "done when" check passing** with real output; **wait for the user to confirm.** Failing = not done: keep working. Approvals, pastes or choices the user can give now aren't blockers: ask and continue. `part done` only for B10, a wait, or something unavailable this session; say what's left.
-   **Continue here?** Next phase on the same model, no wait (overnight, a scheduled window), not split off for its own risky change, and this thread's work plus its estimate under ~60k: ask now. On yes: record actual, status and `Next start` in PLAN.md, rename this thread to the next phase (a Control thread keeps its name), note current usage as the next phase's start for its Actual (B10 still counts from the session baseline), carry on at B6. No handover file.
 2. **Record the actual** in PLAN.md: `~<k> work, plan +<x>%` ("approx" if other sessions ran), plus escalation tokens; part phases add to the existing figure; `not measured` if no usage tool or the context was compacted. Never guess.
-3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**, covering every phase since the last handover: built/found · decisions + why, one line each · files touched (absolute) · how to test, incl. user-run commands · ruled out · key output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted git changes (offer to commit, never unasked) · **next start: first action + the only files it needs**.
+3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**: built/found · decisions + why, one line each · files touched (absolute) · how to test, incl. user-run commands · ruled out · key output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted git changes (offer to commit, never unasked) · **next start: first action + the only files it needs**.
 4. **Update PLAN.md**: status (`done`, `part done` or `blocked`) and `Next start`. If a `CLAUDE.md` or memory note exists for this project, point it at the handover.
 5. **Hand off.** Project complete: `closeout.md` instead. Otherwise always first say **Why a new session:** <phase done · size ~<k> work · waiting for <what/when> · blocked on <what> · model change to <Model>>. Then:
    - **Can start sessions:** ask "Open Phase <m> on <Model>?"; yes: start it with the start line, set its model, name it, open it; no: give the block below.

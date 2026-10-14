@@ -20,7 +20,7 @@
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
    - Record `Control: <this session's id>` (get session `self`) in PLAN.md; this is the control thread (see Control below).
-   - Hand off phase 1 as in SKILL.md D5, then **stop**. If the user asks to continue here instead: keep the Control name, note current usage as phase 1's start for its Actual (B10 counts from the session baseline), run phase 1 from SKILL.md B2.
+   - Hand off phase 1 as in SKILL.md D5, then **stop**. If the user asks to run phase 1 here instead: keep the Control name and go to SKILL.md B2 (its Actual includes planning).
 
 ## Control
 The planning thread, `<Project> — Control`: a dashboard, not a workspace. Phases don't message it (each message would wake and reload it); PLAN.md is the record. Asked for status: read PLAN.md's table and `Next start`, reply in 2 lines (progress, next start line), and offer to open the next phase if you can start sessions (SKILL.md D5).
