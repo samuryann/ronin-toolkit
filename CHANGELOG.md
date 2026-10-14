@@ -4,6 +4,10 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-14
 
+### phased: efficiency pass (3 reviews each, Opus + Prompt Engineer)
+- Shorter always-on descriptions for the skill and both agents (paid in every session), tighter core wording (~180 chars less per phase), one PLAN.md edit at phase end instead of two, one exact-name tool search on the first turn (more reliable session auto-open), and the archive/delete tools load only at close-out.
+- README: table of the `/phased` commands and what each does.
+
 ### phased: menu options in autocomplete
 - `/phased:new`, `/phased:resume`, `/phased:status` and `/phased:close-out` jump straight to that start menu option. All phased commands, `/phased:start` included, are marked `disable-model-invocation`, so they show in the `/` menu but add nothing to each session's context (`/phased:start` used to).
 

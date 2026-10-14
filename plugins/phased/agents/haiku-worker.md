@@ -1,6 +1,6 @@
 ---
 name: haiku-worker
-description: Cheap Haiku worker for the phased skill. Reads bulky material (logs, inventories, exports, large configs) for one bounded question and returns a short extract, so the main thread never carries it.
+description: phased skill only: Haiku reads bulky material (logs, exports, configs) for one bounded question and returns a short extract.
 model: haiku
 effort: low
 tools: Read, Grep, Glob, Bash
