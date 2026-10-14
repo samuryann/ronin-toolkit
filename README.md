@@ -61,6 +61,8 @@ In the Claude desktop app, phased does these three steps for you: it asks "Open 
 
 One folder per job holds `PLAN.md`, the handovers and the ticket note. The folder you pick when opening a session decides which memory loads; the START HERE path only says which file to read, so a phase opened elsewhere still works, just heavier. Lost your place? `Next start` is at the top of `PLAN.md`.
 
+Finished projects crowding the list? Move the folder into `~/phased/archive/` and it stops being listed. To close one out or add work later, type its folder in Other.
+
 ### How it saves tokens
 Every message re-sends the whole conversation, so anything that lands in the chat is paid for again on every later turn. phased keeps bulky material out of it:
 

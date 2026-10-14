@@ -4,6 +4,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-14
 
+### README: hiding finished projects
+- Documented that moving a project folder into `~/phased/archive/` removes it from the project lists (docs only, no skill change).
+
 ### phased: full project list for resume and close-out
 - With more than 4 projects, `/phased:resume` and `/phased:close-out` now print the full list above the question (only `/phased` did before), so projects that don't fit in the 4 choices can be typed in Other.
 
