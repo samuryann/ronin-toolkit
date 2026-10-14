@@ -6,7 +6,7 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ### phased: commands always shown
 - Commands go in the message itself, never only in the app's next-step box, and the recap can't claim commands were given when they weren't (a phase ended its turn saying "I've given you the commands" without showing them).
-- Read-only evidence steps change no config, except turning off CLI paging, which is labelled as the only change.
+- Read-only evidence steps change nothing, except turning off output paging on any platform: a session-only switch where one exists (e.g. `terminal length 0`), a saved setting only where it doesn't (e.g. FortiOS), labelled as the only change.
 
 ### phased: Haiku does the heavy reading
 - **Big output never goes into the chat.** When a command is likely to print more than ~100 lines, phased combines the step's commands into one block that writes one labelled UTF-8 file (`C:\Temp\phased-<step>.txt`, or `/tmp` on Linux) and prints its line count. Bring it back with `copied` (clipboard saved to the project folder) or `saved` (downloaded; phased finds it in the project folder or Downloads). The Haiku worker reads it and returns a short extract. Details load from `bigoutput.md` only when needed.
