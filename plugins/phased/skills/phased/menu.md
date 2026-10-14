@@ -9,4 +9,4 @@ A menu command (resume/status/close-out) skips steps 2–3: step 1, then that op
 - **New project:** `planning.md` (Guided start).
 - **Resume:** second question, up to 4 projects, unfinished first (label = project, description = `2/6 done · next: Verify`), finished ones as "add work"; others via Other. Unfinished: its `Next start` (D5: offer to open it, else the ▶ block). Finished: rename this thread `<Project> — Control`, then `planning.md` from step 3, revising its PLAN.md (append phases, keep done rows); step 7 resets `Next start`.
 - **Status:** the list, one line per project. Then stop.
-- **Close out:** pick any project the same way. Unfinished: confirm its remaining phases are dropped, mark them `skipped (closed out)`. Then `closeout.md` on its PLAN.md; leave this session out of archive/delete unless its title starts `<Project> —`; then it goes last.
+- **Close out:** pick any project the same way. Unfinished: confirm its remaining phases are dropped, mark them `skipped (closed out)`. Then `closeout.md` on its PLAN.md; include this session (last) only if its title starts `<Project> —`.

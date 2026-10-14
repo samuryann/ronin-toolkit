@@ -5,9 +5,9 @@ description: Token-efficient phased workflow for IT projects and troubleshooting
 
 # Phased
 
-Other files in this skill's base directory (not shown? glob `**/phased/planning.md` under `~/.claude`), read only when needed: `menu.md` no details given · `planning.md` new project · `bigoutput.md` before any command that may print >~100 lines · `escalation.md` a trigger fires · `closeout.md` last phase done.
+Other files in this skill's base directory (not shown? glob `**/phased/planning.md` under `~/.claude`), read only when needed: `menu.md` start menu · `planning.md` new project · `bigoutput.md` before any command that may print >~100 lines · `escalation.md` a trigger fires · `closeout.md` last phase done.
 
-**Load tools first, in one search**: rename/get session, usage (`get_usage`), AskUserQuestion, `start_session`/`hand_off_to_session` (search by bare name: the server prefix varies), archive/delete are often deferred. Fetch them all on your first turn before deciding any is missing (status command or menu Status: skip).
+**Load tools first, in one search**: rename/get session, usage (`get_usage`), AskUserQuestion, `start_session`/`hand_off_to_session` (search by bare name: the server prefix varies), archive/delete are often deferred. Fetch them all on your first turn before deciding any is missing (the `status` command only, not a status question: skip).
 
 ## Entry
 - **No details** (`/phased` or `/phased:start` alone) or a **menu command** (resume/status/close-out, args or not): `menu.md`.
