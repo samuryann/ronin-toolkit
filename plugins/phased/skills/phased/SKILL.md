@@ -17,13 +17,7 @@ Other files in this skill's base directory (not shown? glob `**/phased/planning.
 - **Resume, no start line**: the `Next start` line in the folder's PLAN.md. `none`: say the project is complete. No such line: not a phased plan, don't adopt it. No PLAN.md: ask for the folder.
 
 ## Models
-| Tier | Use for | Effort |
-|---|---|---|
-| Haiku | lookups, summarising, boilerplate, formatting, simple scripts | low |
-| Sonnet | most building, configs, docs, debugging with a clear error | medium |
-| Opus | design trade-offs, ambiguous/dead-end debugging, security-sensitive work, risky-change review | high |
-
-Cheapest tier that does the work well; when torn, go lighter. New sessions rebuild the baseline cache, so switch inside a phase: bulk reading down to the Haiku worker (B7), one hard step up to Opus (`escalation.md`).
+Cheapest tier that does the work well (tiers: `planning.md`); when torn, go lighter. New sessions rebuild the baseline cache, so switch inside a phase: bulk reading down to the Haiku worker (B7), one hard step up to Opus (`escalation.md`).
 
 ## Token rules
 - **Budget**: work = tokens above the session's starting context. ~60k per phase; check at ~60k, hand over by ~100k (B10).
@@ -66,7 +60,7 @@ Cheapest tier that does the work well; when torn, go lighter. New sessions rebui
 3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**: built/found (Haiku extracts: point to `FINDINGS.md`, don't copy) · decisions + why, one line each · files touched (absolute) · how to test, incl. user-run commands · ruled out · key output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted git changes (offer to commit, never unasked) · **next start: first action + the only files it needs**.
 4. **Update PLAN.md**: status (`done`, `part done` or `blocked`) and `Next start`. If a `CLAUDE.md` or memory note exists for this project, point it at the handover.
 5. **Hand off.** Project complete: `closeout.md` instead. Otherwise always first say **Why a new session:** <phase done · size ~<k> work · waiting for <what/when> · blocked on <what> · model change to <Model>>. Then:
-   - **Can start sessions** (a `start_session` tool, e.g. `mcp__ccd_session__start_session`; search the bare name, servers differ): ask "Open Phase <m> on <Model>?"; yes: ONE call, `cwd` = the absolute project folder, `title` = the phase thread name, `prompt` = the start line, `model` + `effort` from PLAN.md, `context: fresh`. It runs on its own: say so in one line and STOP, don't wait for it. No: give the block below.
+   - **Can start sessions** (`start_session` loaded, see Load tools): ask "Open Phase <m> on <Model>?"; yes: ONE call, `cwd` = the absolute project folder, `title` = the phase thread name, `prompt` = the start line, `model` + `effort` from PLAN.md, `context: fresh`. It runs on its own: say so in one line and STOP, don't wait for it. No: give the block below.
    - **Otherwise** end with:
 
      **▶ Start a NEW session: 1. folder `<absolute project folder>` · 2. model <Model> (<effort>) · 3. paste:**

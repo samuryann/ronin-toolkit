@@ -1,6 +1,6 @@
 # A. Plan (no building)
 
-**Guided start** (no details given): current folder holds a phased PLAN.md? Offer its `Next start` (`none`: say the project is complete). Otherwise explain in ≤3 lines (small phases, one session each, cheapest model, asks before risky changes or Opus), then ask for the job in one line, a project name (1–4 words; suggest one) and the project folder (suggest `~/phased/<name-slug>/`, offer to create it). Once it exists, one line: phase sessions open **in this folder** (folder picker), which groups them and skips unrelated memory. Then continue below.
+**Guided start** (menu's New project): explain in ≤3 lines (small phases, one session each, cheapest model, asks before risky changes or Opus), then ask for the job in one line, a project name (1–4 words; suggest one) and the project folder (suggest `~/phased/<name-slug>/`, offer to create it). Once it exists, one line: phase sessions open **in this folder** (folder picker), which groups them and skips unrelated memory. Then continue below.
 
 1. **Name first.** As soon as the job is known, in the same batch as your first search or read: the project name (1–4 words; the user's if given, or this thread's title if it already fits), and rename this thread `<Project> — Control`. Check it took (if not, give the user the exact name). Every phase thread carries this name.
    **Triage**, 3 lines max: the job, the model and effort for planning it, the model most phases need. No folder given: propose `~/phased/<project-slug>/` in the same message.
@@ -22,8 +22,15 @@
    - Record `Control: <this session's id>` (get session `self`) in PLAN.md; this is the control thread (see Control below).
    - Hand off phase 1 as in SKILL.md D5, then **stop**. If the user asks to run phase 1 here instead: keep the Control name and go to SKILL.md B2 (its Actual includes planning).
 
+## Models
+| Tier | Use for | Effort |
+|---|---|---|
+| Haiku | lookups, summarising, boilerplate, formatting, simple scripts | low |
+| Sonnet | most building, configs, docs, debugging with a clear error | medium |
+| Opus | design trade-offs, ambiguous/dead-end debugging, security-sensitive work, risky-change review | high |
+
 ## Control
-The planning thread, `<Project> — Control`: a dashboard, not a workspace. Phases don't message it (each message would wake and reload it); PLAN.md is the record. Asked for status: read PLAN.md's table and `Next start`, reply in 2 lines (progress, next start line), and offer to open the next phase if you can start sessions (SKILL.md D5).
+The planning thread, `<Project> — Control`: a dashboard, not a workspace. Phases don't message it (each message would wake and reload it); PLAN.md is the record. Status: SKILL.md Entry.
 
 ## Estimating
 Unit: **k tokens of work above the session's baseline** (what D2 measures). Sum: files to read (1 token ≈ 4 chars) + output written + ~1–2k per tool round trip + ~1–3k per filtered user paste. Give a range and one line of working. Real phases so far: recon/evidence with pastes 7–30k · build 25–60k · verify 5–15k; they ran above estimate more often than below. Escalations are logged separately.

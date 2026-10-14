@@ -1,6 +1,6 @@
 # Close-out (project complete)
 
-First set PLAN.md `Next start: none (project complete)`. Then one multi-select question, exactly these 4 options in order (never add Nothing more or Skip: built in): **Ticket note** · **Save the lesson** · **Archive the sessions** · **Delete the sessions**. Archive and delete both picked: delete. Do only what's picked, then step 5:
+First set PLAN.md `Next start: none (project complete)`. Then one multi-select question, exactly these 4 options in order: **Ticket note** · **Save the lesson** · **Archive the sessions** · **Delete the sessions**. Archive and delete both picked: delete. Do only what's picked, then step 5:
 
 1. **Ticket note.** Write `TICKET-NOTE.md` in the project folder and show it in one code block, ready to paste. Telegraphic: fewest words that keep every fact (names, paths, codes, counts, dates), with abbreviations and arrows; no prose. Lines: `Issue:` · `Cause:` · `Fix:` · `Verified:` · `Ruled out:` · `Follow-up:` (omit empty ones). Build it from PLAN.md and the last handover; grep `FINDINGS.md` or earlier handovers only for a missing fact. No secrets.
 2. **Save the lesson.** Content: date · project · symptom keywords · root cause or outcome (fact) · the fix · any gotcha. No secrets. Where:
