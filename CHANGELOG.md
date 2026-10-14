@@ -7,6 +7,7 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 ### phased: Haiku does the heavy reading
 - **Big output never goes into the chat.** When a command is likely to print more than ~100 lines, phased combines the step's commands into one block that writes one labelled UTF-8 file (`C:\Temp\phased-<step>.txt`, or `/tmp` on Linux) and prints its line count. Bring it back with `copied` (clipboard saved to the project folder) or `saved` (downloaded; phased finds it in the project folder or Downloads). The Haiku worker reads it and returns a short extract. Details load from `bigoutput.md` only when needed.
 - The Haiku worker is called by whichever name is installed (plugin or manual), so no failed first call, and its handback is held to its four lines. Threshold lowered to ~5k of material; mechanical phases (verify, cleanup) are planned on Haiku.
+- Haiku findings are kept: the worker appends each answer (date, question, files) to the project's `FINDINGS.md`. Phases grep it before asking Haiku again, handovers point to it instead of copying, close-out reads it for missing facts, and `SOURCES.md` can search every project's findings (`~/phased/*/FINDINGS.md`).
 - Clipboard save commands for macOS, Windows and Linux. In an interactive remote session the command also puts the file on the clipboard (`Set-Clipboard`), so it's one reply; the line count catches a clipboard sync that cut it short.
 
 ### phased: remote systems

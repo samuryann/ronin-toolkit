@@ -4,7 +4,7 @@
 
 1. **Name first.** As soon as the job is known, in the same batch as your first search or read: the project name (1–4 words; the user's if given, or this thread's title if it already fits), and rename this thread `<Project> — Control`. Check it took (if not, give the user the exact name). Every phase thread carries this name.
    **Triage**, 3 lines max: the job, the model and effort for planning it, the model most phases need. No folder given: propose `~/phased/<project-slug>/` in the same message.
-   - **Seen before?** Search past fixes (SKILL.md token rules); one line per match; useful paths go under `Notes:` in PLAN.md so phases don't search again. `~/phased/SOURCES.md` missing and `ls -d ~/.claude/projects/*/memory` finds notes? Offer once to create it with the line `~/.claude/projects/*/memory` (all Claude memory, future folders too).
+   - **Seen before?** Search past fixes (SKILL.md token rules); one line per match; useful paths go under `Notes:` in PLAN.md so phases don't search again. `~/phased/SOURCES.md` missing and `ls -d ~/.claude/projects/*/memory` finds notes? Offer once to create it with the lines `~/.claude/projects/*/memory` (all Claude memory, future folders too) and `~/phased/*/FINDINGS.md` (Haiku findings from every project; use the folder that holds the project folders).
    - **Fits in one thread?** Offer to just do it: phasing costs more than it saves on small jobs.
    - **Is the current model wrong for planning?** Say so and wait.
 2. **PLAN.md already in the folder?** Never overwrite it. (No `Next start` line: not a phased plan; pick another folder.) Ask: resume, revise, or start new (old one renamed `PLAN-<date>-old.md`).
