@@ -5,9 +5,9 @@ description: Phased IT project/troubleshooting workflow: small phases, one threa
 
 # Phased
 
-Other files in this skill's base directory (not shown? glob `**/phased/planning.md` under `~/.claude`), read only when needed: `menu.md` start menu · `planning.md` new project · `bigoutput.md` before any command that may print >~100 lines (never into chat) · `escalation.md` a trigger fires · `closeout.md` last phase done.
+Other files in this skill's base directory (not shown? glob `**/phased/planning.md` under `~/.claude`), read only when needed: `menu.md` start menu · `planning.md` new project · `bigoutput.md` before any command that may print >~100 lines (recursion, unfiltered lists, full configs/logs; never into chat) · `escalation.md` a trigger fires · `closeout.md` last phase done.
 
-**Load tools first, in one ToolSearch** (`select:` the full names shown in your deferred-tool list; server prefixes vary): `set_session_title`, `get_session`, `get_usage`, `start_session`, `hand_off_to_session`, `archive_session`, `delete_session`, `AskUserQuestion`, whichever are deferred. Do it on your first turn; one not listed: keyword-search its bare name before deciding it's missing (the `status` command only, not a status question: skip).
+**Load tools first, in one ToolSearch** (`select:` the full names shown in your deferred-tool list; server prefixes vary): `set_session_title`, `get_session`, `get_usage`, `start_session`, `hand_off_to_session`, `AskUserQuestion`, whichever are deferred. Do it on your first turn; any not listed: one keyword search for all missing bare names before deciding they're missing (the `status` command only, not a status question: skip).
 
 ## Entry
 - **No details** (`/phased` or `/phased:start` alone) or a **menu command** (resume/status/close-out, args or not): `menu.md`.
