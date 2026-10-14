@@ -6,7 +6,7 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ### phased: Haiku does the heavy reading
 - **Big output never goes into the chat.** When a command is likely to print more than ~100 lines, phased combines the step's commands into one block that writes one labelled UTF-8 file (`C:\Temp\phased-<step>.txt`, or `/tmp` on Linux) and prints its line count. Bring it back with `copied` (clipboard saved to the project folder) or `saved` (downloaded; phased finds it in the project folder or Downloads). The Haiku worker reads it and returns a short extract. Details load from `bigoutput.md` only when needed.
-- Haiku worker threshold lowered to ~5k of material; mechanical phases (verify, cleanup) are planned on Haiku.
+- The Haiku worker is called by whichever name is installed (plugin or manual), so no failed first call, and its handback is held to its four lines. Threshold lowered to ~5k of material; mechanical phases (verify, cleanup) are planned on Haiku.
 - Clipboard save commands for macOS, Windows and Linux. In an interactive remote session the command also puts the file on the clipboard (`Set-Clipboard`), so it's one reply; the line count catches a clipboard sync that cut it short.
 
 ### phased: remote systems
@@ -14,7 +14,7 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ### phased: experience
 - Each phase's first turn loads tools, renames the thread and records usage before any work.
-- The planning thread is renamed `<Project> — Control` as soon as the project is named. Phases no longer message it (each message reloaded it); ask it "status?" and it answers from `PLAN.md`.
+- Name first: the guided start asks for a project name, and the planning thread is renamed `<Project> — Control` before any searching or reading. Phases no longer message it (each message reloaded it); ask it "status?" and it answers from `PLAN.md`.
 - Every choice is a selectable menu: at most 4 options, never an added Other/None/Skip. Plan approval is *Approve* / *Revise*.
 - Close-out asks exactly *Ticket note* · *Save the lesson* · *Archive the sessions* · *Delete the sessions*; anything else goes through Other. It marks `Next start: none (project complete)` first, and resuming a finished project says so.
 - After an Opus GO on a risky change, phased asks *Make the change* / *Stop* before acting. Opus questions are passed to you.
