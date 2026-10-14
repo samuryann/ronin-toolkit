@@ -24,12 +24,14 @@
    FILES: <absolute paths, with line ranges where useful>
    CAN RUN: <what it may execute, or "nothing: user runs commands">
    CONSTRAINTS: <decisions that must hold>
-   RETURN (≤200 words, no preamble): VERDICT GO|GO WITH CHANGES|STOP|SOLVED|NOT SOLVED|NEEDS INFO · CONFIDENCE · DONE · FILES TOUCHED · VERIFIED · RULED OUT · NEXT. REVIEW = read-only.
+   RETURN (≤200 words, no preamble): VERDICT GO|GO WITH CHANGES|STOP|SOLVED|NOT SOLVED|NEEDS INFO · CONFIDENCE · CAUSE · DONE · FILES TOUCHED · VERIFIED · RULED OUT · NEXT · STILL NEEDS OPUS · QUESTION. REVIEW = read-only.
    ```
 4. **After the handback:**
    - **Files touched:** re-read only those files (your copy is stale).
    - **NEEDS INFO:** get it, from the user if necessary. A second call counts toward the limit.
    - **STOP on a risky change:** don't make it. Tell the user and wait.
+   - **GO / GO WITH CHANGES on a risky change:** show the (amended) steps, then ask *Make the change* / *Stop*; yes is the approval, then B9.
+   - **QUESTION:** ask the user (AskUserQuestion).
    - **Low confidence, or "still needs the heavier model":** tell the user. Don't continue blindly.
 5. **Relay in short form**: the verdict, what changed, and the next step. Then log one row in PLAN.md's Escalations table (Mode REVIEW, SOLVE or `<Specialist>`). Tokens come from the Agent result's usage figure; if none is shown, write `not measured`.
 6. **Limit: 2 escalations per step.** If the step is still unresolved, write the handover, mark the phase `blocked` or `part done`, and recommend Opus for the next thread.
