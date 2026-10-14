@@ -12,7 +12,7 @@ for f in "$T"/plugins/phased/skills/phased/*.md; do
       -e "s/^description: .*/description: TEST build of phased ($B branch). Use ONLY for \/phased-dev, a pasted \"DEVSTART <path>\" line or a \"PHASED-DEV STATUS\" message./" \
       -e 's/START HERE/DEVSTART/g; s/PHASED STATUS/PHASED-DEV STATUS/g' \
       -e 's#\*\*/phased/planning.md#**/phased-dev/planning.md#g' \
-      -e 's/haiku-worker/haiku-worker-dev/g; s/opus-escalation/opus-escalation-dev/g' "$f" > "$SK/$(basename "$f")"
+      -e 's/phased:haiku-worker/haiku-worker/g; s/phased:opus-escalation/opus-escalation/g; s/haiku-worker/haiku-worker-dev/g; s/opus-escalation/opus-escalation-dev/g' "$f" > "$SK/$(basename "$f")"
 done
 for a in haiku-worker opus-escalation; do
   sed -e "s/^name: $a$/name: $a-dev/" -e "s/^description: /description: (phased-dev test) /" \
