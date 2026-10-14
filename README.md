@@ -52,6 +52,18 @@ In the Claude desktop app, phased does these three steps for you: it asks "Open 
 
 One folder per job holds `PLAN.md`, the handovers and the ticket note. The folder you pick when opening a session decides which memory loads; the START HERE path only says which file to read, so a phase opened elsewhere still works, just heavier. Lost your place? `Next start` is at the top of `PLAN.md`.
 
+### How it saves tokens
+Every message re-sends the whole conversation, so anything that lands in the chat is paid for again on every later turn. phased keeps bulky material out of it:
+
+- **Haiku reads the bulk.** Logs, exports, inventories and big configs go to a cheap Haiku worker, which answers one precise question in four short lines. Only that answer reaches the main thread. In testing, a 3,000-line export cost about 5k tokens this way, against about 48k pasted into the chat.
+- **Reply `copied`, don't paste.** Copy any output, or just a value, and reply `copied`. phased saves your clipboard to the project folder, reads up to ~100 lines itself and hands anything bigger to Haiku. A paste always lands in the main thread at full size.
+- **Big commands write a file.** When a command could print more than ~100 lines, phased gives one block that writes a labelled file on the server and prints its line count. In an interactive remote session the file also goes on your clipboard, so you just reply `copied`. Or download it and reply `saved` (phased checks the project folder, then Downloads). The line count catches a copy that got cut off.
+- **Drop files in the project folder.** Already have an export, log or config? Save it into the project folder and reply `saved` or name the file. Haiku reads it; the main thread never does.
+- **Answers are kept.** Each Haiku answer is added to the project's `FINDINGS.md`. phased searches it before asking again, and handovers point to it instead of copying it.
+- **Small, fresh sessions.** Each phase runs in its own session on the cheapest model that can do it, starting from a short handover instead of a long history. In the desktop app the next phase opens by itself, nested under Control. Phases split only where that pays off, since every new session costs a little to start.
+- **Opus only when you approve,** for one bounded review or fix, then back to the cheaper model.
+- **Notes are searched, not loaded** (next section).
+
 ### Memory and past fixes
 Phased doesn't load your notes; it searches them. Create `~/phased/SOURCES.md` (it offers to on first run):
 
@@ -70,7 +82,7 @@ It reads only the 1–3 notes that match the client, device or error, and lists 
 ### What it does
 - **Plans first:** phases with "done when" checks, estimates and a model each. Splits only where a new session pays: a model change, a wait, ~60k of work, or a risky change.
 - **Evidence first:** config and logs before testers or downtime; filtered, paste-safe commands; fact vs inference; a "Ruled out" table.
-- **Right model per step:** a Haiku worker reads big logs and exports (big outputs come back as a file, copied or downloaded, never pasted into the chat). Copy any output and reply `copied`: phased reads your clipboard itself, small output directly, big output through Haiku; Opus (or a matching specialist agent you've installed) reviews one hard or risky step, only when you approve.
+- **Right model per step:** Haiku for bulk reading, the phase's model for the work, Opus (or a matching specialist agent you've installed) for one hard or risky step, only when you approve. See [How it saves tokens](#how-it-saves-tokens).
 - **Safe changes:** backup, rollback and exact scope before anything touches production.
 - **Close-out:** a paste-ready ticket note, the lesson saved, and the sessions archived or deleted.
 
