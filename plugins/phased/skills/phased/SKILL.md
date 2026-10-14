@@ -7,7 +7,7 @@ description: Token-efficient phased workflow for IT projects and troubleshooting
 
 Other files in this skill's base directory (not shown? glob `**/phased/planning.md` under `~/.claude`), read only when needed: `planning.md` new project · `bigoutput.md` before any command that may print >~100 lines · `escalation.md` a trigger fires · `closeout.md` last phase done.
 
-**Load tools first, in one search**: rename/get session, usage (`get_usage`), AskUserQuestion, `start_session`/`hand_off_to_session`, archive/delete are often deferred. Fetch them all on your first turn before deciding any is missing.
+**Load tools first, in one search**: rename/get session, usage (`get_usage`), AskUserQuestion, `start_session`/`hand_off_to_session` (search by bare name: the server prefix varies), archive/delete are often deferred. Fetch them all on your first turn before deciding any is missing.
 
 ## Entry
 - **New project or problem**, or no details (`/phased`, `/phased:start`): `planning.md`.
@@ -64,7 +64,7 @@ Cheapest tier that does the work well; when torn, go lighter. New sessions rebui
 3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**: built/found (Haiku extracts: point to `FINDINGS.md`, don't copy) · decisions + why, one line each · files touched (absolute) · how to test, incl. user-run commands · ruled out · key output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted git changes (offer to commit, never unasked) · **next start: first action + the only files it needs**.
 4. **Update PLAN.md**: status (`done`, `part done` or `blocked`) and `Next start`. If a `CLAUDE.md` or memory note exists for this project, point it at the handover.
 5. **Hand off.** Project complete: `closeout.md` instead. Otherwise always first say **Why a new session:** <phase done · size ~<k> work · waiting for <what/when> · blocked on <what> · model change to <Model>>. Then:
-   - **Can start sessions:** ask "Open Phase <m> on <Model>?"; yes: start it with the start line, set its model, name it, open it; no: give the block below.
+   - **Can start sessions** (a `start_session` tool, e.g. `mcp__ccd_session__start_session`; search the bare name, servers differ): ask "Open Phase <m> on <Model>?"; yes: ONE call, `cwd` = the absolute project folder, `title` = the phase thread name, `prompt` = the start line, `model` + `effort` from PLAN.md, `context: fresh`. It runs on its own: say so in one line and STOP, don't wait for it. No: give the block below.
    - **Otherwise** end with:
 
      **▶ Start a NEW session: 1. folder `<absolute project folder>` · 2. model <Model> (<effort>) · 3. paste:**

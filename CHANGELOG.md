@@ -10,6 +10,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 - Haiku findings are kept: each Haiku answer (date, question, files) is appended to the project's `FINDINGS.md`; the worker itself stays read-only. Phases grep it before asking Haiku again, handovers point to it instead of copying, close-out reads it for missing facts, and `SOURCES.md` can search every project's findings (`~/phased/*/FINDINGS.md`).
 - Clipboard save commands for macOS, Windows and Linux. In an interactive remote session the command also puts the file on the clipboard (`Set-Clipboard`), so it's one reply; the line count catches a clipboard sync that cut it short.
 
+### phased: opening the next phase
+- In the Claude desktop app, phases open themselves: one start-session call with the project folder, phase name, model, effort and START HERE line, then the old thread stops instead of waiting. The tool is found by its bare name, since the prefix differs between apps.
+
 ### phased: remote systems
 - `PLAN.md` gets an `Access:` line (how commands reach the systems, and their OS). Planning asks when it isn't obvious. Commands are shaped for it, e.g. RMM jobs run as SYSTEM with no prompts, mapped drives or user-profile paths.
 
