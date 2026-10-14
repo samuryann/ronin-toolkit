@@ -4,6 +4,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-14
 
+### phased: close-out cleans up the saved environment
+- Choosing Archive or Delete at close-out now ends with a reminder to remove the project folder's saved environment from the desktop app's new-session box. A leftover one can make new sessions warn "the Local environment isn't available anymore". The four close-out options are unchanged.
+
 ### phased: commands always shown
 - Commands go in the message itself, never only in the app's next-step box, and the recap can't claim commands were given when they weren't (a phase ended its turn saying "I've given you the commands" without showing them).
 - Read-only evidence steps change nothing, except turning off output paging on any platform: a session-only switch where one exists (e.g. `terminal length 0`), a saved setting only where it doesn't (e.g. FortiOS), labelled as the only change.
