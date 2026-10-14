@@ -9,9 +9,10 @@ T=$(mktemp -d); git archive "$B" plugins/phased | tar -x -C "$T"
 rm -rf "$SK"; mkdir -p "$SK" "$AG"
 for f in "$T"/plugins/phased/skills/phased/*.md; do
   sed -e 's/^name: phased$/name: phased-dev/' \
-      -e "s/^description: .*/description: TEST build of phased ($B branch). Use ONLY for \/phased-dev, a pasted \"DEVSTART <path>\" line or a \"PHASED-DEV STATUS\" message./" \
+      -e "s|^description: .*|description: TEST build of phased ($B branch). Use ONLY for /phased-dev, a pasted \"DEVSTART <path>\" line or a \"PHASED-DEV STATUS\" message.|" \
       -e 's/START HERE/DEVSTART/g; s/PHASED STATUS/PHASED-DEV STATUS/g' \
       -e 's#\*\*/phased/planning.md#**/phased-dev/planning.md#g' \
+      -e 's#`/phased` or `/phased:start` alone#`/phased-dev` alone#; s#^\# Start menu (`/phased` or `/phased:start`#\# Start menu (`/phased-dev`#' \
       -e 's/phased:haiku-worker/haiku-worker/g; s/phased:opus-escalation/opus-escalation/g; s/haiku-worker/haiku-worker-dev/g; s/opus-escalation/opus-escalation-dev/g' "$f" > "$SK/$(basename "$f")"
 done
 for a in haiku-worker opus-escalation; do
