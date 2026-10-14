@@ -7,7 +7,7 @@ description: Token-efficient phased workflow for IT projects and troubleshooting
 
 Other files in this skill's base directory (not shown? glob `**/phased/planning.md` under `~/.claude`), read only when needed: `planning.md` new project · `bigoutput.md` before any command that may print >~100 lines · `escalation.md` a trigger fires · `closeout.md` last phase done.
 
-**Load tools first, in one search**: rename/get session, usage (`get_usage`), AskUserQuestion, `start_session`/`hand_off_to_session`, archive/delete are often deferred. Fetch them all on your first turn before deciding any is missing.
+**Load tools first, in one search**: rename/get session, usage (`get_usage`), AskUserQuestion, `start_session`/`hand_off_to_session` (search by bare name: the server prefix varies), archive/delete are often deferred. Fetch them all on your first turn before deciding any is missing.
 
 ## Entry
 - **New project or problem**, or no details (`/phased`, `/phased:start`): `planning.md`.
@@ -30,6 +30,7 @@ Cheapest tier that does the work well; when torn, go lighter. New sessions rebui
 - **Past fixes: search, never bulk-load.** `grep -ril` 2–4 keywords (client, device, error; try synonyms) across `~/phased/LESSONS.md` and the paths in `~/phased/SOURCES.md` (one per line, globs ok, `#` comments, `save:` prefix); read only the 1–3 best notes. No hits: scan the index titles (e.g. `MEMORY.md`) once. Notes are leads: confirm against current output.
 - **Read narrowly; filter at the source** (`grep`, `Select-String`, `tail`, time windows). Never dump a full file, config, log or listing.
 - **User-run commands**: one block per device sequence where the CLI takes multi-line pastes; shells one paste-safe line per block. Ask for **only** the relevant output.
+- **`copied` means: it's on my clipboard, read it.** Works any time, for any output or value, not just after a big-output block. Never ask for a paste instead. Save it first (macOS `pbpaste > <project folder>/clip-<HHMM>.txt`; other OS: the clipboard line in `bigoutput.md`) and print its line count. Up to ~100 lines: read it yourself. More: Haiku worker (B7). `saved` = a downloaded file (`bigoutput.md`).
 - **Before giving a command expected to print >~100 lines** (recursion, unfiltered lists, full configs or logs): read `bigoutput.md`; never chat.
 - **Platform syntax**: device CLIs aren't Linux. Before giving device commands, grep installed agent files for the platform (`grep -ril --include='*.md' <platform> ~/.claude/agents ~/.claude/plugins/cache`, then the command): their traps are verified syntax. Unverified = low confidence. **Every verification must be able to fail** (case-insensitive or substring matches can hit the old value).
 - **Short replies**: don't restate the plan, echo files, or summarise the user.
@@ -49,7 +50,7 @@ Cheapest tier that does the work well; when torn, go lighter. New sessions rebui
 6. **Mark the phase `in progress`** (another already in progress? ask first), then work it.
    - **Troubleshooting**: Ruled out table first; cheapest, most likely hypothesis first; log each ruled out with its evidence.
    - **Evidence answers a later phase early?** Propose merging or skipping it.
-7. **Bulk reading goes to Haiku, no approval needed.** Any step that needs >~5k of raw material (logs, inventories, exports, large configs, saved output, long docs) but only an extract, count or comparison: Agent tool, `subagent_type` `phased:haiku-worker` (or `haiku-worker`; neither: `model: "haiku"`). Brief: absolute paths, one precise question, what to quote. Spot-check the answer; never for judgement calls or risky-change review.
+7. **Bulk reading goes to Haiku, no approval needed.** Any step that needs >~5k of raw material (logs, inventories, exports, large configs, saved output, long docs) but only an extract, count or comparison: Agent tool, `subagent_type` whichever of `phased:haiku-worker` / `haiku-worker` is in your available agents (neither: `model: "haiku"`). First grep the project's `FINDINGS.md` for the question's keywords: answered there? Use it, no call. Brief: absolute paths, one precise question, what to quote. Then append the handback to `FINDINGS.md` yourself (subagents won't write files): one `cat >>` heredoc, `## <date> · <question>`, `Files:` line, handback. Spot-check the answer; never for judgement calls or risky-change review.
 8. **Escalation triggers, in priority order** (several fire: lead with the first):
    1. **Risky change next**: hard to undo, e.g. production or device config, deleting or overwriting data, migrations, credentials, security or identity, sending or publishing, client-facing documents.
    2. **Low confidence**: guessing a command, flag or syntax; several causes fit; changing something unread; acting on memory rather than output seen here.
@@ -61,10 +62,10 @@ Cheapest tier that does the work well; when torn, go lighter. New sessions rebui
 ## D. End of phase (or part phase)
 1. **Show the "done when" check passing** with real output; **wait for the user to confirm.** Failing = not done: keep working. Approvals, pastes or choices the user can give now aren't blockers: ask and continue. `part done` only for B10, a wait, or something unavailable this session; say what's left.
 2. **Record the actual** in PLAN.md: `~<k> work, plan +<x>%` ("approx" if other sessions ran), plus escalation tokens; part phases add to the existing figure; `not measured` if no usage tool or the context was compacted. Never guess.
-3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**: built/found · decisions + why, one line each · files touched (absolute) · how to test, incl. user-run commands · ruled out · key output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted git changes (offer to commit, never unasked) · **next start: first action + the only files it needs**.
+3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**: built/found (Haiku extracts: point to `FINDINGS.md`, don't copy) · decisions + why, one line each · files touched (absolute) · how to test, incl. user-run commands · ruled out · key output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted git changes (offer to commit, never unasked) · **next start: first action + the only files it needs**.
 4. **Update PLAN.md**: status (`done`, `part done` or `blocked`) and `Next start`. If a `CLAUDE.md` or memory note exists for this project, point it at the handover.
 5. **Hand off.** Project complete: `closeout.md` instead. Otherwise always first say **Why a new session:** <phase done · size ~<k> work · waiting for <what/when> · blocked on <what> · model change to <Model>>. Then:
-   - **Can start sessions:** ask "Open Phase <m> on <Model>?"; yes: start it with the start line, set its model, name it, open it; no: give the block below.
+   - **Can start sessions** (a `start_session` tool, e.g. `mcp__ccd_session__start_session`; search the bare name, servers differ): ask "Open Phase <m> on <Model>?"; yes: ONE call, `cwd` = the absolute project folder, `title` = the phase thread name, `prompt` = the start line, `model` + `effort` from PLAN.md, `context: fresh`. It runs on its own: say so in one line and STOP, don't wait for it. No: give the block below.
    - **Otherwise** end with:
 
      **▶ Start a NEW session: 1. folder `<absolute project folder>` · 2. model <Model> (<effort>) · 3. paste:**

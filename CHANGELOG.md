@@ -6,15 +6,22 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ### phased: Haiku does the heavy reading
 - **Big output never goes into the chat.** When a command is likely to print more than ~100 lines, phased combines the step's commands into one block that writes one labelled UTF-8 file (`C:\Temp\phased-<step>.txt`, or `/tmp` on Linux) and prints its line count. Bring it back with `copied` (clipboard saved to the project folder) or `saved` (downloaded; phased finds it in the project folder or Downloads). The Haiku worker reads it and returns a short extract. Details load from `bigoutput.md` only when needed.
-- Haiku worker threshold lowered to ~5k of material; mechanical phases (verify, cleanup) are planned on Haiku.
+- The Haiku worker is called by whichever name is installed (plugin or manual), so no failed first call, and its handback is held to its four lines. Threshold lowered to ~5k of material; mechanical phases (verify, cleanup) are planned on Haiku.
+- Haiku findings are kept: each Haiku answer (date, question, files) is appended to the project's `FINDINGS.md`; the worker itself stays read-only. Phases grep it before asking Haiku again, handovers point to it instead of copying, close-out reads it for missing facts, and `SOURCES.md` can search every project's findings (`~/phased/*/FINDINGS.md`).
 - Clipboard save commands for macOS, Windows and Linux. In an interactive remote session the command also puts the file on the clipboard (`Set-Clipboard`), so it's one reply; the line count catches a clipboard sync that cut it short.
+
+### phased: `copied` works everywhere
+- Reply `copied` after copying any output or value and phased reads your clipboard: it saves it to the project folder, reads up to ~100 lines itself and sends anything bigger to the Haiku worker. Before, `copied` was only understood after a big-output command, so a phase could answer "paste the output" instead.
+
+### phased: opening the next phase
+- In the Claude desktop app, phases open themselves: one start-session call with the project folder, phase name, model, effort and START HERE line, then the old thread stops instead of waiting. The tool is found by its bare name, since the prefix differs between apps.
 
 ### phased: remote systems
 - `PLAN.md` gets an `Access:` line (how commands reach the systems, and their OS). Planning asks when it isn't obvious. Commands are shaped for it, e.g. RMM jobs run as SYSTEM with no prompts, mapped drives or user-profile paths.
 
 ### phased: experience
 - Each phase's first turn loads tools, renames the thread and records usage before any work.
-- The planning thread is renamed `<Project> — Control` as soon as the project is named. Phases no longer message it (each message reloaded it); ask it "status?" and it answers from `PLAN.md`.
+- Name first: the guided start asks for a project name, and the planning thread is renamed `<Project> — Control` before any searching or reading. Phases no longer message it (each message reloaded it); ask it "status?" and it answers from `PLAN.md`.
 - Every choice is a selectable menu: at most 4 options, never an added Other/None/Skip. Plan approval is *Approve* / *Revise*.
 - Close-out asks exactly *Ticket note* · *Save the lesson* · *Archive the sessions* · *Delete the sessions*; anything else goes through Other. It marks `Next start: none (project complete)` first, and resuming a finished project says so.
 - After an Opus GO on a risky change, phased asks *Make the change* / *Stop* before acting. Opus questions are passed to you.

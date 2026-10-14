@@ -1,9 +1,10 @@
 # A. Plan (no building)
 
-**Guided start** (no details given): current folder holds a phased PLAN.md? Offer its `Next start` (`none`: say the project is complete). Otherwise explain in ≤3 lines (small phases, one session each, cheapest model, asks before risky changes or Opus), then ask for the job in one line and the project folder (suggest `~/phased/<slug>/`, offer to create it). Once it exists, one line: phase sessions open **in this folder** (folder picker), which groups them and skips unrelated memory. Then continue below.
+**Guided start** (no details given): current folder holds a phased PLAN.md? Offer its `Next start` (`none`: say the project is complete). Otherwise explain in ≤3 lines (small phases, one session each, cheapest model, asks before risky changes or Opus), then ask for the job in one line, a project name (1–4 words; suggest one) and the project folder (suggest `~/phased/<name-slug>/`, offer to create it). Once it exists, one line: phase sessions open **in this folder** (folder picker), which groups them and skips unrelated memory. Then continue below.
 
-1. **Triage**, 3 lines max: the job, the model and effort for planning it, the model most phases need. No folder given: propose `~/phased/<project-slug>/` in the same message.
-   - **Seen before?** Search past fixes (SKILL.md token rules); one line per match; useful paths go under `Notes:` in PLAN.md so phases don't search again. `~/phased/SOURCES.md` missing and `ls -d ~/.claude/projects/*/memory` finds notes? Offer once to create it with the line `~/.claude/projects/*/memory` (all Claude memory, future folders too).
+1. **Name first.** As soon as the job is known, in the same batch as your first search or read: the project name (1–4 words; the user's if given, or this thread's title if it already fits), and rename this thread `<Project> — Control`. Check it took (if not, give the user the exact name). Every phase thread carries this name.
+   **Triage**, 3 lines max: the job, the model and effort for planning it, the model most phases need. No folder given: propose `~/phased/<project-slug>/` in the same message.
+   - **Seen before?** Search past fixes (SKILL.md token rules); one line per match; useful paths go under `Notes:` in PLAN.md so phases don't search again. `~/phased/SOURCES.md` missing and `ls -d ~/.claude/projects/*/memory` finds notes? Offer once to create it with the lines `~/.claude/projects/*/memory` (all Claude memory, future folders too) and `~/phased/*/FINDINGS.md` (Haiku findings from every project; use the folder that holds the project folders).
    - **Fits in one thread?** Offer to just do it: phasing costs more than it saves on small jobs.
    - **Is the current model wrong for planning?** Say so and wait.
 2. **PLAN.md already in the folder?** Never overwrite it. (No `Next start` line: not a phased plan; pick another folder.) Ask: resume, revise, or start new (old one renamed `PLAN-<date>-old.md`).
@@ -15,8 +16,7 @@
      - A fix isn't done until its verification has been seen.
      - Put the fix in its own phase, so the risky change gets a clean thread and an approval.
 5. **Split into phases** of about 60k of work or less each (see Estimating), each with a 1–2 word name (e.g. Evidence, Fix, Verify). Every new session rebuilds the ~baseline cache, so **split only where it pays**: a model change, a wait (overnight, a scheduled window), the ~60k limit, or a risky change that needs its own approval thread. Otherwise merge. Mechanical phases (verify against a clear check, cleanup, docs from notes) go to Haiku; bulk reading inside any phase goes to the Haiku worker.
-6. **Name the project**: 1–4 words for the job (e.g. `File server migration`); reuse this thread's title if it already says that. Rename this thread `<Project> — Control` now and check it took (if not, give the user the exact name). Every phase thread carries the project name.
-   **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then ask *Approve* / *Revise* (AskUserQuestion). Build nothing until approved.
+6. **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then ask *Approve* / *Revise* (AskUserQuestion). Build nothing until approved.
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
    - Record `Control: <this session's id>` (get session `self`) in PLAN.md; this is the control thread (see Control below).
@@ -31,11 +31,11 @@ Unit: **k tokens of work above the session's baseline** (what D2 measures). Sum:
 ## PLAN.md template
 ```markdown
 # <Project>: <one-line title>
-Project: <the project name from step 6, without "— Control">
+Project: <the project name from step 1, without "— Control">
 Control: <this session's id, or none>
 Next start: <START HERE line for the next phase>
 Goal: <one line> · Shape: build|troubleshoot · Folder: <abs path> · Created: <date> · Models: <available>
-Access: <how commands reach the systems + OS, e.g. Datto RMM remote session (interactive PowerShell) on Windows Server 2022, RMM job (SYSTEM), or local>
+Access: <how commands reach the systems + OS, e.g. RMM remote session (interactive PowerShell) on Windows Server 2022, RMM job (SYSTEM), or local>
 Notes: <abs paths of matching past notes, or none>
 
 ## Decisions

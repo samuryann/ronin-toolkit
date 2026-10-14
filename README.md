@@ -33,7 +33,7 @@ Runs IT projects and troubleshooting in small phases, each on the cheapest model
 
 ### Start it
 Pick Sonnet, then either:
-- **Guided:** `/phased:start`. It asks for the job and a project folder (default `~/phased/<job>/`, created for you), then plans.
+- **Guided:** `/phased:start`. It asks for the job, a project name and a folder (default `~/phased/<job>/`, created for you), then plans.
 - **Manual:** `Split this into phases: <the job, symptoms, what changed>. Project folder: <path>`.
 
 Start that first session from your usual folder (e.g. home). It's named `<Project> — Control` and stays there; ask it "status?" any time and it answers from `PLAN.md` (phases don't message it, which would reload it each time). Each phase then ends with three steps:
@@ -41,6 +41,8 @@ Start that first session from your usual folder (e.g. home). It's named `<Projec
 1. Open a new session **in the project folder**.
 2. Pick the model it names.
 3. Paste its START HERE line.
+
+In the Claude desktop app, phased does these three steps for you: it asks "Open Phase 2 on Sonnet?" and, on yes, starts the phase in the project folder, already named, on the right model, with the START HERE line. The new thread shows nested under Control in the sidebar, but it runs in the project folder. Where the app can't start sessions (e.g. the terminal), or you say no, you get the three steps above.
 
 ### Project folders
 | Thread | Opened in | Why |
@@ -55,10 +57,12 @@ Phased doesn't load your notes; it searches them. Create `~/phased/SOURCES.md` (
 
 ```
 ~/.claude/projects/*/memory
+~/phased/*/FINDINGS.md
 save: ~/.claude/projects/<your home folder>/memory
 ```
 
 - **Line 1** searches all your Claude memory, wherever it was saved, including folders created later.
+- **Line 2** searches every project's `FINDINGS.md`: every Haiku answer is appended there, so past extracts are found without re-reading.
 - **`save:`** (optional) is where close-out writes the lesson as a memory note. Without it, lessons go to `~/phased/LESSONS.md`.
 
 It reads only the 1–3 notes that match the client, device or error, and lists them in `PLAN.md`.
@@ -66,7 +70,7 @@ It reads only the 1–3 notes that match the client, device or error, and lists 
 ### What it does
 - **Plans first:** phases with "done when" checks, estimates and a model each. Splits only where a new session pays: a model change, a wait, ~60k of work, or a risky change.
 - **Evidence first:** config and logs before testers or downtime; filtered, paste-safe commands; fact vs inference; a "Ruled out" table.
-- **Right model per step:** a Haiku worker reads big logs and exports (big outputs come back as a file, copied or downloaded, never pasted into the chat); Opus (or a matching specialist agent you've installed) reviews one hard or risky step, only when you approve.
+- **Right model per step:** a Haiku worker reads big logs and exports (big outputs come back as a file, copied or downloaded, never pasted into the chat). Copy any output and reply `copied`: phased reads your clipboard itself, small output directly, big output through Haiku; Opus (or a matching specialist agent you've installed) reviews one hard or risky step, only when you approve.
 - **Safe changes:** backup, rollback and exact scope before anything touches production.
 - **Close-out:** a paste-ready ticket note, the lesson saved, and the sessions archived or deleted.
 

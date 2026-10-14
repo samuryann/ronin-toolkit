@@ -18,7 +18,7 @@ You do ONE bulk-reading job for a project that runs on a more expensive model. Y
 - **Budget:** about 10 tool calls.
 - **No secrets** in output: mask keys, passwords and hashes.
 
-## Handback (this shape only, under ~200 words, no preamble)
+## Handback (these four lines only, under ~200 words: no preamble, no extra sections)
 ```
 ANSWER: <direct answer to the question>
 EVIDENCE: <up to 5 quoted lines with file:line, or counts>
