@@ -10,7 +10,7 @@ T=$(mktemp -d); git archive "$B" plugins/phased | tar -x -C "$T"
 rm -rf "$SK"; mkdir -p "$SK" "$AG"
 for f in "$T"/plugins/phased/skills/phased/*.md; do
   sed -e 's/^name: phased$/name: phased-dev/' \
-      -e "s|^description: .*|description: TEST build of phased ($B branch). Use ONLY for /phased-dev, a pasted \"DEVSTART <path>\" line or a \"PHASED-DEV STATUS\" message.|" \
+      -e "s|^description: .*|description: TEST build of phased ($B branch). Use ONLY for /phased-dev or /phased-dev-* commands, a pasted \"DEVSTART <path>\" line or a \"PHASED-DEV STATUS\" message.|" \
       -e 's/START HERE/DEVSTART/g; s/PHASED STATUS/PHASED-DEV STATUS/g' \
       -e 's#\*\*/phased/planning.md#**/phased-dev/planning.md#g' \
       -e 's#`/phased` or `/phased:start` alone)#`/phased-dev` alone)#; s#^\# Start menu (`/phased` or `/phased:start`#\# Start menu (`/phased-dev`#' \
@@ -22,6 +22,7 @@ for a in haiku-worker opus-escalation; do
 done
 mkdir -p "$CM"; rm -f "$CM"/phased-dev-*.md
 for c in new resume status close-out; do
+  [ -f "$T/plugins/phased/commands/$c.md" ] || continue
   sed -e 's/^description: /description: (phased-dev) /' -e 's/the phased skill/the phased-dev skill/' \
       "$T/plugins/phased/commands/$c.md" > "$CM/phased-dev-$c.md"
 done
