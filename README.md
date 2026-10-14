@@ -36,7 +36,7 @@ Pick Sonnet, then either:
 - **Guided:** `/phased:start`. It asks for the job and a project folder (default `~/phased/<job>/`, created for you), then plans.
 - **Manual:** `Split this into phases: <the job, symptoms, what changed>. Project folder: <path>`.
 
-Start that first session from your usual folder (e.g. home). Approve the plan and it becomes `<Project> — Control`, a dashboard that stays there and gets a 5-line status from every phase. Each phase then ends with three steps:
+Start that first session from your usual folder (e.g. home). It's named `<Project> — Control` and stays there; ask it "status?" any time and it answers from `PLAN.md` (phases don't message it, which would reload it each time). Each phase then ends with three steps:
 
 1. Open a new session **in the project folder**.
 2. Pick the model it names.
@@ -45,7 +45,7 @@ Start that first session from your usual folder (e.g. home). Approve the plan an
 ### Project folders
 | Thread | Opened in | Why |
 |---|---|---|
-| `<Project> — Control` | your usual folder (e.g. home) | planning with your normal memory; collects phase status |
+| `<Project> — Control` | your usual folder (e.g. home) | planning with your normal memory; status on request |
 | `<Project> — Phase n: <step>` | `~/phased/<job>/` | no unrelated memory loads, sessions group by project |
 
 One folder per job holds `PLAN.md`, the handovers and the ticket note. The folder you pick when opening a session decides which memory loads; the START HERE path only says which file to read, so a phase opened elsewhere still works, just heavier. Lost your place? `Next start` is at the top of `PLAN.md`.
@@ -66,11 +66,11 @@ It reads only the 1–3 notes that match the client, device or error, and lists 
 ### What it does
 - **Plans first:** phases with "done when" checks, estimates and a model each. Splits only where a new session pays: a model change, a wait, ~60k of work, or a risky change.
 - **Evidence first:** config and logs before testers or downtime; filtered, paste-safe commands; fact vs inference; a "Ruled out" table.
-- **Right model per step:** a Haiku worker reads big logs and exports; Opus (or a matching specialist agent you've installed) reviews one hard or risky step, only when you approve.
+- **Right model per step:** a Haiku worker reads big logs and exports (big outputs come back as a file, copied or downloaded, never pasted into the chat); Opus (or a matching specialist agent you've installed) reviews one hard or risky step, only when you approve.
 - **Safe changes:** backup, rollback and exact scope before anything touches production.
 - **Close-out:** a paste-ready ticket note, the lesson saved, and the sessions archived or deleted.
 
-**Footprint:** ~180 tokens per session while installed, ~2.3k when a phase runs.
+**Footprint:** ~175 tokens per session while installed, ~2.2k when a phase runs.
 
 ## fortigate-meraki
 

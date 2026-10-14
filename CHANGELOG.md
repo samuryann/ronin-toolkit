@@ -2,6 +2,32 @@
 
 All notable changes to ronin-toolkit. The plugin version is the git commit.
 
+## 2026-10-14
+
+### phased: Haiku does the heavy reading
+- **Big output never goes into the chat.** When a command is likely to print more than ~100 lines, phased combines the step's commands into one block that writes one labelled UTF-8 file (`C:\Temp\phased-<step>.txt`, or `/tmp` on Linux) and prints its line count. Bring it back with `copied` (clipboard saved to the project folder) or `saved` (downloaded; phased finds it in the project folder or Downloads). The Haiku worker reads it and returns a short extract. Details load from `bigoutput.md` only when needed.
+- Haiku worker threshold lowered to ~5k of material; mechanical phases (verify, cleanup) are planned on Haiku.
+- Clipboard save commands for macOS, Windows and Linux.
+
+### phased: remote systems
+- `PLAN.md` gets an `Access:` line (how commands reach the systems, and their OS). Planning asks when it isn't obvious. Commands are shaped for it, e.g. RMM jobs run as SYSTEM with no prompts, mapped drives or user-profile paths.
+
+### phased: experience
+- Each phase's first turn loads tools, renames the thread and records usage before any work.
+- The planning thread is renamed `<Project> — Control` as soon as the project is named. Phases no longer message it (each message reloaded it); ask it "status?" and it answers from `PLAN.md`.
+- Every choice is a selectable menu: at most 4 options, never an added Other/None/Skip. Plan approval is *Approve* / *Revise*.
+- Close-out asks exactly *Ticket note* · *Save the lesson* · *Archive the sessions* · *Delete the sessions*; anything else goes through Other. It marks `Next start: none (project complete)` first, and resuming a finished project says so.
+- After an Opus GO on a risky change, phased asks *Make the change* / *Stop* before acting. Opus questions are passed to you.
+- "Why a new session" shows on every hand-off; declining to open the next session gives you the start block.
+- Agent costs are stated before approval: agents with "All tools" cost ~50k+ per call, tool-listed ones far less. The cheapest fitting model is passed.
+
+### phased: efficiency
+- Core instructions trimmed and rarely needed steps moved to files that load on demand. Status checks no longer load the planning file.
+- Estimating figures updated from real runs. Escalations table column is now `Tokens`.
+
+### Repository
+- `dev` branch for testing; `scripts/dev-install.sh` installs any branch side by side as `/phased-dev`.
+
 ## 2026-10-13
 
 ### phased: no unexplained hand-offs
