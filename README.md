@@ -32,9 +32,18 @@ Install fails? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` and retry. Remove with `/
 Runs IT projects and troubleshooting in small phases, each on the cheapest model that can do it. **Why:** fewer tokens, everything for a job in one folder, and a guided, evidence-first way through fixes and builds.
 
 ### Start it
-Pick Sonnet, then either:
-- **Menu:** `/phased:start` (or `/phased`) on its own. Pick **New project** (it asks for the job, a project name and a folder, default `~/phased/<job>/`, created for you), **Resume a project** (your projects listed with progress, e.g. `2/6 done · next: Verify`; finished ones can take more work), **Status of all projects**, or **Close out a project**. Or type the job in the Other box to go straight to planning. Each option also has its own command in the `/` menu: `/phased:new`, `/phased:resume`, `/phased:status`, `/phased:close-out`. They cost nothing until used: their descriptions stay out of Claude's context.
-- **Manual:** `Split this into phases: <the job, symptoms, what changed>. Project folder: <path>`.
+Pick Sonnet, then type one of these (they all show in the `/` menu):
+
+| Command | What it does |
+|---|---|
+| `/phased:start` (or `/phased`) | Menu: New project, Resume a project, Status of all projects, Close out a project. Type the job in the Other box to go straight to planning. |
+| `/phased:new` | New project. Add the job to skip questions (`/phased:new fix VPN drops at the branch`); otherwise it asks for the job, a project name and a folder (default `~/phased/<job>/`, created for you). |
+| `/phased:resume` | Lists your projects with progress (`2/6 done · next: Verify`) and opens the next phase. Finished projects can take more work. |
+| `/phased:status` | One line per project, nothing else loaded: the cheapest check. |
+| `/phased:close-out` | Ticket note, lesson, then archive or delete the project's sessions. |
+
+Or skip the commands: `Split this into phases: <the job, symptoms, what changed>. Project folder: <path>`.
+The commands cost nothing until used (their descriptions stay out of Claude's context). Cheapest starts: `/phased:new <job>` or `/phased:status`; the menu adds one question.
 
 Start that first session from your usual folder (e.g. home). It's named `<Project> — Control` and stays there; ask it "status?" any time and it answers from `PLAN.md` (phases don't message it, which would reload it each time). Each phase then ends with three steps:
 
