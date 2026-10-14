@@ -37,7 +37,7 @@ Cheapest tier that does the work well; when torn, go lighter. New sessions rebui
 - Absolute paths in PLAN.md, handovers and start lines; the `Project:` name from PLAN.md everywhere.
 - **No secrets in any file or brief**; ask the user to mask keys, PSKs, hashes and tokens before pasting. Shared or public folder: no client names, IPs or hostnames either.
 - **Every choice is an AskUserQuestion** (recommended first; multi-select for close-out): plan approval, model check, escalation, continue here, opening a session, close-out. Max 4 options; never add Other/None/Skip (built in). Text list only if the tool doesn't exist.
-- **Systems you can't reach**: exact commands, pasted output is evidence, conclusions labelled **fact** (seen) or **inference**.
+- **Systems you can't reach**: exact commands, pasted output is evidence, conclusions labelled **fact** (seen) or **inference**. Shape commands for PLAN.md's `Access:` (e.g. RMM jobs run as SYSTEM, non-interactive: no prompts, no mapped drives or user-profile paths).
 
 ## B. Run a phase
 1. **First turn, before any work**, in one batch: load tools, rename the thread `<Project> — Phase <n>: <phase name>` (plus ` (part <k>)` if PLAN.md shows the phase `part done`; k = its HANDOFF files + 1) record the baseline (context size, plan usage). Rename didn't take? Give the user the exact name. Then one roadmap line: `Phase 2/3 · 1 Evidence ✓ · 2 Root cause ← · 3 Fix`.

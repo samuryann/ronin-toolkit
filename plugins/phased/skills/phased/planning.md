@@ -7,7 +7,7 @@
    - **Fits in one thread?** Offer to just do it: phasing costs more than it saves on small jobs.
    - **Is the current model wrong for planning?** Say so and wait.
 2. **PLAN.md already in the folder?** Never overwrite it. (No `Next start` line: not a phased plan; pick another folder or file name.) Ask: resume, revise, or start new (old one renamed `PLAN-<date>-old.md`).
-3. **Unclear? Ask** before planning, at most 4 questions. Don't ask what a config or output paste would answer: ask for the paste. Troubleshooting: symptoms, when it started, what changed, scope (who and what), what's been tried.
+3. **Unclear? Ask** before planning, at most 4 questions. Don't ask what a config or output paste would answer: ask for the paste. Troubleshooting: symptoms, when it started, what changed, scope (who and what), what's been tried. Remote systems: how commands reach them (RMM job, remote session, SSH, RDP) and their OS, unless obvious.
 4. **Pick the shape:**
    - **Build**: phases deliver working pieces.
    - **Troubleshoot**: gather evidence > hypotheses > test (cheapest and most likely first) > fix > verify it holds.
@@ -35,6 +35,7 @@ Project: <the project name from step 6, without "— Control">
 Control: <this session's id, or none>
 Next start: <START HERE line for the next phase>
 Goal: <one line> · Shape: build|troubleshoot · Folder: <abs path> · Created: <date> · Models: <available>
+Access: <how commands reach the systems + OS, e.g. Datto RMM job (SYSTEM) on Windows Server 2022, or local>
 Notes: <abs paths of matching past notes, or none>
 
 ## Decisions
