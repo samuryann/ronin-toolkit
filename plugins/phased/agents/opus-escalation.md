@@ -1,6 +1,6 @@
 ---
 name: opus-escalation
-description: Opus escalation for the phased skill. Use only after the user approves: one bounded REVIEW or SOLVE step, then hand back.
+description: phased skill only, after user approval: Opus does one bounded REVIEW or SOLVE step, then hands back.
 model: opus
 effort: high
 tools: Read, Grep, Glob, Bash, Edit, Write

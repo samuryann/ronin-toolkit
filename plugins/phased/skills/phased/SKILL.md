@@ -1,13 +1,13 @@
 ---
 name: phased
-description: Token-efficient phased workflow for IT projects and troubleshooting: small phases, one per thread, handovers, cheapest viable model, Opus only with approval. Use for /phased, "split this into phases", a pasted "START HERE <path>" line, or resuming or checking a phased PLAN.md.
+description: Phased IT project/troubleshooting workflow: small phases, one thread each, handovers, cheapest viable model, Opus only with approval. Use for /phased, "split this into phases", a pasted "START HERE <path>" line, or resuming/checking a phased PLAN.md.
 ---
 
 # Phased
 
-Other files in this skill's base directory (not shown? glob `**/phased/planning.md` under `~/.claude`), read only when needed: `menu.md` start menu · `planning.md` new project · `bigoutput.md` before any command that may print >~100 lines · `escalation.md` a trigger fires · `closeout.md` last phase done.
+Other files in this skill's base directory (not shown? glob `**/phased/planning.md` under `~/.claude`), read only when needed: `menu.md` start menu · `planning.md` new project · `bigoutput.md` before any command that may print >~100 lines (recursion, unfiltered lists, full configs/logs; never into chat) · `escalation.md` a trigger fires · `closeout.md` last phase done.
 
-**Load tools first, in one search**: rename/get session, usage (`get_usage`), AskUserQuestion, `start_session`/`hand_off_to_session` (search by bare name: the server prefix varies), archive/delete are often deferred. Fetch them all on your first turn before deciding any is missing (the `status` command only, not a status question: skip).
+**Load tools first, in one ToolSearch** (`select:` the full names shown in your deferred-tool list; server prefixes vary): `set_session_title`, `get_session`, `get_usage`, `start_session`, `hand_off_to_session`, `AskUserQuestion`, whichever are deferred. Do it on your first turn; any not listed: one keyword search for all missing bare names before deciding they're missing (the `status` command only, not a status question: skip).
 
 ## Entry
 - **No details** (`/phased` or `/phased:start` alone) or a **menu command** (resume/status/close-out, args or not): `menu.md`.
@@ -21,13 +21,12 @@ Other files in this skill's base directory (not shown? glob `**/phased/planning.
 Cheapest tier that does the work well (tiers: `planning.md`); when torn, go lighter. New sessions rebuild the baseline cache, so switch inside a phase: bulk reading down to the Haiku worker (B7), one hard step up to Opus (`escalation.md`).
 
 ## Token rules
-- **Budget**: work = tokens above the session's starting context. ~60k per phase; check at ~60k, hand over by ~100k (B10).
+- **Budget**: work = tokens above the session's starting context; ~60k per phase (B10).
 - **Evidence ladder**: free evidence first (config, existing logs, current state), analysed before asking for more; live tests, other people or downtime only if that didn't settle it. Batch within a step.
 - **Past fixes: search, never bulk-load.** `grep -ril` 2–4 keywords (client, device, error; try synonyms) across `~/phased/LESSONS.md` and the paths in `~/phased/SOURCES.md` (one per line, globs ok, `#` comments, `save:` prefix); read only the 1–3 best notes. No hits: scan the index titles (e.g. `MEMORY.md`) once. Notes are leads: confirm against current output.
 - **Read narrowly; filter at the source** (`grep`, `Select-String`, `tail`, time windows). Never dump a full file, config, log or listing.
 - **User-run commands**: one block per device sequence where the CLI takes multi-line pastes; shells one paste-safe line per block. Ask for **only** the relevant output. Commands and anything the user must act on go in your message, never only in a next-step/wrap-up box, and a recap never says something was given that isn't shown above it. Evidence (read-only) steps change nothing, except turning off output paging on any platform. Prefer a session-only switch (e.g. `terminal length 0` on Cisco/EdgeOS/HP, `--no-pager`, `| Out-String`); use a saved setting only where none exists (e.g. FortiOS `config system console` / `set output standard`), and label it as the only change.
-- **`copied` means: it's on my clipboard, read it.** Works any time, for any output or value, not just after a big-output block. Never ask for a paste instead. Save it first (macOS `pbpaste > <project folder>/clip-<HHMM>.txt`; other OS: the clipboard line in `bigoutput.md`) and print its line count. Up to ~100 lines: read it yourself. More: Haiku worker (B7). `saved` = a downloaded file (`bigoutput.md`).
-- **Before giving a command expected to print >~100 lines** (recursion, unfiltered lists, full configs or logs): read `bigoutput.md`; never chat.
+- **`copied` = read my clipboard**, any time, any output or value; never ask for a paste instead. Save it first (macOS `pbpaste > <project folder>/clip-<HHMM>.txt`; other OS: `bigoutput.md`), print its line count; ≤~100 lines: read it, more: Haiku worker (B7). `saved` = a downloaded file (`bigoutput.md`).
 - **Platform syntax**: device CLIs aren't Linux. Before giving device commands, grep installed agent files for the platform (`grep -ril --include='*.md' <platform> ~/.claude/agents ~/.claude/plugins/cache`, then the command): their traps are verified syntax. Unverified = low confidence. **Every verification must be able to fail** (case-insensitive or substring matches can hit the old value).
 - **Short replies**: don't restate the plan, echo files, or summarise the user.
 
@@ -53,13 +52,13 @@ Cheapest tier that does the work well (tiers: `planning.md`); when torn, go ligh
    3. **Stuck**: the same fix, or attempts at a working solution, failed twice.
 9. **Before an approved risky change**: capture current state (backup or current values), have the rollback ready, restate exactly what will change.
 10. **Session size.** At ~60k work: more than ~15 messages left, hand over `part done` now; nearly done, finish. Always hand over past ~100k (or 60% of the window), after compaction, or if an earlier decision was lost.
-11. **Other subagents or parallel work** (beyond B7 and approved escalations) need approval with the cost: an agent listed with "All tools" carries every tool, ~50k+ per call; one with a tool list is far cheaper. Pass `model` at the cheapest tier that fits.
+11. **Other subagents or parallel work** (beyond B7 and approved escalations): ask first, with the cost ("All tools" agents ~50k+ per call; tool-listed ones far cheaper). Pass `model` at the cheapest tier that fits.
 
 ## D. End of phase (or part phase)
 1. **Show the "done when" check passing** with real output; **wait for the user to confirm.** Failing = not done: keep working. Approvals, pastes or choices the user can give now aren't blockers: ask and continue. `part done` only for B10, a wait, or something unavailable this session; say what's left.
-2. **Record the actual** in PLAN.md: `~<k> work, plan +<x>%` ("approx" if other sessions ran), plus escalation tokens; part phases add to the existing figure; `not measured` if no usage tool or the context was compacted. Never guess.
+2. **Actual** (written in the same PLAN.md edit as D4): `~<k> work, plan +<x>%` ("approx" if other sessions ran), plus escalation tokens; part phases add to the existing figure; `not measured` if no usage tool or the context was compacted. Never guess.
 3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**: built/found (Haiku extracts: point to `FINDINGS.md`, don't copy) · decisions + why, one line each · files touched (absolute) · how to test, incl. user-run commands · ruled out · key output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted git changes (offer to commit, never unasked) · **next start: first action + the only files it needs**.
-4. **Update PLAN.md**: status (`done`, `part done` or `blocked`) and `Next start`. If a `CLAUDE.md` or memory note exists for this project, point it at the handover.
+4. **Update PLAN.md** (one edit with D2): status (`done`, `part done` or `blocked`) and `Next start`. If a `CLAUDE.md` or memory note exists for this project, point it at the handover.
 5. **Hand off.** Project complete: `closeout.md` instead. Otherwise always first say **Why a new session:** <phase done · size ~<k> work · waiting for <what/when> · blocked on <what> · model change to <Model>>. Then:
    - **Can start sessions** (`start_session` loaded, see Load tools): ask "Open Phase <m> on <Model>?"; yes: ONE call, `cwd` = the absolute project folder, `title` = the phase thread name, `prompt` = the start line, `model` + `effort` from PLAN.md, `context: fresh`. It runs on its own: say so in one line and STOP, don't wait for it. No: give the block below.
    - **Otherwise** end with:
