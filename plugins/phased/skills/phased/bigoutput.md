@@ -8,7 +8,7 @@ Never into chat. One file per step, then Haiku.
    - Linux: `{ echo "== disk"; df -h; echo "== log"; journalctl -u <unit> --since -1d; } > /tmp/phased-<step>.txt 2>&1; wc -l < /tmp/phased-<step>.txt`
 3. **The user brings it over**, either way:
    - select all, copy, reply `copied`: save it to `<project folder>/phased-<step>.txt` with the clipboard command for this machine: macOS `pbpaste > <file>` · Windows `powershell -NoProfile -Command "Get-Clipboard | Set-Content '<file>'"` (works from Git Bash too) · Linux `wl-paste > <file>` or `xclip -o -selection clipboard > <file>`;
-   - or pull the file with the remote tool's file transfer (e.g. RMM remote session), drop it into the project folder in Finder or Explorer, and reply `saved`. Not into the chat: that becomes an @-mention and inlines it.
+   - or download the file with the remote tool's file transfer (e.g. RMM remote session) and reply `saved`: look in the project folder, then `~/Downloads`, for the newest `phased-<step>*.txt` and move it into the project folder. Never via the chat: dropping a file there becomes an @-mention and inlines it.
 4. **Confirm** with its line count and first and last line, then hand it to the Haiku worker (SKILL.md B7).
 
 Device CLIs that can't write files: filter harder; still big, the same copy route.
