@@ -51,7 +51,12 @@ Start that first session from your usual folder (e.g. home). It's named `<Projec
 2. Pick the model it names.
 3. Paste its START HERE line.
 
-In the Claude desktop app, phased does these three steps for you: it asks "Open Phase 2 on Sonnet?" and, on yes, starts the phase in the project folder, already named, on the right model, with the START HERE line. The new thread shows nested under Control in the sidebar, but it runs in the project folder. Where the app can't start sessions (e.g. the terminal), or you say no, you get the three steps above.
+In the Claude desktop app, phased does these three steps for you: it asks "Open Phase 2 on Sonnet?" with three answers:
+- **Open it now:** starts the phase in the project folder, already named, on the right model, with the START HERE line. It shows nested under Control in the sidebar. The thread that opened it gets a short note each time the new phase finishes a turn, about 10% extra tokens.
+- **Later:** when ready, "status?" in Control or the resume command offers to open it.
+- **Start block:** you get the three steps above. Not nested, no notes, about 10% fewer tokens.
+
+Where the app can't start sessions (e.g. the terminal), or opening fails, you get the three steps above.
 
 ### Project folders
 | Thread | Opened in | Why |
