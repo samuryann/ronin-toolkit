@@ -9,7 +9,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 - Project list reads each phase's status from the end of its row, so a `|` inside a "Done when" cell no longer shifts it.
 - Past-fix search runs in `sh`, so a SOURCES.md glob that matches nothing no longer aborts it in zsh.
 - Haiku findings are appended with a quoted heredoc, so `$` and `$(...)` in logs aren't expanded.
-- `saved` also finds a file you name or just dropped in the project folder.
+- `saved` also finds a file you name, or the newest file you dropped (in Downloads or the project folder, skipping phased's own files); unsure, it asks.
+- First run with no projects says so and offers New project.
+- README: `/phased:phased` (plugin skill name), uninstall keeps project folders, Windows needs Git for Windows; Windows clipboard saves as UTF-8.
 - No longer loads an unused session tool on the first turn.
 - Docs: footprint figures updated (~205 / ~2.8k); the 2026-10-13 "Continue here?" offer was later removed (every phase hands off).
 

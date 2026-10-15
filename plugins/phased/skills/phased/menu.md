@@ -1,9 +1,9 @@
 # Start menu (`/phased` or `/phased:start` with no details)
 
-A menu command (resume/status/close-out) skips steps 2–3: step 1, then that option; this folder's project first and recommended; a project or folder given: use it; none listed: ask for the folder.
+A menu command (resume/status/close-out) skips steps 2–3: step 1, then that option; this folder's project first and recommended; a project or folder given: use it; none listed: say there are no projects yet and offer New project, or ask for the folder.
 
 1. One command, never reading whole plans:
-`grep -H '^Next start:' PLAN.md 2>/dev/null; find ~/phased -mindepth 2 -maxdepth 2 -name PLAN.md -exec ls -t {} + 2>/dev/null | while IFS= read -r f; do awk -F'|' '/^Project:/{p=substr($0,10)} /^Next start:/{n=substr($0,13)} /^\| *[0-9]+ *\|/{t++; s=$(NF-1); gsub(/^ +| +$/,"",s); if(s~/^(done|skipped)/)d++; else if(c==""){x=$3; gsub(/^ +| +$/,"",x); c=x (s~/^not started/?"":" ("s")")}} END{printf "%s | %d/%d done | %s | %s\n",p,d,t,(n~/^none/?"complete":"next: "c),FILENAME}' "$f"; done`
+`grep -H '^Next start:' PLAN.md 2>/dev/null; find ~/phased -mindepth 2 -maxdepth 2 -name PLAN.md -exec ls -t {} + 2>/dev/null | while IFS= read -r f; do awk -F'|' '/^Project:/{p=substr($0,10)} /^Next start:/{n=substr($0,13)} /^\| *[0-9]+ *\|/{t++; s=($NF~/^ *$/?$(NF-1):$NF); gsub(/^ +| +$/,"",s); if(s~/^(done|skipped)/)d++; else if(c==""){x=$3; gsub(/^ +| +$/,"",x); c=x (s~/^not started/?"":" ("s")")}} END{printf "%s | %d/%d done | %s | %s\n",p,d,t,(n~/^none/?"complete":"next: "c),FILENAME}' "$f"; done`
 2. Current folder has a PLAN.md: still ask step 3, with **Resume a project** first and recommended, its description naming this folder's project and next phase; picked: resume that project directly (SKILL.md Entry **Resume**; `none`: offer to add work).
 3. One AskUserQuestion, exactly: **New project** · **Resume a project** · **Status of all projects** · **Close out a project**, even with no projects listed. A job typed in Other = manual start (`planning.md` with it). More than 4 projects: print the list above the question. Projects outside `~/phased`: their folder via Other.
 - **New project:** `planning.md` (Guided start).

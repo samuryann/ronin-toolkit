@@ -25,7 +25,7 @@ In Claude Code:
 Want the firewall agent too? `/plugin install fortigate-meraki@ronin-toolkit`
 
 Then turn on updates: `/plugin` → **Marketplaces** → **ronin-toolkit** → **Enable auto-update**.
-Install fails? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` and retry. Remove with `/plugin uninstall phased@ronin-toolkit`.
+Install fails? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` and retry. Remove with `/plugin uninstall phased@ronin-toolkit` (your `~/phased` project folders are kept). Windows: needs Git for Windows (Claude Code's Bash), since the project list uses `find` and `awk`.
 
 ## phased
 
@@ -36,7 +36,7 @@ Pick Sonnet, then type one of these (they all show in the `/` menu):
 
 | Command | What it does |
 |---|---|
-| `/phased:start` (or `/phased`) | Menu: New project, Resume a project, Status of all projects, Close out a project. Type the job in the Other box to go straight to planning. |
+| `/phased:start` (or `/phased:phased`) | Menu: New project, Resume a project, Status of all projects, Close out a project. Type the job in the Other box to go straight to planning. |
 | `/phased:new` | New project. Add the job to skip questions (`/phased:new fix VPN drops at the branch`); otherwise it asks for the job, a project name and a folder (default `~/phased/<job>/`, offered for you). |
 | `/phased:resume` | Lists your projects with progress (`2/6 done · next: Verify`) and opens the next phase. Finished projects can take more work. |
 | `/phased:status` | One line per project, nothing else loaded: the cheapest check. |
@@ -68,7 +68,7 @@ One folder per job holds `PLAN.md`, the handovers and the ticket note. The folde
 
 Finished projects crowding the list? Move the folder into `~/phased/archive/` and it stops being listed. To close one out or add work later, type its folder in Other.
 
-Want each project grouped in the sidebar? Once Phase 1 has opened, right-click the Control thread, choose **Move to → New section** and name it after the project. The phases nested under Control move with it. If a later phase shows up outside the section, move it in the same way. It's done by hand, costs no tokens, and you can undo it the same way.
+Desktop app: want each project grouped in the sidebar? Once Phase 1 has opened, right-click the Control thread, choose **Move to → New section** and name it after the project. The phases nested under Control move with it. If a later phase shows up outside the section, move it in the same way. It's done by hand, costs no tokens, and you can undo it the same way.
 
 ### How it saves tokens
 Every message re-sends the whole conversation, so anything that lands in the chat is paid for again on every later turn. phased keeps bulky material out of it:
