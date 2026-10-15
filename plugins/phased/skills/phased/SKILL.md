@@ -14,7 +14,7 @@ Other files in this skill's base directory (not shown? glob `**/phased/planning.
 - **`new` command**: `planning.md` Guided start, asking only what its details don't give.
 - **New project or problem** (details given): `planning.md`.
 - **`START HERE` + a path** (match loosely): run a phase (**B**). The path is a handover, or PLAN.md for phase 1.
-- **Control thread asked for status** (or an old `PHASED STATUS` message): from PLAN.md, in 2 lines: progress and the `Next start` line; offer to open it (D5), unless that phase is `in progress`: say it's running, no offer.
+- **Control thread asked for status** (or an old `PHASED STATUS` message): from PLAN.md, in 2 lines: progress and the `Next start` line; offer to open it (D5).
 - **Resume, no start line**: the `Next start` line in the folder's PLAN.md. `none`: say the project is complete. No such line: not a phased plan, don't adopt it. No PLAN.md: ask for the folder.
 
 ## Models
@@ -59,7 +59,7 @@ Cheapest tier that does the work well (tiers: `planning.md`); when torn, go ligh
 2. **Actual** (written in the same PLAN.md edit as D4): `~<k> work, plan +<x>%` ("approx" if other sessions ran), plus escalation tokens; part phases add to the existing figure; `not measured` if no usage tool or the context was compacted. Never guess.
 3. **Write `HANDOFF-<YYYY-MM-DD>-PHASE-<n>.md`** (add `-2`, `-3`... if it exists). **Under ~500 words, facts not narrative**: built/found (Haiku extracts: point to `FINDINGS.md`, don't copy) · decisions + why, one line each · files touched (absolute) · how to test, incl. user-run commands · ruled out · key output lines quoted, not whole logs · open faults and questions · escalations + verdicts · uncommitted git changes (offer to commit, never unasked) · **next start: first action + the only files it needs**.
 4. **Update PLAN.md** (one edit with D2): status (`done`, `part done` or `blocked`) and `Next start`. If a `CLAUDE.md` or memory note exists for this project, point it at the handover.
-5. **Hand off.** Project complete: `closeout.md` instead. Otherwise always first say **Why a new session:** <phase done · size ~<k> work · waiting for <what/when> · blocked on <what> · model change to <Model>>. Then:
+5. **Hand off.** Project complete: `closeout.md` instead. That phase already `in progress` (status, resume): say it's running, no offer, unless the user says its thread is gone. Otherwise always first say **Why a new session:** <phase done · size ~<k> work · waiting for <what/when> · blocked on <what> · model change to <Model>>. Then:
    - **Can start sessions** (`start_session` in your tools; load it if deferred): ask "Open Phase <m> on <Model>?" with options *Open it now* (Recommended; nested in sidebar) · *Later* · *Start block* (manual, not nested, ~10% fewer tokens). Open: ONE call, `cwd` = the absolute project folder, `title` = the phase thread name, `prompt` = the start line, `model` + `effort` from PLAN.md, `context: fresh`. It runs on its own: say so in one line and STOP, don't wait for it. Later: one line: when ready, "status?" in Control or the phased resume command offers to open it. Start block, or the call fails: print the block below in this message.
    - **Otherwise** end with:
 

@@ -8,7 +8,7 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 - Opening the next phase now asks with three answers: Open it now (nested), Later, or Start block (manual, not nested, ~10% fewer tokens). Before, the question could have a single answer, which the app rejects, and the start block could go missing.
 - If opening fails, the start block is printed in the same message.
 - Device commands: only the next block is given (later ones depend on its output), ending with "run it, then `copied`". Before, one phase previewed six later blocks and ended with "paste".
-- "status?" in Control no longer offers to open a phase that is already in progress (it says it's running).
+- "status?" in Control and the resume command no longer offer to open a phase that is already in progress (they say it's running; say its thread is gone to reopen it).
 - Cost: about +125 tokens per phase session.
 
 ### phased: deferred Phase 1 points to resume
