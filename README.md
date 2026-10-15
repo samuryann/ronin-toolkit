@@ -63,6 +63,8 @@ One folder per job holds `PLAN.md`, the handovers and the ticket note. The folde
 
 Finished projects crowding the list? Move the folder into `~/phased/archive/` and it stops being listed. To close one out or add work later, type its folder in Other.
 
+Want each project grouped in the sidebar? Once Phase 1 has opened, right-click the Control thread, choose **Move to → New section** and name it after the project. The phases nested under Control move with it, and each later phase nests under the one before, so the whole project stays in its section. It's done by hand, costs no tokens, and you can undo it the same way.
+
 ### How it saves tokens
 Every message re-sends the whole conversation, so anything that lands in the chat is paid for again on every later turn. phased keeps bulky material out of it:
 

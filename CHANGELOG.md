@@ -2,6 +2,11 @@
 
 All notable changes to ronin-toolkit. The plugin version is the git commit.
 
+## 2026-10-15
+
+### README: grouping a project in the sidebar
+- Tip: right-click the Control thread → Move to → New section; nested phases move with it (docs only, no skill change).
+
 ## 2026-10-14
 
 ### README: hiding finished projects
