@@ -4,6 +4,9 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-15
 
+### phased: deferred Phase 1 points to resume
+- When Phase 1 isn't opened right after planning (declined, or planned for later), the manual start steps now end with one line: when ready, "status?" in the Control thread or the resume command offers to open it. Before, it looked as if auto-open had stopped working.
+
 ### README: grouping a project in the sidebar
 - Tip: right-click the Control thread → Move to → New section; nested phases move with it (docs only, no skill change).
 
