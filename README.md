@@ -37,7 +37,7 @@ Pick Sonnet, then type one of these (they all show in the `/` menu):
 | Command | What it does |
 |---|---|
 | `/phased:start` (or `/phased`) | Menu: New project, Resume a project, Status of all projects, Close out a project. Type the job in the Other box to go straight to planning. |
-| `/phased:new` | New project. Add the job to skip questions (`/phased:new fix VPN drops at the branch`); otherwise it asks for the job, a project name and a folder (default `~/phased/<job>/`, created for you). |
+| `/phased:new` | New project. Add the job to skip questions (`/phased:new fix VPN drops at the branch`); otherwise it asks for the job, a project name and a folder (default `~/phased/<job>/`, offered for you). |
 | `/phased:resume` | Lists your projects with progress (`2/6 done · next: Verify`) and opens the next phase. Finished projects can take more work. |
 | `/phased:status` | One line per project, nothing else loaded: the cheapest check. |
 | `/phased:close-out` | Ticket note, lesson, then archive or delete the project's sessions. |
@@ -104,7 +104,7 @@ It reads only the 1–3 notes that match the client, device or error, and lists 
 - **Safe changes:** backup, rollback and exact scope before anything touches production.
 - **Close-out:** a paste-ready ticket note, the lesson saved, and the sessions archived or deleted.
 
-**Footprint:** ~175 tokens per session while installed, ~2.2k when a phase runs.
+**Footprint:** ~205 tokens per session while installed, ~2.8k when a phase runs.
 
 ## fortigate-meraki
 
