@@ -20,7 +20,7 @@
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
    - Record `Control: <this session's id>` (get session `self`) in PLAN.md; this is the control thread (see Control below).
-   - Hand off phase 1 as in SKILL.md D5, then **stop**. Not opened now (declined, or planned for later): after the ▶ block, one line: when ready, "status?" in this thread or the phased resume command offers to open it. If the user asks to run phase 1 here instead: keep the Control name and go to SKILL.md B2 (its Actual includes planning).
+   - Hand off phase 1 as in SKILL.md D5, then **stop**. Not opened now (declined or for later): end with D5's Later line. If the user asks to run phase 1 here instead: keep the Control name and go to SKILL.md B2 (its Actual includes planning).
 
 ## Models
 | Tier | Use for | Effort |
