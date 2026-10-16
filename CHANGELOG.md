@@ -5,16 +5,16 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 ## 2026-10-16
 
 ### phased: audit fixes (19 real phase threads reviewed)
-- **One-click open.** The app lets Claude start a session only when you asked for it in that turn; otherwise it can only propose a card, which can't set the folder or model (a real hand-off fell back to that). So "is this phase done?" now carries the hand-off: *Done, open Phase 3* · *Done, open later* · *Not done*, and plan approval offers *Approve, open Phase 1*. Refused opens print the START HERE block.
+- **One-click open.** The app lets Claude start a session only when you asked for it in that turn; otherwise it can only propose a card, which can't set the folder or model (a real hand-off fell back to that). So "is this phase done?" now carries the hand-off: *Yes, open Phase 3* · *Yes, open later* · *Not done*, and plan approval offers *Approve, open Phase 1*. Refused opens print the START HERE block.
 - **Paste guard.** Five oversized threads were 61% of all phased cost; the worst was one ~1M-character paste. The hook now stops a paste over ~30k characters in a phase thread: reply `copied` and Haiku reads it from a file.
-- **Browser work** hands over at ~60k and prefers page text to screenshots (screenshots were half of one 264k thread).
+- **Browser work** reads page text first and takes a screenshot only when the text can't show it (screenshots were half of one 264k thread).
 - Usage is checked at the start and before the handover only (the every-10-turns check was never done in practice). Opus reviews return amended steps in NEXT. Close-out uses the ticket-notes skill when installed.
 
 ### phased: break hook (real runs)
 - New hook, when you send a message: in a phased project thread idle over an hour and over ~40k tokens, it adds one line, and phased offers a fresh session from a handover instead of re-reading the whole thread uncached. Measured on real projects: 11 such returns, ~3M tokens of plan usage re-read uncached; the returning turn still pays, a fresh session keeps the turns after it small. A script with no model call: silent and free otherwise, ~20 tokens when it fires.
 
 ### phased: hand-off offer in long threads (real run)
-- A 200k+ thread printed the manual start block instead of offering to open the next phase, because the next phase was waiting on client inputs. Now a next phase that can start opens by itself with no question; one that waits on something (or a status request) asks, with *Later* recommended. And a thread past ~100k re-reads the end-of-phase steps before handing off (~1.3k tokens, only then).
+- A 200k+ thread printed the manual start block instead of offering to open the next phase, because the next phase was waiting on client inputs. Now a next phase that can start opens by itself with no question (superseded above: one-click open); one that waits on something (or a status request) asks, with *Later* recommended. And a thread past ~100k re-reads the end-of-phase steps before handing off (~1.3k tokens, only then).
 
 ### phased: escalation fix (real run)
 - When a risky change, low confidence or a repeated failure triggers, phased now always reads the escalation step first and offers *Opus review* (or a matching specialist) / *Carry on* / *Stop*. A long thread had asked a plain *Approve* / *Not yet* instead.
