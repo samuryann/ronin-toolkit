@@ -45,7 +45,7 @@ DONE: <changes, or "none">
 FILES TOUCHED: <abs paths, or none>
 VERIFIED: <check + actual result, or "not run: reason" + commands for the user>
 RULED OUT: <hypothesis: evidence, or none>
-NEXT: <exact next step for the lighter model>
+NEXT: <exact next step for the lighter model; REVIEW of a risky change: blast radius + the amended steps>
 STILL NEEDS OPUS: no | yes: <what>
 QUESTION: <only if a user decision is needed>
 ```
