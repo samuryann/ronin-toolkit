@@ -13,20 +13,31 @@ In Japanese history, a *ronin* was a samurai with no master. These days they're 
 
 ## Install
 
-In Claude Code:
+In Claude Code, add the marketplace once:
 
 ```
 /plugin marketplace add samuryann/ronin-toolkit
 ```
 
+Then install the plugins you want, each on its own:
+
+**phased**: phased projects and troubleshooting
 ```
 /plugin install phased@ronin-toolkit
 ```
 
-Want the firewall agent too? `/plugin install fortigate-meraki@ronin-toolkit`. Ticket notes: `/plugin install ticket-notes@ronin-toolkit`
+**fortigate-meraki**: firewall engineer subagent
+```
+/plugin install fortigate-meraki@ronin-toolkit
+```
+
+**ticket-notes**: paste-ready PSA ticket notes
+```
+/plugin install ticket-notes@ronin-toolkit
+```
 
 Then turn on updates: `/plugin` → **Marketplaces** → **ronin-toolkit** → **Enable auto-update**.
-Install fails? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` and retry. Remove with `/plugin uninstall phased@ronin-toolkit` (your `~/phased` project folders are kept). Windows: needs Git for Windows (Claude Code's Bash), since the project list uses `find` and `awk`.
+Install fails? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` and retry. Remove a plugin with `/plugin uninstall <name>@ronin-toolkit` (removing phased keeps your `~/phased` project folders). Windows: phased needs Git for Windows (Claude Code's Bash), since its project list uses `find` and `awk`.
 
 ## phased
 
