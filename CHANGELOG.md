@@ -4,6 +4,15 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-16
 
+### phased: break hook (real runs)
+- New hook, when you send a message: in a phased project thread idle over an hour and over ~40k tokens, it adds one line, and phased offers a fresh session from a handover instead of re-reading the whole thread uncached. Measured on real projects: 11 such returns, ~3M tokens of plan usage re-read uncached; the returning turn still pays, a fresh session keeps the turns after it small. A script with no model call: silent and free otherwise, ~20 tokens when it fires.
+
+### phased: hand-off offer in long threads (real run)
+- A 200k+ thread printed the manual start block instead of offering to open the next phase, because the next phase was waiting on client inputs. Now a next phase that can start opens by itself with no question; one that waits on something (or a status request) asks, with *Later* recommended. And a thread past ~100k re-reads the end-of-phase steps before handing off (~1.3k tokens, only then).
+
+### phased: escalation fix (real run)
+- When a risky change, low confidence or a repeated failure triggers, phased now always reads the escalation step first and offers *Opus review* (or a matching specialist) / *Carry on* / *Stop*. A long thread had asked a plain *Approve* / *Not yet* instead.
+
 ### phased: phases no longer wake the thread that opened them
 - Each phase detaches itself on its first turn, so its turns no longer wake (and re-bill) Control or the previous phase. Measured cost of those wake-ups on a real project: ~250k tokens in one afternoon.
 - Phased now keeps each project in its own sidebar group (Control and all phases); phases sit side by side instead of nested. Close-out's Archive/Delete also removes a group phased created.
