@@ -16,12 +16,12 @@
      - A fix isn't done until its verification has been seen.
      - Put the fix in its own phase, so the risky change gets a clean thread and an approval.
 5. **Split into phases** of about 60k of work or less each (see Estimating), each with a 1–2 word name (e.g. Evidence, Fix, Verify). Every new session rebuilds the ~baseline cache, so **split only where it pays**: a model change, a wait (overnight, a scheduled window), the ~60k limit, or a risky change that needs its own approval thread. Otherwise merge. Mechanical phases (verify against a clear check, cleanup, docs from notes) go to Haiku; bulk reading inside any phase goes to the Haiku worker.
-6. **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then ask *Approve* / *Revise* (AskUserQuestion). Build nothing until approved.
+6. **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then ask (AskUserQuestion) *Approve, open Phase 1* · *Approve, open later* · *Revise* (no `start_session`: *Approve* · *Revise*). Build nothing until approved.
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
    - **Sidebar group** (load `list_sections`, `create_section`, `move_sessions`): PLAN.md has a `Group:` id: use it. Else reuse the section named `<Project>` or create it, and record `Group: <id> (existing)` or `(created)` (none made: `Group: none`). Then `move_sessions ["self"]`, `group_id` = the id alone (fails: ignore).
    - Record `Control: <this session's id>` (get session `self`) in PLAN.md; this is the control thread (see Control below).
-   - Hand off phase 1 as in SKILL.md D5, then **stop**. Not opened now (declined or for later): end with D5's Later line. If the user asks to run phase 1 here instead: keep the Control name and go to SKILL.md B2 (its Actual includes planning).
+   - Hand off phase 1 as in SKILL.md D5 (*Approve, open Phase 1* = the user chose to open), then **stop**. Not opened now: end with D5's Later line. If the user asks to run phase 1 here instead: keep the Control name and go to SKILL.md B2 (its Actual includes planning).
 
 ## Models
 | Tier | Use for | Effort |
