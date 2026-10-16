@@ -46,12 +46,12 @@ Cheapest tier that does the work well (tiers: `planning.md`); when torn, go ligh
    - **Troubleshooting**: Ruled out table first; cheapest, most likely hypothesis first; log each ruled out with its evidence.
    - **Evidence answers a later phase early?** Propose merging or skipping it.
 7. **Bulk reading goes to Haiku, no approval needed.** Any step that needs >~5k of raw material (logs, inventories, exports, large configs, saved output, long docs) but only an extract, count or comparison: Agent tool, `subagent_type` whichever of `phased:haiku-worker` / `haiku-worker` is in your available agents (neither: `model: "haiku"`). First grep the project's `FINDINGS.md` for the question's keywords: answered there? Use it, no call. Brief: absolute paths, one precise question, what to quote. Then append the handback to `FINDINGS.md` yourself (subagents won't write files): one `cat >>` heredoc with a quoted delimiter (`<<'EOF'`), `## <date> · <question>`, `Files:` line, handback. Spot-check the answer; never for judgement calls or risky-change review.
-8. **Escalation triggers, in priority order** (several fire: lead with the first):
+8. **Escalation triggers, in priority order** (several fire: lead with the first). One fires: read `escalation.md` before asking anything and ask with its options; never a plain approve/hold question:
    1. **Risky change next**: hard to undo, e.g. production or device config, deleting or overwriting data, migrations, credentials, security or identity, sending or publishing, client-facing documents.
    2. **Low confidence**: guessing a command, flag or syntax; several causes fit; changing something unread; acting on memory rather than output seen here.
    3. **Stuck**: the same fix, or attempts at a working solution, failed twice.
 9. **Before an approved risky change**: capture current state (backup or current values), have the rollback ready, restate exactly what will change.
-10. **Session size.** At ~60k work: more than ~15 messages left, hand over `part done` now; nearly done, finish. Always hand over past ~100k (or 60% of the window), after compaction, or if an earlier decision was lost.
+10. **Session size.** At ~60k work: more than ~15 messages left, hand over `part done` now; nearly done, finish. Always hand over past ~100k (or 60% of the window), after compaction, or if an earlier decision was lost. A `PHASED IDLE` line on the user's message (break hook) in a phase thread: answer a quick question first, then ask *Fresh session* (Recommended: hand over `part done`, D2–D5; later turns stay small) · *Continue here* (this thread stays large).
 11. **Other subagents or parallel work** (beyond B7 and approved escalations): ask first, with the cost ("All tools" agents ~50k+ per call; tool-listed ones far cheaper). Pass `model` at the cheapest tier that fits.
 
 ## D. End of phase (or part phase)

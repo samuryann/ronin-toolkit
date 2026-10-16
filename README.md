@@ -91,6 +91,7 @@ Every message re-sends the whole conversation, so anything that lands in the cha
 - **Drop files in the project folder.** Already have an export, log or config? Save it into the project folder and reply `saved` or name the file. Haiku reads it; the main thread never does.
 - **Answers are kept.** Each Haiku answer is added to the project's `FINDINGS.md`. phased searches it before asking again, and handovers point to it instead of copying it.
 - **Small, fresh sessions.** Each phase runs in its own session on the cheapest model that can do it, starting from a short handover instead of a long history. In the desktop app the next phase opens by itself, in the project's sidebar group. Phases split only where that pays off, since every new session costs a little to start.
+- **Breaks are caught.** After about an hour away, your next message in a long thread re-reads the whole thread uncached, at about double the cost. A small hook (a script, no model call) spots this in phased project threads, and phased offers to continue in a fresh session from a handover instead. It needs `jq`, which is built into macOS 15 and later.
 - **Opus only when you approve,** for one bounded review or fix, then back to the cheaper model.
 - **Notes are searched, not loaded** (next section).
 
