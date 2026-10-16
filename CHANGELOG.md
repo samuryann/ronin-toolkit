@@ -4,6 +4,10 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-16
 
+### phased: hand-off fix (real run)
+- End of phase loads the session-opening tool if it isn't loaded yet, so the *Open it now* (nested) / *Later* / *Start block* question is always offered when the app supports it.
+- The "is this phase done?" confirmation no longer absorbs the hand-off question.
+
 ### ticket-notes: new plugin
 - Paste-ready PSA ticket notes (AutoTask, ConnectWise, HaloPSA) from rough notes or the work in the conversation.
 - Only what was stated or done in the conversation; steps the user was told to do count as done; Next Steps only for open items; Outcome line for unfinished work; Optional Improvements for out-of-scope suggestions; never writes secrets.
