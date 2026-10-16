@@ -9,6 +9,7 @@ In Japanese history, a *ronin* was a samurai with no master. These days they're 
 |---|---|
 | [`phased`](#phased) | Runs IT projects and troubleshooting in small, cheap phases, escalating to Opus only when you approve |
 | [`fortigate-meraki`](#fortigate-meraki) | A FortiGate & Meraki engineer subagent that knows the silent-fail traps, plans changes with rollback, and reads debug output |
+| [`ticket-notes`](#ticket-notes) | Turns rough notes or the work in a conversation into a paste-ready PSA ticket note, with nothing made up |
 
 ## Install
 
@@ -22,7 +23,7 @@ In Claude Code:
 /plugin install phased@ronin-toolkit
 ```
 
-Want the firewall agent too? `/plugin install fortigate-meraki@ronin-toolkit`
+Want the firewall agent too? `/plugin install fortigate-meraki@ronin-toolkit`. Ticket notes: `/plugin install ticket-notes@ronin-toolkit`
 
 Then turn on updates: `/plugin` → **Marketplaces** → **ronin-toolkit** → **Enable auto-update**.
 Install fails? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` and retry. Remove with `/plugin uninstall phased@ronin-toolkit` (your `~/phased` project folders are kept). Windows: needs Git for Windows (Claude Code's Bash), since the project list uses `find` and `awk`.
@@ -111,6 +112,14 @@ It reads only the 1–3 notes that match the client, device or error, and lists 
 A subagent for FortiGate (FortiOS 7.2–7.6) and Meraki MX/MS/MR work. It never touches a device: it gives you firmware-correct commands with a backup, verification and rollback, reads your pasted `diagnose`/`show` output, and labels fact vs inference. It knows the traps that fail silently: `set` replacing whole lists, a policy with the wrong `dstintf` that never matches, local-in not protecting VIPs, session filters that flush everything, dial-up IPsec name and DH-order limits, MX uplink and flow-preference overrides. Use it directly (`@agent-fortigate-meraki:fortigate-meraki-engineer`), or let `phased` offer it as the specialist reviewer on firewall steps. It uses only file, shell and web tools, so it stays cheap to call.
 
 **Footprint:** about 90 tokens per session while installed, and about 4.4k each time it's called.
+
+## ticket-notes
+
+Writes a ticket note you can paste straight into AutoTask, ConnectWise, HaloPSA or any PSA. Give it your rough notes, or just ask for a note at the end of a working conversation: "write a ticket note". You get plain text with `-` bullets (no markdown to clean up), in a fixed layout: a one-line summary, **Work Performed**, then **Root Cause**, **Outcome** (only when the work isn't finished), **Next Steps** and **Optional Improvements**, each only when there's something to put in it.
+
+It's written as a change record, so it sticks to what happened. It never invents routine steps you didn't mention ("backed up the config"). Steps the conversation told you to do count as done unless you said you skipped them. Next Steps holds only what's still open. It never writes passwords, PSKs or keys. Run it as `/ticket-notes:ticket-notes`, or just ask for a ticket note.
+
+**Footprint:** about 65 tokens per session while installed, and about 720 each time it writes a note.
 
 ## License
 

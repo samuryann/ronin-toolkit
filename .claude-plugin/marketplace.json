@@ -14,6 +14,11 @@
       "name": "fortigate-meraki",
       "source": "./plugins/fortigate-meraki",
       "description": "FortiGate & Meraki engineer subagent: change plans with rollback, debug-output reading, and the silent-fail traps"
+    },
+    {
+      "name": "ticket-notes",
+      "source": "./plugins/ticket-notes",
+      "description": "Paste-ready PSA ticket notes (AutoTask, ConnectWise, HaloPSA) from rough notes or the work in the conversation: only what was actually done, open items kept separate"
     }
   ]
 }

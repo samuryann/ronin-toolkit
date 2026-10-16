@@ -2,6 +2,12 @@
 
 All notable changes to ronin-toolkit. The plugin version is the git commit.
 
+## 2026-10-16
+
+### ticket-notes: new plugin
+- Paste-ready PSA ticket notes (AutoTask, ConnectWise, HaloPSA) from rough notes or the work in the conversation.
+- Only what was stated or done in the conversation; steps the user was told to do count as done; Next Steps only for open items; Outcome line for unfinished work; Optional Improvements for out-of-scope suggestions; never writes secrets.
+
 ## 2026-10-15
 
 ### phased: release hardening (comprehensive QA)
