@@ -64,9 +64,9 @@ Start that first session from your usual folder (e.g. home). It's named `<Projec
 3. Paste its START HERE line.
 
 In the Claude desktop app, phased does these three steps for you: it asks "Open Phase 2 on Sonnet?" with three answers:
-- **Open it now:** starts the phase in the project folder, already named, on the right model, with the START HERE line. It shows nested under Control in the sidebar. The thread that opened it gets a short note each time the new phase finishes a turn, about 10% extra tokens.
+- **Open it now:** starts the phase in the project folder, already named, on the right model, with the START HERE line. It detaches itself from the thread that opened it, so no other thread is woken (and charged) each time it finishes a turn, and files itself in the project's sidebar group.
 - **Later:** when ready, "status?" in Control or the resume command offers to open it.
-- **Start block:** you get the three steps above. Not nested, no notes, about 10% fewer tokens.
+- **Start block:** you get the three steps above. The phase still files itself in the project's group.
 
 Where the app can't start sessions (e.g. the terminal), or opening fails, you get the three steps above.
 
@@ -80,7 +80,7 @@ One folder per job holds `PLAN.md`, the handovers and the ticket note. The folde
 
 Finished projects crowding the list? Move the folder into `~/phased/archive/` and it stops being listed. To close one out or add work later, type its folder in Other.
 
-Desktop app: want each project grouped in the sidebar? Once Phase 1 has opened, right-click the Control thread, choose **Move to → New section** and name it after the project. The phases nested under Control move with it. If a later phase shows up outside the section, move it in the same way. It's done by hand, costs no tokens, and you can undo it the same way.
+Desktop app: each project gets its own sidebar group, named after it, holding Control and every phase (phases sit side by side, not nested). Close-out's Archive or Delete also removes a group phased created. Projects planned before this change: add `Group: <id> (existing)` to their `PLAN.md` to keep new phases in your own group.
 
 ### How it saves tokens
 Every message re-sends the whole conversation, so anything that lands in the chat is paid for again on every later turn. phased keeps bulky material out of it:
@@ -90,7 +90,7 @@ Every message re-sends the whole conversation, so anything that lands in the cha
 - **Big commands write a file.** When a command could print more than ~100 lines, phased gives one block that writes a labelled file on the server and prints its line count. In an interactive remote session the file also goes on your clipboard, so you just reply `copied`. Or download it and reply `saved` (phased checks the project folder, then Downloads). The line count catches a copy that got cut off.
 - **Drop files in the project folder.** Already have an export, log or config? Save it into the project folder and reply `saved` or name the file. Haiku reads it; the main thread never does.
 - **Answers are kept.** Each Haiku answer is added to the project's `FINDINGS.md`. phased searches it before asking again, and handovers point to it instead of copying it.
-- **Small, fresh sessions.** Each phase runs in its own session on the cheapest model that can do it, starting from a short handover instead of a long history. In the desktop app the next phase opens by itself, nested under Control. Phases split only where that pays off, since every new session costs a little to start.
+- **Small, fresh sessions.** Each phase runs in its own session on the cheapest model that can do it, starting from a short handover instead of a long history. In the desktop app the next phase opens by itself, in the project's sidebar group. Phases split only where that pays off, since every new session costs a little to start.
 - **Opus only when you approve,** for one bounded review or fix, then back to the cheaper model.
 - **Notes are searched, not loaded** (next section).
 

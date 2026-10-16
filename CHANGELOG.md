@@ -4,6 +4,11 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 
 ## 2026-10-16
 
+### phased: phases no longer wake the thread that opened them
+- Each phase detaches itself on its first turn, so its turns no longer wake (and re-bill) Control or the previous phase. Measured cost of those wake-ups on a real project: ~250k tokens in one afternoon.
+- Phased now keeps each project in its own sidebar group (Control and all phases); phases sit side by side instead of nested. Close-out's Archive/Delete also removes a group phased created.
+- About +600 tokens per phase thread for the two extra tool calls.
+
 ### phased: hand-off fix (real run)
 - End of phase loads the session-opening tool if it isn't loaded yet, so the *Open it now* (nested) / *Later* / *Start block* question is always offered when the app supports it.
 - The "is this phase done?" confirmation no longer absorbs the hand-off question.

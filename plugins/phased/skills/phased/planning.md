@@ -19,6 +19,7 @@
 6. **Write `PLAN.md`** from the template below, keeping it terse: every phase thread reads it. Show it, then ask *Approve* / *Revise* (AskUserQuestion). Build nothing until approved.
 7. **Once it's approved:**
    - Fill in `Next start` (phase 1's start line points at PLAN.md itself, with no handover file).
+   - **Sidebar group** (load `list_sections`, `create_section`, `move_sessions`): PLAN.md has a `Group:` id: use it. Else reuse the section named `<Project>` or create it, and record `Group: <id> (existing)` or `(created)` (none made: `Group: none`). Then `move_sessions ["self"]`, `group_id` = the id alone (fails: ignore).
    - Record `Control: <this session's id>` (get session `self`) in PLAN.md; this is the control thread (see Control below).
    - Hand off phase 1 as in SKILL.md D5, then **stop**. Not opened now (declined or for later): end with D5's Later line. If the user asks to run phase 1 here instead: keep the Control name and go to SKILL.md B2 (its Actual includes planning).
 
@@ -40,6 +41,7 @@ Unit: **k tokens of work above the session's baseline** (what D2 measures). Sum:
 # <Project>: <one-line title>
 Project: <the project name from step 1, without "— Control">
 Control: <this session's id, or none>
+Group: <sidebar group id (created|existing), or none>
 Next start: <START HERE line for the next phase>
 Goal: <one line> · Shape: build|troubleshoot · Folder: <abs path> · Created: <date> · Models: <available>
 Access: <how commands reach the systems + OS, e.g. RMM remote session (interactive PowerShell) on Windows Server 2022, RMM job (SYSTEM), or local>
