@@ -15,7 +15,7 @@ Draft a PSA ticket note (AutoTask, ConnectWise, HaloPSA or similar) for an IT te
 
 ## Output
 
-Reply with the note only: one plain-text block ready to paste. No preamble, no closing remarks, no markdown (no **, #, or code fences). No date or title line; the PSA stamps the note.
+Reply with the note only, inside one ```text code block so it copies exactly (loose text renders as markdown: "- " becomes bullet symbols and lines merge). Nothing before or after the block. Inside it: plain text, no ** or #. No date or title line; the PSA stamps the note.
 
 Every list item starts with "- " (ASCII hyphen, space). Never use bullet characters, asterisks, or numbers.
 
@@ -52,6 +52,7 @@ Omit any section that has no content.
 Input: "fixed vpn on abc corp, sonicwall was blocking traffic after ISP changed our IP block, updated the NAT policies and tested"
 
 Output:
+```text
 Updated SonicWall NAT policies at ABC Corp to restore VPN connectivity after an ISP IP block change.
 
 Work Performed:
@@ -60,10 +61,12 @@ Work Performed:
 
 Root Cause:
 - ISP changed the IP block and the SonicWall was blocking traffic
+```
 
 Input: "swapped the fw at abc, new fortigate 60f in, wan is up, vpn to site b not up yet, waiting on their psk"
 
 Output:
+```text
 Replaced the firewall at ABC with a FortiGate 60F.
 
 Work Performed:
@@ -75,3 +78,4 @@ Outcome:
 
 Next Steps:
 - Obtain the PSK from Site B and bring up the VPN
+```
