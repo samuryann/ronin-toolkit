@@ -1,0 +1,12 @@
+{
+  "name": "ticket-notes",
+  "description": "Paste-ready PSA ticket notes (AutoTask, ConnectWise, HaloPSA) from rough notes or the work in the conversation: only what was actually done, plain text, '-' bullets, open items and optional improvements kept separate",
+  "author": {
+    "name": "Samuryann",
+    "url": "https://github.com/samuryann"
+  },
+  "homepage": "https://github.com/samuryann/ronin-toolkit",
+  "repository": "https://github.com/samuryann/ronin-toolkit",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": ["ticket", "psa", "autotask", "connectwise", "halopsa", "documentation", "change-record", "msp", "sysadmin"]
+}
