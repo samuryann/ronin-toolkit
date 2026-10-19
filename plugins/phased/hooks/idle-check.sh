@@ -5,12 +5,13 @@
 # fresh session instead of re-reading the whole thread uncached.
 IDLE_MIN=60; MIN_CTX=40000; MAX_PASTE=30000
 command -v jq >/dev/null 2>&1 || exit 0
+jq() { command jq "$@" | tr -d '\r'; }  # Windows jq.exe ends lines with CRLF
 in=$(cat)
 cwd=$(printf '%s' "$in" | jq -r '.cwd // empty' 2>/dev/null)
 tp=$(printf '%s' "$in" | jq -r '.transcript_path // empty' 2>/dev/null)
 [ -f "$tp" ] || exit 0
 # A phased thread: works in a phased project folder, or a START HERE line (phase start or the loaded skill) is near the top.
-case "$cwd" in */phased/*) [ -f "$cwd/PLAN.md" ] ;; *) false ;; esac || head -n 5 "$tp" | grep -q 'START HERE' || exit 0
+case "$cwd" in */phased/*|*\\phased\\*) [ -f "$cwd/PLAN.md" ] ;; *) false ;; esac || head -n 5 "$tp" | grep -q 'START HERE' || exit 0
 len=$(printf '%s' "$in" | jq -r '.prompt // "" | length' 2>/dev/null)
 if [ "${len:-0}" -gt "$MAX_PASTE" ]; then
   echo "phased: not sent (${len} characters would stay in this thread for every later message). Still on your clipboard? Reply \`copied\`. Or save it in the project folder and reply \`saved\`." >&2
