@@ -7,6 +7,7 @@ All notable changes to ronin-toolkit. The plugin version is the git commit.
 ### phased: plugin and Windows fixes (first Windows install)
 - **Commands name the skill in full.** `/phased:new` and the other commands said "use the phased skill", so Claude first tried `phased`, got "unknown skill", and retried as `phased:phased`. They now name `phased:phased`.
 - **`copied` on Windows** reads the clipboard with `cat /dev/clipboard` (Git Bash); before, it only knew the macOS command.
+- **Opened phases always load phased.** One hand-off added a `background` note to the open call; the app put it above the START HERE line, so the new phase never loaded phased and skipped its first-turn steps (it stayed nested under the old phase, outside the project group). The open call now forbids it.
 - **The hook works on Windows.** jq on Windows ends lines with CRLF, which made the hook silently do nothing; it now strips them. Windows project folders (backslash paths) are recognised too.
 
 ## 2026-10-16
