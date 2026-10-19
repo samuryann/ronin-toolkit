@@ -59,7 +59,7 @@ Every message re-sends the whole conversation, so a long thread gets expensive (
 ### A project, start to finish
 1. **Plan.** Pick Sonnet and run `/phased:new <the job>`. Control asks up to 4 questions, searches your past fixes, and writes `PLAN.md`: phases with "done when" checks, an estimate and a model each. It splits only where a new session pays: a model change, a wait, ~60k of work, or a risky change.
 2. **Approve.** Choose *Approve, open Phase 1* and the phase opens in one click.
-3. **Work.** On its first turn a phase names itself, files itself in the project's sidebar group, and reads only `PLAN.md` and the latest handover. Then evidence first: one command block at a time, config and logs before testers or downtime, a backup and rollback before any change. Before a risky change it offers an Opus or specialist review.
+3. **Work.** On its first turn a phase names itself, files itself in the project's sidebar group, and reads only `PLAN.md` and the latest handover. Then evidence first: one command block at a time, config and logs before testers or downtime, a backup and rollback before any change. Before a risky change, when it is guessing, or after the same fix fails twice, it stops and offers an Opus or specialist review (or carry on, or stop).
 4. **Hand over.** It shows the "done when" check passing and asks you to confirm: *Yes, open Phase 2* · *Yes, open later* (recommended when waiting on client info, a person or a date) · *Not done*. It writes the handover, updates `PLAN.md` and opens the next phase on its model. A thread that grows past ~100k hands over early as `part done`.
 5. **Close out.** After the last phase: a paste-ready ticket note, the lesson saved, the sessions archived or deleted.
 
