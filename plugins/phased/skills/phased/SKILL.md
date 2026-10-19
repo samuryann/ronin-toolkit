@@ -7,7 +7,7 @@ description: Phased IT project/troubleshooting workflow: small phases, one threa
 
 Other files in this skill's base directory (not shown? glob `**/phased/planning.md` under `~/.claude`), read only when needed: `menu.md` start menu · `planning.md` new project · `bigoutput.md` before any command that may print >~100 lines (recursion, unfiltered lists, full configs/logs; never into chat) · `escalation.md` a trigger fires · `closeout.md` last phase done.
 
-**Load tools first, in one ToolSearch** (`select:` the full names shown in your deferred-tool list; server prefixes vary): `set_session_title`, `get_session`, `get_usage`, `start_session`, `detach_session` + `move_sessions` (phases), `AskUserQuestion`, whichever are deferred. Do it on your first turn; any not listed: one keyword search for all missing bare names before deciding they're missing (the `status` command only, not a status question: skip).
+**Load tools first, in one ToolSearch** (`select:` the full names shown in your deferred-tool list; server prefixes vary): `set_session_title`, `get_session`, `get_usage`, `start_session`, `detach_session` and `move_sessions` (phases: always both), `AskUserQuestion`, whichever are deferred. Do it on your first turn; any not listed: one keyword search for all missing bare names before deciding they're missing (the `status` command only, not a status question: skip).
 
 ## Entry
 - **No details** (`/phased` or `/phased:start` alone) or a **menu command** (resume/status/close-out, args or not): `menu.md`.
@@ -37,7 +37,7 @@ Cheapest tier that does the work well (tiers: `planning.md`); when torn, go ligh
 - **Systems you can't reach**: exact commands, pasted output is evidence, conclusions labelled **fact** (seen) or **inference**. Shape commands for PLAN.md's `Access:` (e.g. RMM jobs run as SYSTEM, non-interactive: no prompts, no mapped drives or user-profile paths).
 
 ## B. Run a phase
-1. **First turn, before any work**, one batch: (a) load tools; (b) rename the thread `<Project> — Phase <n>: <phase name>`, plus ` (part <k>)` if PLAN.md shows the phase `part done` (k = its HANDOFF files + 1); (c) record the baseline: context size and plan usage (`get_usage`); (d) once (a) has loaded them: `detach_session self` (stops waking your opener), then if PLAN.md `Group:` has an id, `move_sessions ["self"]`, `group_id` = the id alone. Refused/failed: ignore, no retry. Rename failed: give the user the exact name. Then one roadmap line: `Phase 2/3 · 1 Evidence ✓ · 2 Root cause ← · 3 Fix`.
+1. **First turn, before any work**, one batch: (a) load tools; (b) rename the thread `<Project> — Phase <n>: <phase name>`, plus ` (part <k>)` if PLAN.md shows the phase `part done` (k = its HANDOFF files + 1); (c) record the baseline: context size and plan usage (`get_usage`); (d) once (a) has loaded them, two calls, always both: `detach_session self` (stops waking your opener), then `move_sessions ["self"]` with `group_id` = PLAN.md's `Group:` id alone (no id: skip); detaching alone leaves the thread outside the project's group. Refused/failed: ignore, no retry. Rename failed: give the user the exact name. Then one roadmap line: `Phase 2/3 · 1 Evidence ✓ · 2 Root cause ← · 3 Fix`.
 2. **Model check**: yours differs from PLAN.md's pick? Ask whether to continue.
 3. **Usage**: re-check before D2.
 4. **Read only** PLAN.md, the given handover (never older ones) and the files it names (phase 1: PLAN.md alone). `Notes:` paths only when a step needs them; a fresh error justifies a new past-fix search.
