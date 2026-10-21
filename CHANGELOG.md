@@ -2,6 +2,11 @@
 
 All notable changes to ronin-toolkit. The plugin version is the git commit.
 
+## 2026-10-21
+
+### phased: single-thread jobs still get a project
+- Choosing *Single thread* for a small job used to skip the project folder, `PLAN.md` and sidebar group, so the job had nowhere to keep files and didn't show in status or close-out. It now gets all three and runs as one phase in the same thread.
+
 ## 2026-10-19
 
 ### phased: plugin and Windows fixes (first Windows install)
