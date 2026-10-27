@@ -139,7 +139,9 @@ Type `/shogun:shogun` (optionally followed by your first tasks) and the thread b
 
 It picks the cheapest model that can do each job: Haiku for lookups and reading, Sonnet for real work, Opus only when you say yes. A miss gets one follow-up, then one step up a model, then it comes back to you. At most 4 agents run at once. A ledger in `~/.claude/shogun/` tracks every agent, survives context compaction, and flags any agent that has gone quiet.
 
-Every brief ends with a fixed rules block: agents never run anything on client systems or write to your PSA, RMM, documentation or M365, and they hand you paste-ready commands with a verify step and a rollback instead, copied to you word for word. Works with `phased` (uses its Haiku worker; inside a phase, phased's rules win) and `fortigate-meraki`. Forked from [orchestrator-skill](https://github.com/olivieropinotti/orchestrator-skill) by Oliviero Pinotti (MIT).
+Every brief ends with a fixed rules block: agents never run anything on client systems or write to your PSA, RMM, documentation or M365, and they hand you paste-ready commands with a verify step and a rollback instead, copied to you word for word. Works with `phased` (uses its Haiku worker; inside a phase, phased's rules win) and `fortigate-meraki`.
+
+**Credit:** shogun is a reimagined take on [orchestrator-skill](https://github.com/olivieropinotti/orchestrator-skill) by [Oliviero Pinotti](https://github.com/olivieropinotti), rebuilt for our own purpose: cheapest model first, IT safety rules in every brief, and a ledger built for client work. The original is MIT licensed; its licence ships with the plugin as `LICENSE-upstream`.
 
 **Footprint:** about 50 tokens per session while installed, and about 1.3k when you start it.
 
