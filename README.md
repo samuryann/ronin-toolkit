@@ -10,6 +10,7 @@ In Japanese history, a *ronin* was a samurai with no master. These days they're 
 | [`phased`](#phased) | Runs IT projects and troubleshooting in small, cheap phases, escalating to Opus only when you approve |
 | [`fortigate-meraki`](#fortigate-meraki) | A FortiGate & Meraki engineer subagent that knows the silent-fail traps, plans changes with rollback, and reads debug output |
 | [`ticket-notes`](#ticket-notes) | Turns rough notes or the work in a conversation into a paste-ready PSA ticket note, with nothing made up |
+| [`shogun`](#shogun) | Turns a thread into a commander that never blocks: work goes to background agents on the cheapest model, tracked in a ledger |
 
 ## Install
 
@@ -34,6 +35,11 @@ Then install the plugins you want, each on its own:
 **ticket-notes**: paste-ready PSA ticket notes
 ```
 /plugin install ticket-notes@ronin-toolkit
+```
+
+**shogun**: background agent commander
+```
+/plugin install shogun@ronin-toolkit
 ```
 
 Then turn on updates: `/plugin` → **Marketplaces** → **ronin-toolkit** → **Enable auto-update**.
@@ -126,6 +132,18 @@ Writes a ticket note you can paste straight into AutoTask, ConnectWise, HaloPSA 
 It's written as a change record, so it sticks to what happened. It never invents routine steps you didn't mention ("backed up the config"). Steps the conversation told you to do count as done unless you said you skipped them. Next Steps holds only what's still open. It never writes passwords, PSKs or keys. Run it as `/ticket-notes:ticket-notes`, or just ask for a ticket note.
 
 **Footprint:** about 65 tokens per session while installed, and about 720 each time it writes a note.
+
+## shogun
+
+Type `/shogun:shogun` (optionally followed by your first tasks) and the thread becomes a commander. It splits what you ask into independent tasks, sends each to a background agent, and answers you in seconds while they work, so you keep talking instead of waiting. Say `status`, `stop <name>`, `redirect <name> to ...`, or `stand down` to end it.
+
+It picks the cheapest model that can do each job: Haiku for lookups and reading, Sonnet for real work, Opus only when you say yes. A miss gets one follow-up, then one step up a model, then it comes back to you. At most 4 agents run at once. A ledger in `~/.claude/shogun/` tracks every agent, survives context compaction, and flags any agent that has gone quiet.
+
+Every brief ends with a fixed rules block: agents never run anything on client systems or write to your PSA, RMM, documentation or M365, and they hand you paste-ready commands with a verify step and a rollback instead, copied to you word for word. Works with `phased` (uses its Haiku worker; inside a phase, phased's rules win) and `fortigate-meraki`.
+
+**Credit:** shogun is a reimagined take on [orchestrator-skill](https://github.com/olivieropinotti/orchestrator-skill) by [Oliviero Pinotti](https://github.com/olivieropinotti), rebuilt for our own purpose: cheapest model first, IT safety rules in every brief, and a ledger built for client work. The original is MIT licensed; its licence ships with the plugin as `LICENSE-upstream`.
+
+**Footprint:** about 50 tokens per session while installed, and about 1.3k when you start it.
 
 ## License
 

@@ -2,6 +2,11 @@
 
 All notable changes to ronin-toolkit. The plugin version is the git commit.
 
+## 2026-10-27
+
+### shogun: new plugin
+- `/shogun:shogun` turns a thread into a non-blocking commander: work goes to background agents on the cheapest model that can do it (Haiku, Sonnet, Opus only with your yes), tracked in a per-project ledger, with a fixed safety rules block in every brief. Forked from olivieropinotti/orchestrator-skill (MIT) and reviewed by four agents over three rounds before release.
+
 ## 2026-10-21
 
 ### phased: single-thread jobs still get a project
