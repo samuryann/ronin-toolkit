@@ -1,0 +1,12 @@
+{
+  "name": "shogun",
+  "description": "Non-blocking commander: /shogun turns the thread into a dispatcher that sends work to background agents on the cheapest model that can do it, tracks them in a ledger and reports, with hard safety rules in every brief",
+  "author": {
+    "name": "Samuryann",
+    "url": "https://github.com/samuryann"
+  },
+  "homepage": "https://github.com/samuryann/ronin-toolkit",
+  "repository": "https://github.com/samuryann/ronin-toolkit",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": ["orchestrator", "subagents", "background", "dispatcher", "cost-optimization", "msp", "sysadmin"]
+}

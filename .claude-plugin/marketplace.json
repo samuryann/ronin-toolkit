@@ -19,6 +19,11 @@
       "name": "ticket-notes",
       "source": "./plugins/ticket-notes",
       "description": "Paste-ready PSA ticket notes (AutoTask, ConnectWise, HaloPSA) from rough notes or the work in the conversation: only what was actually done, open items kept separate"
+    },
+    {
+      "name": "shogun",
+      "source": "./plugins/shogun",
+      "description": "Non-blocking commander: /shogun sends work to background agents on the cheapest model that can do it, tracks them in a ledger and reports, with hard safety rules in every brief"
     }
   ]
 }
