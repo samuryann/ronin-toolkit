@@ -7,10 +7,10 @@ In Japanese history, a *ronin* was a samurai with no master. These days they're 
 
 | Plugin | What it does |
 |---|---|
-| [`phased`](#phased) | Runs IT projects and troubleshooting in small, cheap phases, escalating to Opus only when you approve |
-| [`fortigate-meraki`](#fortigate-meraki) | A FortiGate & Meraki engineer subagent that knows the silent-fail traps, plans changes with rollback, and reads debug output |
-| [`ticket-notes`](#ticket-notes) | Turns rough notes or the work in a conversation into a paste-ready PSA ticket note, with nothing made up |
-| [`shogun`](#shogun) | Turns a thread into a commander that never blocks: work goes to background agents on the cheapest model, tracked in a ledger |
+| 🗡️ [`phased`](#phased) | Runs IT projects and troubleshooting in small, cheap phases, escalating to Opus only when you approve |
+| 🛡️ [`fortigate-meraki`](#fortigate-meraki) | A FortiGate & Meraki engineer subagent that knows the silent-fail traps, plans changes with rollback, and reads debug output |
+| 📜 [`ticket-notes`](#ticket-notes) | Turns rough notes or the work in a conversation into a paste-ready PSA ticket note, with nothing made up |
+| 🏯 [`shogun`](#shogun) | Turns a thread into a commander that never blocks: work goes to background agents on the cheapest model, tracked in a ledger |
 
 ## Install
 
@@ -22,22 +22,22 @@ In Claude Code, add the marketplace once:
 
 Then install the plugins you want, each on its own:
 
-**phased**: phased projects and troubleshooting
+🗡️ **phased**: phased projects and troubleshooting
 ```
 /plugin install phased@ronin-toolkit
 ```
 
-**fortigate-meraki**: firewall engineer subagent
+🛡️ **fortigate-meraki**: firewall engineer subagent
 ```
 /plugin install fortigate-meraki@ronin-toolkit
 ```
 
-**ticket-notes**: paste-ready PSA ticket notes
+📜 **ticket-notes**: paste-ready PSA ticket notes
 ```
 /plugin install ticket-notes@ronin-toolkit
 ```
 
-**shogun**: background agent commander
+🏯 **shogun**: background agent commander
 ```
 /plugin install shogun@ronin-toolkit
 ```
@@ -45,7 +45,8 @@ Then install the plugins you want, each on its own:
 Then turn on updates: `/plugin` → **Marketplaces** → **ronin-toolkit** → **Enable auto-update**.
 Install fails? Set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` and retry. Remove a plugin with `/plugin uninstall <name>@ronin-toolkit` (removing phased keeps your `~/phased` project folders). Windows: phased needs Git for Windows (Claude Code's Bash), since its project list uses `find` and `awk`.
 
-## phased
+<a id="phased"></a>
+## 🗡️ phased
 
 Runs IT projects and troubleshooting in small phases, each on the cheapest model that can do it. **Why:** fewer tokens, everything for a job in one folder, and a guided, evidence-first way through fixes and builds.
 
@@ -119,13 +120,15 @@ The first two lines are where it searches (all your Claude memory, and every pro
 
 **Footprint:** ~205 tokens per session while installed, ~3.1k when a phase runs.
 
-## fortigate-meraki
+<a id="fortigate-meraki"></a>
+## 🛡️ fortigate-meraki
 
 A subagent for FortiGate (FortiOS 7.2–7.6) and Meraki MX/MS/MR work. It never touches a device: it gives you firmware-correct commands with a backup, verification and rollback, reads your pasted `diagnose`/`show` output, and labels fact vs inference. It knows the traps that fail silently: `set` replacing whole lists, a policy with the wrong `dstintf` that never matches, local-in not protecting VIPs, session filters that flush everything, dial-up IPsec name and DH-order limits, MX uplink and flow-preference overrides. Use it directly (`@agent-fortigate-meraki:fortigate-meraki-engineer`), or let `phased` offer it as the specialist reviewer on firewall steps. It uses only file, shell and web tools, so it stays cheap to call.
 
 **Footprint:** about 90 tokens per session while installed, and about 4.4k each time it's called.
 
-## ticket-notes
+<a id="ticket-notes"></a>
+## 📜 ticket-notes
 
 Writes a ticket note you can paste straight into AutoTask, ConnectWise, HaloPSA or any PSA. Give it your rough notes, or just ask for a note at the end of a working conversation: "write a ticket note". You get plain text with `-` bullets (no markdown to clean up), in a fixed layout: a one-line summary, **Work Performed**, then **Root Cause**, **Outcome** (only when the work isn't finished), **Next Steps** and **Optional Improvements**, each only when there's something to put in it.
 
@@ -133,7 +136,8 @@ It's written as a change record, so it sticks to what happened. It never invents
 
 **Footprint:** about 65 tokens per session while installed, and about 720 each time it writes a note.
 
-## shogun
+<a id="shogun"></a>
+## 🏯 shogun
 
 Type `/shogun:shogun` (optionally followed by your first tasks) and the thread becomes a commander. It splits what you ask into independent tasks, sends each to a background agent, and answers you in seconds while they work, so you keep talking instead of waiting. Say `status`, `stop <name>`, `redirect <name> to ...`, or `stand down` to end it.
 
